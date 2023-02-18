@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ActivitiesApp: App {
+    let module = ActivityModule()
+
     var body: some Scene {
         WindowGroup {
-            ActivityModule().rootView
+            module.rootView
         }
     }
 }
