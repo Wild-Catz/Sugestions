@@ -47,12 +47,16 @@ extension ActivityModule: ScreenFactory {
         case .congratulationsScreen:
             EmptyView()
         case .detailsScreen:
-            EmptyView()
+            makeDetailsView()
         case .mainScreen:
             EmptyView()
         case .rateUsScreen:
             EmptyView()
         }
+    }
+    
+    @ViewBuilder func makeDetailsView() -> some View {
+        DetailsView(activityService : ActivityService())
     }
     typealias RD = RoutingDestination
 }
