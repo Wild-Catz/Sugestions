@@ -12,7 +12,6 @@
 		67170575299E11A000C033B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67170574299E11A000C033B2 /* Preview Assets.xcassets */; };
 		67772C0229A3C8220096F498 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0129A3C8220096F498 /* RouterTests.swift */; };
 		67772C0429A50A9E0096F498 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0329A50A9E0096F498 /* MainViewModelTests.swift */; };
-		67772C0F29A6034A0096F498 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 67772C0E29A6034A0096F498 /* RswiftLibrary */; };
 		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
@@ -59,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67772C0F29A6034A0096F498 /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,11 +196,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				67772C0929A6013F0096F498 /* PBXTargetDependency */,
 			);
 			name = Activities;
 			packageProductDependencies = (
-				67772C0E29A6034A0096F498 /* RswiftLibrary */,
 			);
 			productName = Activities;
 			productReference = 6717056A299E119F00C033B2 /* Activities.app */;
@@ -256,7 +252,6 @@
 			);
 			mainGroup = 67170561299E119F00C033B2;
 			packageReferences = (
-				67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = 6717056B299E119F00C033B2 /* Products */;
 			projectDirPath = "";
@@ -342,10 +337,6 @@
 			isa = PBXTargetDependency;
 			target = 67170569299E119F00C033B2 /* Activities */;
 			targetProxy = 67772BFC29A3C8110096F498 /* PBXContainerItemProxy */;
-		};
-		67772C0929A6013F0096F498 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 67772C0829A6013F0096F498 /* RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -603,29 +594,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mac-cain13/R.swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		67772C0829A6013F0096F498 /* RswiftGenerateInternalResources */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "plugin:RswiftGenerateInternalResources";
-		};
-		67772C0E29A6034A0096F498 /* RswiftLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */;
-			productName = RswiftLibrary;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67170562299E119F00C033B2 /* Project object */;
 }
