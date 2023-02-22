@@ -10,6 +10,11 @@
 		6717056E299E119F00C033B2 /* ActivitiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6717056D299E119F00C033B2 /* ActivitiesApp.swift */; };
 		67170572299E11A000C033B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67170571299E11A000C033B2 /* Assets.xcassets */; };
 		67170575299E11A000C033B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67170574299E11A000C033B2 /* Preview Assets.xcassets */; };
+		67772C0229A3C8220096F498 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0129A3C8220096F498 /* RouterTests.swift */; };
+		67772C0429A50A9E0096F498 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0329A50A9E0096F498 /* MainViewModelTests.swift */; };
+		67772C0F29A6034A0096F498 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 67772C0E29A6034A0096F498 /* RswiftLibrary */; };
+		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
+		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
 		67CB2394299F79BD000C42DE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2393299F79BD000C42DE /* Router.swift */; };
 		67CB2396299F7B4D000C42DE /* PresentingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2395299F7B4D000C42DE /* PresentingView.swift */; };
@@ -19,11 +24,27 @@
 		67CB23A1299FCB94000C42DE /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB23A0299FCB94000C42DE /* ActivityService.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		67772BFC29A3C8110096F498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67170562299E119F00C033B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67170569299E119F00C033B2;
+			remoteInfo = Activities;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		6717056A299E119F00C033B2 /* Activities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Activities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6717056D299E119F00C033B2 /* ActivitiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesApp.swift; sourceTree = "<group>"; };
 		67170571299E11A000C033B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67170574299E11A000C033B2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		67772BF829A3C8110096F498 /* ActivitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ActivitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		67772C0129A3C8220096F498 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
+		67772C0329A50A9E0096F498 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		67772C1B29A605DA0096F498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		67772C1F29A607A90096F498 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2393299F79BD000C42DE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		67CB2395299F7B4D000C42DE /* PresentingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingView.swift; sourceTree = "<group>"; };
@@ -38,6 +59,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67772C0F29A6034A0096F498 /* RswiftLibrary in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67772BF529A3C8110096F498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,7 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				6717056C299E119F00C033B2 /* Activities */,
+				67772BF929A3C8110096F498 /* ActivitiesTests */,
 				6717056B299E119F00C033B2 /* Products */,
+				67772C0A29A602F80096F498 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				6717056A299E119F00C033B2 /* Activities.app */,
+				67772BF829A3C8110096F498 /* ActivitiesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,6 +95,7 @@
 		6717056C299E119F00C033B2 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				67772C1129A6049B0096F498 /* Localization */,
 				67CB239F299FCB83000C42DE /* Services */,
 				67CB239A299FC44A000C42DE /* Models */,
 				67CB2397299FC416000C42DE /* Views */,
@@ -81,6 +114,30 @@
 				67170574299E11A000C033B2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		67772BF929A3C8110096F498 /* ActivitiesTests */ = {
+			isa = PBXGroup;
+			children = (
+				67772C0129A3C8220096F498 /* RouterTests.swift */,
+				67772C0329A50A9E0096F498 /* MainViewModelTests.swift */,
+			);
+			path = ActivitiesTests;
+			sourceTree = "<group>";
+		};
+		67772C0A29A602F80096F498 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		67772C1129A6049B0096F498 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				67772C1C29A605DA0096F498 /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		67CB238F299F78CF000C42DE /* Modules */ = {
@@ -104,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				67CB2398299FC429000C42DE /* MainView.swift */,
+				67772C2129A608770096F498 /* ActivityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -140,11 +198,33 @@
 			buildRules = (
 			);
 			dependencies = (
+				67772C0929A6013F0096F498 /* PBXTargetDependency */,
 			);
 			name = Activities;
+			packageProductDependencies = (
+				67772C0E29A6034A0096F498 /* RswiftLibrary */,
+			);
 			productName = Activities;
 			productReference = 6717056A299E119F00C033B2 /* Activities.app */;
 			productType = "com.apple.product-type.application";
+		};
+		67772BF729A3C8110096F498 /* ActivitiesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67772C0029A3C8110096F498 /* Build configuration list for PBXNativeTarget "ActivitiesTests" */;
+			buildPhases = (
+				67772BF429A3C8110096F498 /* Sources */,
+				67772BF529A3C8110096F498 /* Frameworks */,
+				67772BF629A3C8110096F498 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67772BFD29A3C8110096F498 /* PBXTargetDependency */,
+			);
+			name = ActivitiesTests;
+			productName = ActivitiesTests;
+			productReference = 67772BF829A3C8110096F498 /* ActivitiesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -153,11 +233,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					67170569299E119F00C033B2 = {
 						CreatedOnToolsVersion = 14.0.1;
+					};
+					67772BF729A3C8110096F498 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 67170569299E119F00C033B2;
 					};
 				};
 			};
@@ -167,14 +251,19 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				it,
 				Base,
 			);
 			mainGroup = 67170561299E119F00C033B2;
+			packageReferences = (
+				67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */,
+			);
 			productRefGroup = 6717056B299E119F00C033B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				67170569299E119F00C033B2 /* Activities */,
+				67772BF729A3C8110096F498 /* ActivitiesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -186,6 +275,14 @@
 			files = (
 				67170575299E11A000C033B2 /* Preview Assets.xcassets in Resources */,
 				67170572299E11A000C033B2 /* Assets.xcassets in Resources */,
+				67772C1A29A605DA0096F498 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67772BF629A3C8110096F498 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,13 +319,47 @@
 				67CB239C299FC460000C42DE /* Activity.swift in Sources */,
 				67CB2394299F79BD000C42DE /* Router.swift in Sources */,
 				67CB239E299FC4B3000C42DE /* Rating.swift in Sources */,
+				67772C2229A608770096F498 /* ActivityView.swift in Sources */,
 				67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */,
 				67CB23A1299FCB94000C42DE /* ActivityService.swift in Sources */,
 				6717056E299E119F00C033B2 /* ActivitiesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		67772BF429A3C8110096F498 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67772C0429A50A9E0096F498 /* MainViewModelTests.swift in Sources */,
+				67772C0229A3C8220096F498 /* RouterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67772BFD29A3C8110096F498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67170569299E119F00C033B2 /* Activities */;
+			targetProxy = 67772BFC29A3C8110096F498 /* PBXContainerItemProxy */;
+		};
+		67772C0929A6013F0096F498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 67772C0829A6013F0096F498 /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		67772C1C29A605DA0096F498 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67772C1B29A605DA0096F498 /* en */,
+				67772C1F29A607A90096F498 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		67170576299E11A000C033B2 /* Debug */ = {
@@ -403,6 +534,44 @@
 			};
 			name = Release;
 		};
+		67772BFE29A3C8110096F498 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5U55B3662Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.ActivitiesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Activities.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Activities";
+			};
+			name = Debug;
+		};
+		67772BFF29A3C8110096F498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5U55B3662Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.ActivitiesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Activities.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Activities";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -424,7 +593,39 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		67772C0029A3C8110096F498 /* Build configuration list for PBXNativeTarget "ActivitiesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67772BFE29A3C8110096F498 /* Debug */,
+				67772BFF29A3C8110096F498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67772C0829A6013F0096F498 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		67772C0E29A6034A0096F498 /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67772C0D29A6034A0096F498 /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67170562299E119F00C033B2 /* Project object */;
 }

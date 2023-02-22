@@ -47,7 +47,7 @@ extension ActivityModule: ScreenFactory {
         case .congratulationsScreen:
             EmptyView()
         case .detailsScreen:
-            Color.red
+            makeDeailedActivityScreen()
         case .mainScreen:
             makeMainScreen()
         case .rateUsScreen:
@@ -60,6 +60,10 @@ extension ActivityModule: ScreenFactory {
             activityService: FakeActivityService(),
             onDetailsScreen: { self.router.push(.detailsScreen) }
         ))
+    }
+
+    @ViewBuilder func makeDeailedActivityScreen() -> some View {
+        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService()))
     }
     typealias RD = RoutingDestination
 }
