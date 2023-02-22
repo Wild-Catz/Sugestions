@@ -132,10 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67170578299E11A000C033B2 /* Build configuration list for PBXNativeTarget "Activities" */;
 			buildPhases = (
+				67CB238E299E33DF000C42DE /* ShellScript */,
+				672596CE29A6675D00EEEA48 /* R setup */,
 				67170566299E119F00C033B2 /* Sources */,
 				67170567299E119F00C033B2 /* Frameworks */,
 				67170568299E119F00C033B2 /* Resources */,
-				67CB238E299E33DF000C42DE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -192,6 +193,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		672596CE29A6675D00EEEA48 /* R setup */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "R setup";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo $SRCROOT\n$SRCROOT/rswift generate $SRCROOT/R.generated.swift\n";
+		};
 		67CB238E299E33DF000C42DE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
