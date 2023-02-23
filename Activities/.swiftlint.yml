@@ -19,7 +19,7 @@ opt_in_rules: # some rules are only opt-in
 #  - Source
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
-  - "*.generated.swift"
+  - Generated
   - Pods
   - AppFolder\ App/Class/*
  # - AppFolder\ App/ViewController/* //Enabled for this
