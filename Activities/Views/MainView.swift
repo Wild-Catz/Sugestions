@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+private enum Const {
+    static var bottomPadding: CGFloat = 33
+    static var profileSize: CGFloat = 50
+}
+
 protocol MainViewModelProtocol: ObservableObject {
     func getActivity()
     func onButtonTap()
@@ -35,8 +40,42 @@ struct MainView<VM: MainViewModelProtocol>: View {
     let viewModel: VM
 
     var body: some View {
-        Text("Main Screen")
-        Button("On description screen", action: viewModel.onButtonTap)
+        VStack {
+            HStack {
+                Spacer()
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: Const.profileSize, height: Const.profileSize)
+            }
+            Spacer()
+            shape
+            Spacer()
+            Text(LocalizedStringKey("dayly_activity_label"))
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+            Spacer(minLength: 70)
+            startButton
+        }
+        .toolbar(.hidden)
+    }
+
+    var startButton: some View {
+        Button(action: viewModel.onButtonTap) {
+            Text("start_button_label")
+                .foregroundColor(.black)
+            }
+        .frame(height: 60)
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .cornerRadius(10)
+        .padding(.horizontal, 30)
+        .padding(.bottom, Const.bottomPadding)
+    }
+
+    var shape: some View {
+        Image("shape")
+            .resizable()
+            .aspectRatio(0.71, contentMode: .fit)
     }
 }
 
