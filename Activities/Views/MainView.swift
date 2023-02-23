@@ -50,7 +50,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
             Spacer()
             shape
             Spacer()
-            Text(R.string.localizable.dayly_activity_label)
+            Text(LocalizedStringKey("dayly_activity_label"))
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
             Spacer(minLength: 70)
@@ -61,7 +61,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
     var startButton: some View {
         Button(action: viewModel.onButtonTap) {
-            Text(R.string.localizable.start_button_label)
+            Text("start_button_label")
                 .foregroundColor(.black)
             }
         .frame(height: 60)
@@ -73,7 +73,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
     }
 
     var shape: some View {
-        Image(R.image.shape)
+        Image("shape")
             .resizable()
             .aspectRatio(0.71, contentMode: .fit)
     }
