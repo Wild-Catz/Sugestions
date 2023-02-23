@@ -4,6 +4,7 @@ disabled_rules: # rule identifiers to exclude from running
   - control_statement
   - force_cast
   - shorthand_operator
+  - superfluous_disable_command
 
 cyclomatic_complexity:
   warning: 25 # two nested ifs are acceptable
