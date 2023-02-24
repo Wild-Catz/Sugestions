@@ -57,13 +57,13 @@ extension ActivityModule: ScreenFactory {
 
     @ViewBuilder func makeMainScreen() -> some View {
         MainView(viewModel: MainViewModel(
-            activityService: FakeActivityService(),
+            personService: FakePersonService(),
             onDetailsScreen: { self.router.push(.detailsScreen) }
         ))
     }
 
     @ViewBuilder func makeDeailedActivityScreen() -> some View {
-        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService()))
+        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))))
     }
     typealias RD = RoutingDestination
 }

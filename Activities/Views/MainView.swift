@@ -13,26 +13,23 @@ private enum Const {
 }
 
 protocol MainViewModelProtocol: ObservableObject {
-    func getActivity()
+    var person: Person { get }
     func onButtonTap()
 }
 
 class MainViewModel: MainViewModelProtocol {
-    var activityService: ActivityServiceProtocol
-    @Published var activity: Activity?
+    var personService: PersonServiceProtocol
+    @Published var person: Person
     var onDetailsScreen: () -> Void
 
-    init(activityService: ActivityServiceProtocol, onDetailsScreen: @escaping () -> Void) {
+    init(personService: PersonServiceProtocol, onDetailsScreen: @escaping () -> Void) {
         self.onDetailsScreen = onDetailsScreen
-        self.activityService = activityService
+        self.personService = personService
+        self.person = personService.getPerson()
     }
 
     func onButtonTap() {
         onDetailsScreen()
-    }
-
-    func getActivity() {
-        self.activity = activityService.getActivity()
     }
 }
 
@@ -41,32 +38,39 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("Welcome back,")
+                        .font(.largeTitle)
+                    Text(viewModel.person.name + "!")
+                        .font(.largeTitle)
+                        .bold()
+                }
                 Spacer()
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: Const.profileSize, height: Const.profileSize)
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 48, height: 48)
             }
+            .padding(.top, 40)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 30)
+            MainButtonView()
+                .frame(height: 400)
+                .padding(.horizontal, 10)
             Spacer()
-            shape
-            Spacer()
-            Text(LocalizedStringKey("dayly_activity_label"))
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
-            Spacer(minLength: 70)
-            startButton
         }
+        .background(Color("MainBackgroundScreen"))
         .toolbar(.hidden)
     }
 
     var startButton: some View {
         Button(action: viewModel.onButtonTap) {
             Text("start_button_label")
-                .foregroundColor(.black)
-            }
+                .foregroundColor(Color.accentColor)
+        }
         .frame(height: 60)
         .frame(maxWidth: .infinity)
-        .background(Color.white)
+        .background(Color.primary)
         .cornerRadius(10)
         .padding(.horizontal, 30)
         .padding(.bottom, Const.bottomPadding)
@@ -81,6 +85,6 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(activityService: FakeActivityService(), onDetailsScreen: { }))
+        MainView(viewModel: MainViewModel(personService: FakePersonService(), onDetailsScreen: { }))
     }
 }

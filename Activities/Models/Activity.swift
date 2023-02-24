@@ -13,5 +13,5 @@ struct Activity {
     let id: ActivityID
     let name: String
     let description: String
-    let rate: Rating
+    let categories: [Category: Int]
 }
