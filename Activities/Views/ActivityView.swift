@@ -38,12 +38,18 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
     let vm: VM
 
     var body: some View {
-        Text("Hi")
+        VStack {
+            HStack {
+                Text(vm.activity.name)
+                    .font(.largeTitle)
+                Spacer()
+            }
+        }
     }
 }
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService()))
+        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))))
     }
 }
