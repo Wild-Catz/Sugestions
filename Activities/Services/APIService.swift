@@ -54,14 +54,18 @@ final class APIService: APIServiceProtocol {
     private func getActivities(in category: Category) -> [Activity] {
         return Self.activities.filter { $0.categories.keys.contains(category) }
     }
-
 }
 
 extension APIService {
     private static let activities: [Activity] = [
-        .init(id: 0, name: "First Activity", description: "I dont know now", categories: [.fineMotory: 4]),
-        .init(id: 1, name: "Second Activity", description: "I Gay maybe", categories: [.expressive: 6])
+        .init(
+            id: 0,
+            name: "Receptive language with images",
+            description: "Some not very long description",
+            tips: ["First tip", "Second tip"],
+            need: "Objects varying in shape, size, and color. Preferably that he knows well, even if he does’t know it’s name.",
+            categories: [.problemSolving: 3, .receptive: 2, .expressive: 1])
     ]
 
-    private static let errorActivity: Activity = .init(id: 404, name: "Error Activity", description: "Error Description", categories: [.problemSolving: 2])
+    private static let errorActivity: Activity = .init(id: 404, name: "Error Activity", description: "Error", tips: [], need: "Error", categories: [:])
 }

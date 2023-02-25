@@ -23,6 +23,7 @@ struct ActivityBigView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ZStack {
                         primaryColor
+                            .ignoresSafeArea()
                         VStack {
                             Text("THE ACTIVITY")
                             Text("OF THE DAY")
@@ -30,6 +31,7 @@ struct ActivityBigView: View {
                         .font(.title2)
                         .bold()
                     }
+                    .ignoresSafeArea()
                     .frame(height: proxy.size.height/2)
                     ZStack(alignment: .leading) {
                         titleColor
@@ -69,6 +71,7 @@ struct ActivityBigView: View {
                 }
             }
         }
+        .ignoresSafeArea(edges: .top)
     }
 }
 

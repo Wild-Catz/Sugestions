@@ -13,27 +13,45 @@ struct DetailedActivity {
     let image: UIImage?
     let name: String
     let description: String
+    var tips: [Tip]
+    var need: String
 
     init(activity: Activity) {
         self.image = nil
         self.name = activity.name
         self.description = activity.description
+        self.tips = activity.tips
+        self.need = activity.need
     }
 }
 
 protocol ActivityViewModelProtocol: ObservableObject {
     var activity: DetailedActivity { get }
+    func onButtonTapped()
+    func onCloseButtonTapped()
 }
 
 final class ActivityViewModel: ActivityViewModelProtocol {
-    private let activityService: ActivityServiceProtocol
     @Published var activity: DetailedActivity
+    
+    private let activityService: ActivityServiceProtocol
+    private let onDone: () -> Void
+    private let onClose: () -> Void
 
-    init(activityService: ActivityServiceProtocol) {
+    init(activityService: ActivityServiceProtocol, onDone: @escaping () -> Void, onClose: @escaping () -> Void) {
         self.activityService = activityService
         self.activity = .init(activity: activityService.getActivity())
+        self.onDone = onDone
+        self.onClose = onClose
     }
-
+    
+    func onButtonTapped() {
+        onDone()
+    }
+    
+    func onCloseButtonTapped() {
+        onClose()
+    }
 }
 
 // swiftlint::disable line_length
@@ -42,35 +60,50 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
     let vm: VM
 
     var body: some View {
-        ActivityBigView(
-            activityName: "Receptive language with images",
-            primaryColor: .purple,
-            titleColor: .purple.opacity(0.4),
-            whatYouNeedLabel: "You need different objects in shapes, colors and sizes",
-            description: """
-                        Take the objects you choose and place them on a table. Sitting in front of the child, ask him to pass you an object by spelling out the name carefully.
-                        
-                        Don’t worry if the child does not respond or is struggling, you can help him by pointing to the object in question or by placing his hands directly on it, aiming more and mor
+        ZStack {
+            ActivityBigView(
+                activityName: vm.activity.name,
+                primaryColor: .purple,
+                titleColor: .purple.opacity(0.4),
+                whatYouNeedLabel: vm.activity.need,
+                description: vm.activity.description,
+                tipsAndTricls: vm.activity.tips
+            )
+            VStack {
+                Spacer()
+                Button(action: vm.onButtonTapped) {
+                    Color.purple
+                        .overlay {
+                            Text("Done")
+                                .foregroundColor(.primary)
+                                .font(.title3)
+                                .bold()
+                        }
+                }
+                .buttonStyle(.plain)
+                .frame(height: 60)
+                .cornerRadius(13)
+                .padding(.horizontal, 40)
+            }
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: vm.onCloseButtonTapped) {
+                        Text("Close")
+                            .foregroundColor(.primary)
+                            .font(.title2)
+                    }
+                }
+                Spacer()
+            }
+        }
+        .toolbar(.hidden)
 
-                        After each successful exercise give him positive reinforcement, compliment him and/or high-five him (don't give him physical/sweet rewards just yet).
-
-                        Finally, before repeating the exercise, repeat the name of the object in question to strengthen the association.
-
-                        Remember to always speak very clearly.
-
-                        Repeat this exercise several times but remember to change the order of the objects on the table.
-
-                        At the end of the session you can reward the child with sweets or a more substantial reward.
-                        """, tipsAndTricls: [
-                            "Avoid objects with a similar pronunciation in the same session",
-                            "The table/place where you carry out your business must be free from other distractions and possibly noise",
-                            "At the beginning is normal that the child is confused. Start giving him physical prompts, leading his hand to the right object, then try reducing the support step by step"
-                        ])
     }
 }
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))))
+        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService())), onDone: {}, onClose: {}))
     }
 }
