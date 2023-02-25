@@ -54,26 +54,16 @@ struct MainView<VM: MainViewModelProtocol>: View {
             .padding(.top, 40)
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
-            MainButtonView()
-                .frame(height: 400)
-                .padding(.horizontal, 10)
+            Button(action: viewModel.onButtonTap) {
+                MainButtonView()
+                    .frame(height: 400)
+                    .padding(.horizontal, 10)
+            }
+            .foregroundColor(.primary)
             Spacer()
         }
         .background(Color("MainBackgroundScreen"))
         .toolbar(.hidden)
-    }
-
-    var startButton: some View {
-        Button(action: viewModel.onButtonTap) {
-            Text("start_button_label")
-                .foregroundColor(Color.accentColor)
-        }
-        .frame(height: 60)
-        .frame(maxWidth: .infinity)
-        .background(Color.primary)
-        .cornerRadius(10)
-        .padding(.horizontal, 30)
-        .padding(.bottom, Const.bottomPadding)
     }
 
     var shape: some View {

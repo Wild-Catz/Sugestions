@@ -37,7 +37,6 @@ struct MainButtonView: View {
                 .padding(.leading, 24)
                 .background(.white)
             }
-
             .cornerRadius(34)
         }
     }

@@ -18,6 +18,8 @@
 		67525F9429A7F9EF0072F741 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525F9329A7F9EF0072F741 /* History.swift */; };
 		67525F9729A825090072F741 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525F9629A825090072F741 /* APIService.swift */; };
 		67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525FC429A9166F0072F741 /* MainButtonView.swift */; };
+		67525FC729AA42930072F741 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525FC629AA42930072F741 /* UserDefaultsStorage.swift */; };
+		67525FCA29AA44760072F741 /* ActivityBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525FC929AA44760072F741 /* ActivityBigView.swift */; };
 		67772C0229A3C8220096F498 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0129A3C8220096F498 /* RouterTests.swift */; };
 		67772C0429A50A9E0096F498 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0329A50A9E0096F498 /* MainViewModelTests.swift */; };
 		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
@@ -54,6 +56,8 @@
 		67525F9329A7F9EF0072F741 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		67525F9629A825090072F741 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		67525FC429A9166F0072F741 /* MainButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonView.swift; sourceTree = "<group>"; };
+		67525FC629AA42930072F741 /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
+		67525FC929AA44760072F741 /* ActivityBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBigView.swift; sourceTree = "<group>"; };
 		67772BF829A3C8110096F498 /* ActivitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ActivitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67772C0129A3C8220096F498 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		67772C0329A50A9E0096F498 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 		6717056C299E119F00C033B2 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				67525FC829AA429A0072F741 /* Core */,
 				67772C1129A6049B0096F498 /* Localization */,
 				67CB239F299FCB83000C42DE /* Services */,
 				67CB239A299FC44A000C42DE /* Models */,
@@ -134,8 +139,17 @@
 			isa = PBXGroup;
 			children = (
 				67525FC429A9166F0072F741 /* MainButtonView.swift */,
+				67525FC929AA44760072F741 /* ActivityBigView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		67525FC829AA429A0072F741 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				67525FC629AA42930072F741 /* UserDefaultsStorage.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		67772BF929A3C8110096F498 /* ActivitiesTests */ = {
@@ -364,7 +378,9 @@
 				6717056E299E119F00C033B2 /* ActivitiesApp.swift in Sources */,
 				67525F8B29A78C470072F741 /* Category.swift in Sources */,
 				67525F8F29A7988A0072F741 /* Feedback.swift in Sources */,
+				67525FC729AA42930072F741 /* UserDefaultsStorage.swift in Sources */,
 				67525F8D29A78D1A0072F741 /* RatingService.swift in Sources */,
+				67525FCA29AA44760072F741 /* ActivityBigView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

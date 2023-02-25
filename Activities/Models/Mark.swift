@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Mark: Int {
+enum Mark: Int, Codable {
     case tooBad = -3
     case bad = -2
     case normal = 0

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: String, CaseIterable {
+enum Category: String, CaseIterable, Codable {
     case receptive
     case expressive
     case problemSolving

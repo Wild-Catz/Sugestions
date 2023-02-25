@@ -10,27 +10,33 @@ import Foundation
 protocol PersonServiceProtocol {
     func getPerson() -> Person
     func setWishCatgories(categories: Set<Category>)
+    func isFirstLaunch() -> Bool
 }
 
 final class FakePersonService {
-    let ud = UserDefaults()
-    let name: String
-    var categories: Set<Category>
-    var history: [History]
+    let ud = UserDefaultsManager()
 
     init() {
-        name = ud.object(forKey: "name") as? String ?? ""
-        categories = ud.object(forKey: "categories") as? Set<Category> ?? Set<Category>()
-        history = ud.object(forKey: "history") as? [History] ?? []
+        if (isFirstLaunch()) {
+            setWishCatgories(categories: .init(arrayLiteral: .expressive, .fineMotory, .receptive, .problemSolving))
+        }
     }
 }
 
 extension FakePersonService: PersonServiceProtocol {
     func getPerson() -> Person {
-        Person(name: "Francesco", categories: categories, history: [])
+        let name = ud.load(String.self, forKey: "name") ?? "Francesco"
+        let categories = ud.load(Set<Category>.self, forKey: "categories") ?? Set<Category>()
+        let history = ud.load([History].self, forKey: "history") ?? []
+        return Person(name: name, categories: categories, history: history)
     }
 
     func setWishCatgories(categories: Set<Category>) {
-        self.categories = categories
+        ud.save(categories, forKey: "categories")
     }
+
+    func isFirstLaunch() -> Bool {
+        ud.load(Bool.self, forKey: "firstLaunch") ?? true
+    }
+
 }
