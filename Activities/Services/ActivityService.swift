@@ -7,18 +7,16 @@
 
 import Foundation
 
-private enum Const {
-    static let udKey = "C:"
-}
-
 protocol ActivityServiceProtocol {
     func getActivity() -> Activity
     func rateActivity(activity: Activity, feedback: Feedback)
+    func getQuestions(activity: Activity) -> [Question]
 }
 
 final class FakeActivityService {
-    let apiService: APIServiceProtocol
-    let personService: PersonServiceProtocol
+    private let apiService: APIServiceProtocol
+    private let personService: PersonServiceProtocol
+    private var storedActivity: Activity?
 
     init(personService: PersonServiceProtocol, apiService: APIServiceProtocol) {
         self.apiService = apiService
@@ -28,10 +26,20 @@ final class FakeActivityService {
 
 extension FakeActivityService: ActivityServiceProtocol {
     func getActivity() -> Activity {
-        apiService.getActivity(for: personService.getPerson())
+        if let activity = self.storedActivity {
+            return activity
+        } else {
+            let activity = apiService.getActivity(for: personService.getPerson())
+            self.storedActivity = activity
+            return activity
+        }
     }
 
     func rateActivity(activity: Activity, feedback: Feedback) {
         apiService.rateActivity(activity, with: feedback, for: personService.getPerson())
+    }
+    
+    func getQuestions(activity: Activity) -> [Question] {
+        apiService.getQuestions(for: activity)
     }
 }

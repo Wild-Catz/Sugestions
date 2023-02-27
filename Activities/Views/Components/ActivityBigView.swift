@@ -35,7 +35,7 @@ struct ActivityBigView: View {
                     .frame(height: proxy.size.height/2)
                     ZStack(alignment: .leading) {
                         titleColor
-                        Text("Receptive language with images")
+                        Text(activityName)
                             .font(.title2)
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -68,6 +68,7 @@ struct ActivityBigView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 30)
+                    .padding(.bottom, 60)
                 }
             }
         }

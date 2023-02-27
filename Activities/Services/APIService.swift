@@ -10,15 +10,36 @@ import Foundation
 protocol APIServiceProtocol {
     func getActivity(for profile: Person) -> Activity
     func rateActivity(_ activity: Activity, with feedback: Feedback, for profile: Person)
+    func getQuestions(for activity: Activity) -> [Question]
 }
 
-final class APIService: APIServiceProtocol {
+final class APIService {
     let ratingService: RatingServiceProtocol
 
     init(ratingService: RatingServiceProtocol) {
         self.ratingService =  ratingService
     }
 
+    private func suggestActivity(in category: Category) -> Activity {
+        let activity = getActivities(in: category).randomElement()
+        return activity ?? Self.errorActivity
+    }
+    
+    private func getActivities(in category: Category) -> [Activity] {
+        let currentRatings = RatingService.dict
+        return Self.activities
+            .filter { $0.categories.contains(category) }
+        
+            .filter { $0.difficult.difficultDict().allSatisfy {
+                currentRatings[$0.key]! >= $0.value
+            } }
+            .sorted { act1, act2 -> Bool in
+                act1.difficult.getDifficult(category: category) < act2.difficult.getDifficult(category: category)
+            }
+    }
+}
+
+extension APIService: APIServiceProtocol {
     func getActivity(for profile: Person) -> Activity {
         let categories = profile.categories
         let history = profile.history
@@ -29,10 +50,10 @@ final class APIService: APIServiceProtocol {
         .map {
             (ratingService.getCategoryRating(category: $0), $0)
         }
-        .sorted(by: { $0.0 > $1.0 })
+        .sorted { $0.0 < $1.0 }
         .first?.1
         if let category = category {
-            return suggestActivity(in: category, for: profile)
+            return suggestActivity(in: category)
         } else {
             return Self.errorActivity
         }
@@ -41,31 +62,62 @@ final class APIService: APIServiceProtocol {
     func rateActivity(_ activity: Activity, with feedback: Feedback, for profile: Person) {
         ratingService.rateActivity(activity: activity, feedback: feedback)
     }
-
-    private func suggestActivity(in category: Category, for profile: Person) -> Activity {
-        let activity = getActivities(in: category, max: ratingService.getCategoryRating(category: category)).randomElement()
-        return activity ?? Self.activities[0]
-    }
-
-    private func getActivities(in category: Category, max rating: Int) -> [Activity] {
-        getActivities(in: category)
-    }
-
-    private func getActivities(in category: Category) -> [Activity] {
-        return Self.activities.filter { $0.categories.keys.contains(category) }
+    
+    func getQuestions(for activity: Activity) -> [Question] {
+        return [.init(text: "AAA?", category: .fineMotory),
+                .init(text: "BBB?", category: .receptive),
+                .init(text: "CCC?", category: .receptive)]
     }
 }
 
 extension APIService {
     private static let activities: [Activity] = [
-        .init(
-            id: 0,
-            name: "Receptive language with images",
-            description: "Some not very long description",
-            tips: ["First tip", "Second tip"],
-            need: "Objects varying in shape, size, and color. Preferably that he knows well, even if he does’t know it’s name.",
-            categories: [.problemSolving: 3, .receptive: 2, .expressive: 1])
+        .init(id: 0,
+              name: "First Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+              categories: .init(arrayLiteral: .receptive)),
+        .init(id: 1,
+              name: "Second Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
+              categories: .init(arrayLiteral: .problemSolving, .expressive)
+             ),
+        .init(id: 2,
+              name: "Third Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 3, problemSolving: 4, fineMotory: 5),
+              categories: .init(arrayLiteral: .fineMotory, .problemSolving)
+             ),
+        .init(id: 3,
+              name: "Fourth Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 3, expressive: 3, problemSolving: 1, fineMotory: 2),
+              categories: .init(arrayLiteral: .fineMotory, .receptive, .problemSolving)
+            ),
+        .init(id: 4,
+              name: "Fifth Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 5, expressive: 3, problemSolving: 2, fineMotory: 1),
+              categories: .init(arrayLiteral: .expressive, .fineMotory, .receptive)
+             )
     ]
 
-    private static let errorActivity: Activity = .init(id: 404, name: "Error Activity", description: "Error", tips: [], need: "Error", categories: [:])
+    private static let errorActivity: Activity = .init(id: 404,
+                                                       name: "Error Activity",
+                                                       description: "Error description",
+                                                       tips: ["Error"],
+                                                       need: "Error",
+                                                       difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
+                                                       categories: .init(arrayLiteral: .receptive, .fineMotory))
 }

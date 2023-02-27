@@ -51,7 +51,7 @@ extension ActivityModule: ScreenFactory {
         case .mainScreen:
             makeMainScreen()
         case .rateUsScreen:
-            EmptyView()
+            makeRateScreen()
         }
     }
 
@@ -69,9 +69,19 @@ extension ActivityModule: ScreenFactory {
                     personService: FakePersonService(),
                     apiService: APIService(
                         ratingService: RatingService())),
-                onDone: { self.router.push(.congratulationsScreen) },
+                onDone: { self.router.push(.rateUsScreen) },
                 onClose: { self.router.pop() }
             ))
     }
+    
+    @ViewBuilder func makeRateScreen() -> some View {
+        RateView(vm: RateViewModel(
+            activityService: FakeActivityService(
+                personService: FakePersonService(),
+                apiService: APIService(
+                    ratingService: RatingService())))
+                 )
+    }
+    
     typealias RD = RoutingDestination
 }

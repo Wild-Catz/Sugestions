@@ -59,6 +59,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
                     .frame(height: 400)
                     .padding(.horizontal, 10)
             }
+            .buttonStyle(.plain)
             .foregroundColor(.primary)
             Spacer()
         }

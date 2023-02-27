@@ -7,7 +7,6 @@ protocol UserDefaultsManagerProtocol {
 }
 
 class UserDefaultsManager: UserDefaultsManagerProtocol {
-
     func save<T: Encodable>(_ object: T, forKey key: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(object) {

@@ -17,5 +17,6 @@ struct Activity {
     let description: String
     var tips: [Tip]
     var need: String
-    let categories: [Category: Int]
+    let difficult: Difficult
+    let categories: Set<Category>
 }

@@ -71,19 +71,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
             )
             VStack {
                 Spacer()
-                Button(action: vm.onButtonTapped) {
-                    Color.purple
-                        .overlay {
-                            Text("Done")
-                                .foregroundColor(.primary)
-                                .font(.title3)
-                                .bold()
-                        }
-                }
-                .buttonStyle(.plain)
-                .frame(height: 60)
-                .cornerRadius(13)
-                .padding(.horizontal, 40)
+                WCButton(action: vm.onButtonTapped, text: "Done")
             }
             VStack {
                 HStack {
