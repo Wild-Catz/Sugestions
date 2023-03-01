@@ -6,4 +6,24 @@
   
 */
 
-"start_button_label" = "Start";
+"dayly_activity_label" = "Vuoi scoprire l'attività del giorno?";
+
+// MainView
+
+"Welcome back," = "Bentornato,";
+
+// ActivityBigView
+
+"daily_activity_lable_1" = "L'ATTIVITÀ";
+"daily_activity_lable_2" = "DEL GIORNO";
+
+// ActivityVIew
+
+"start_button_label" = "Comincia";
+
+// RateView
+
+"receptive_question_feedback" = "Quanto ha compreso quello che dicevi durante l’attività?";
+"expressive_question_feedback" = "Quanto facilmente è riuscito ad esprimersi il bambino?";
+"problemSolving_question_feedback" = "Quanto è stato facile comprendere l’attività?";
+"fineMotory_question_feedback" = "Quanto è stato facile svolgere praticamente l’attività?";

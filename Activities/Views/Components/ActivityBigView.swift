@@ -16,7 +16,8 @@ struct ActivityBigView: View {
     let whatYouNeedLabel: String
     let description: String
     let tipsAndTricls: [String]
-
+    @State private var offset = CGFloat.zero
+    
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
@@ -25,8 +26,8 @@ struct ActivityBigView: View {
                         primaryColor
                             .ignoresSafeArea()
                         VStack {
-                            Text("THE ACTIVITY")
-                            Text("OF THE DAY")
+                            Text("daily_activity_lable_1")
+                            Text("daily_activity_lable_2")
                         }
                         .font(.title2)
                         .bold()
@@ -70,7 +71,16 @@ struct ActivityBigView: View {
                     .padding(.top, 30)
                     .padding(.bottom, 60)
                 }
+                .background(GeometryReader { proxy -> Color in
+                    DispatchQueue.main.async {
+                        offset = -proxy.frame(in: .named("scroll")).origin.y
+                    }
+//                    print(offset)
+//                    print("also \(proxy.frame(in: .named("Scroll")).size.height)")
+                    return Color.clear
+                })
             }
+            .coordinateSpace(name: "Scroll")
         }
         .ignoresSafeArea(edges: .top)
     }

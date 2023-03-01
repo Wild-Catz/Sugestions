@@ -19,6 +19,9 @@ final class FakePersonService {
     var history: [History]
 
     init() {
+        if ud.load(Bool.self, forKey: "first_launch") == nil {
+            ud.save(Set<Category>.init(arrayLiteral: .expressive, .fineMotory, .problemSolving, .receptive), forKey: "categories")
+        }
         name = ud.load(String.self, forKey: "name") ?? ""
         categories = ud.load(Set<Category>.self, forKey: "categories") ?? Set<Category>()
         history = ud.load([History].self, forKey: "history") ?? []
@@ -27,7 +30,7 @@ final class FakePersonService {
 
 extension FakePersonService: PersonServiceProtocol {
     func getPerson() -> Person {
-        Person(name: name, categories: categories, history: [])
+        return Person(name: name, categories: categories, history: [])
     }
 
     func setWishCatgories(categories: Set<Category>) {
