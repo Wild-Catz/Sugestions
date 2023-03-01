@@ -79,13 +79,18 @@ extension APIService: APIServiceProtocol {
     }
     
     func getQuestions(for activity: Activity) -> [Question] {
-        return [.init(text: "AAA?", category: .fineMotory),
-                .init(text: "BBB?", category: .receptive),
-                .init(text: "CCC?", category: .receptive)]
+        Self.questions.filter { activity.categories.contains($0.category) }
     }
 }
 
 extension APIService {
+    private static let questions: [Question] = [
+        .init(text: "receptive_question_feedback", category: .receptive),
+        .init(text: "expressive_question_feedback", category: .expressive),
+        .init(text: "problemSolving_question_feedback", category: .problemSolving),
+        .init(text: "fineMotory_question_feedback", category: .fineMotory)
+    ]
+    
     private static let activities: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
@@ -98,7 +103,7 @@ extension APIService {
               name: "Second Activity",
               description: "I dont know now",
               tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe",
+              need: "You need something maybe. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
               difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
               categories: .init(arrayLiteral: .problemSolving, .expressive)
              ),

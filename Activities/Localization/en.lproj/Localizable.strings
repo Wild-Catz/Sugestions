@@ -6,5 +6,24 @@
   
 */
 
-"start_button_label" = "Start";
 "dayly_activity_label" = "Do you want to discover the activity of the day?";
+
+// MainView
+
+"Welcome back," = "Welcome back,";
+
+// ActivityBigView
+
+"daily_activity_lable_1" = "THE ACTIVITY";
+"daily_activity_lable_2" = "OF THE DAY";
+
+// ActivityView
+
+"start_button_label" = "Start";
+
+// RateView
+
+"receptive_question_feedback" = "How much did the child comprehend you during the activity?";
+"expressive_question_feedback" = "How well did the child manage to express himself?";
+"problemSolving_question_feedback" = "How well did the child understand the activity?";
+"fineMotory_question_feedback" = "How well did the child manage to physically perform the activity?";
