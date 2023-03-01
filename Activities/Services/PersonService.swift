@@ -13,21 +13,21 @@ protocol PersonServiceProtocol {
 }
 
 final class FakePersonService {
-    let ud = UserDefaults()
+    let ud = UserDefaultsManager()
     let name: String
     var categories: Set<Category>
     var history: [History]
 
     init() {
-        name = ud.object(forKey: "name") as? String ?? ""
-        categories = ud.object(forKey: "categories") as? Set<Category> ?? Set<Category>()
-        history = ud.object(forKey: "history") as? [History] ?? []
+        name = ud.load(String.self, forKey: "name") ?? ""
+        categories = ud.load(Set<Category>.self, forKey: "categories") ?? Set<Category>()
+        history = ud.load([History].self, forKey: "history") ?? []
     }
 }
 
 extension FakePersonService: PersonServiceProtocol {
     func getPerson() -> Person {
-        Person(name: "Francesco", categories: categories, history: [])
+        Person(name: name, categories: categories, history: [])
     }
 
     func setWishCatgories(categories: Set<Category>) {

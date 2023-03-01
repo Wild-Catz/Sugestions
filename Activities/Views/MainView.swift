@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 private enum Const {
     static var bottomPadding: CGFloat = 33
@@ -13,28 +14,44 @@ private enum Const {
 }
 
 protocol MainViewModelProtocol: ObservableObject {
+    var showCongratulationsBanner: Bool { get set }
     var person: Person { get }
     func onButtonTap()
+    func closeShowBannerTap()
 }
 
 class MainViewModel: MainViewModelProtocol {
-    var personService: PersonServiceProtocol
-    @Published var person: Person
     var onDetailsScreen: () -> Void
+    var onCongratsClose: () -> Void
+    
+    @Published var person: Person
+    @Published var activity: Activity
+    @Published var showCongratulationsBanner: Bool
 
-    init(personService: PersonServiceProtocol, onDetailsScreen: @escaping () -> Void) {
+    init(person: Person,
+         activity: Activity,
+         showCongratulationsBanner: Bool,
+         onCongratsClose: @escaping () -> Void,
+         onDetailsScreen: @escaping () -> Void) {
+        self.person = person
+        self.activity = activity
+        self.showCongratulationsBanner = showCongratulationsBanner
         self.onDetailsScreen = onDetailsScreen
-        self.personService = personService
-        self.person = personService.getPerson()
+        self.onCongratsClose = onCongratsClose
     }
 
     func onButtonTap() {
         onDetailsScreen()
     }
+    
+    func closeShowBannerTap() {
+        self.showCongratulationsBanner = false
+        onCongratsClose()
+    }
 }
 
 struct MainView<VM: MainViewModelProtocol>: View {
-    let viewModel: VM
+    @ObservedObject var viewModel: VM
 
     var body: some View {
         VStack {
@@ -54,26 +71,25 @@ struct MainView<VM: MainViewModelProtocol>: View {
             .padding(.top, 40)
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
-            MainButtonView()
-                .frame(height: 400)
-                .padding(.horizontal, 10)
+            Button(action: viewModel.onButtonTap) {
+                MainButtonView()
+                    .frame(height: 400)
+                    .padding(.horizontal, 10)
+            }
+            .buttonStyle(.plain)
+            .foregroundColor(.primary)
             Spacer()
         }
         .background(Color("MainBackgroundScreen"))
         .toolbar(.hidden)
-    }
-
-    var startButton: some View {
-        Button(action: viewModel.onButtonTap) {
-            Text("start_button_label")
-                .foregroundColor(Color.accentColor)
+        .blur(radius: viewModel.showCongratulationsBanner ? 30 : 0)
+        .overlay {
+            if viewModel.showCongratulationsBanner {
+                CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, action: {
+                    self.viewModel.closeShowBannerTap()
+                })
+            }
         }
-        .frame(height: 60)
-        .frame(maxWidth: .infinity)
-        .background(Color.primary)
-        .cornerRadius(10)
-        .padding(.horizontal, 30)
-        .padding(.bottom, Const.bottomPadding)
     }
 
     var shape: some View {
@@ -85,6 +101,13 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(personService: FakePersonService(), onDetailsScreen: { }))
+        MainView(viewModel: MainViewModel(person: FakePersonService().getPerson(),
+                                          activity: FakeActivityService(
+                                            personService: FakePersonService(),
+                                            apiService: APIService(
+                                                ratingService: RatingService())).getActivity(),
+                                          showCongratulationsBanner: false,
+                                          onCongratsClose: { },
+                                          onDetailsScreen: { }))
     }
 }

@@ -23,6 +23,9 @@ final class ActivityModule: Module {
     }
     private var presentingView: PresentingView<R, ActivityModule>!
     private let router = R()
+    private let activityService = FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))
+    private let personService = FakePersonService()
+    
     init() {
         self.presentingView = PresentingView(router: router, factory: self, root: .mainScreen)
     }
@@ -33,7 +36,6 @@ extension ActivityModule {
         case mainScreen
         case detailsScreen
         case rateUsScreen
-        case congratulationsScreen
     }
 }
 
@@ -44,26 +46,42 @@ extension ActivityModule.RoutingDestination: Identifiable {
 extension ActivityModule: ScreenFactory {
     @ViewBuilder func view(for destination: RoutingDestination) -> some View {
         switch destination {
-        case .congratulationsScreen:
-            EmptyView()
         case .detailsScreen:
             makeDeailedActivityScreen()
         case .mainScreen:
             makeMainScreen()
         case .rateUsScreen:
-            EmptyView()
+            makeRateScreen()
         }
     }
 
     @ViewBuilder func makeMainScreen() -> some View {
         MainView(viewModel: MainViewModel(
-            personService: FakePersonService(),
-            onDetailsScreen: { self.router.push(.detailsScreen) }
-        ))
+            person: personService.getPerson(),
+            activity: activityService.getActivity(),
+            showCongratulationsBanner: activityService.shouldShowBanner,
+            onCongratsClose: { self.activityService.shouldShowBanner = false },
+            onDetailsScreen: { self.router.push(.detailsScreen) })
+                 )
     }
 
     @ViewBuilder func makeDeailedActivityScreen() -> some View {
-        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))))
+        ActivityView(
+            vm: ActivityViewModel(
+                activity: activityService.getActivity(),
+                onDone: { self.router.push(.rateUsScreen) },
+                onClose: { self.router.pop() }
+            ))
     }
+    
+    @ViewBuilder func makeRateScreen() -> some View {
+        let activity: Activity = self.activityService.getActivity()
+        RateView(vm: RateViewModel(questions: self.activityService.getQuestions(activity: activity)) {
+            self.activityService.rateActivity(activity: activity, feedback: $0)
+            self.router.pop()
+            self.router.pop()
+        })
+    }
+    
     typealias RD = RoutingDestination
 }

@@ -20,10 +20,9 @@ protocol RatingServiceProtocol {
 }
 
 final class RatingService {
-    let ud = UserDefaults(suiteName: Const.udKey)
 
     private func getRate(category: Category) -> Int {
-        return ud?.object(forKey: category.rawValue) as? Int ?? Const.def
+        return Self.dict[category]!
     }
 
     private func changeRate(category: Category, mark: Mark) {
@@ -31,7 +30,7 @@ final class RatingService {
         rate += mark.rawValue
         if rate > Const.max { rate = Const.max }
         if rate < Const.min { rate = Const.min }
-        ud?.set(rate, forKey: category.rawValue)
+        Self.dict[category] = rate
     }
 }
 
@@ -45,4 +44,10 @@ extension RatingService: RatingServiceProtocol {
             changeRate(category: key.category, mark: mark)
         }
     }
+}
+
+extension RatingService {
+    static var dict: [Category: Int] = [
+        .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
+    ]
 }

@@ -21,7 +21,8 @@ struct PresentingView<R: RouterProtocol, F: ScreenFactory>: View where R.RD == F
     var body: some View {
         NavigationStack(path: $router.navigationPath) {
             makeView(for: root)
-                .navigationDestination(for: R.RD.self, destination: { makeView(for: $0)
+                .navigationDestination(for: R.RD.self, destination: {
+                    makeView(for: $0)
                 })
         }
         .sheet(item: $router.presentedView) {

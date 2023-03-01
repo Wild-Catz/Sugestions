@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct History {
+struct History: Codable {
     let activityId: ActivityID
     let category: Category
     let rate: Feedback

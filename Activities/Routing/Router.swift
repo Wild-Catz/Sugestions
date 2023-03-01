@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 // swiftlint:disable type_name
 
@@ -20,6 +21,7 @@ protocol RouterProtocol: ObservableObject {
     func pop()
     func present(_ destination: RD)
     func dismiss()
+    func clear()
 }
 
 protocol ScreenFactory: AnyObject {
@@ -32,6 +34,13 @@ protocol ScreenFactory: AnyObject {
 final class Router<RD: RoutingDestinationProtocol>: RouterProtocol {
     @Published var navigationPath = NavigationPath()
     @Published var presentedView: RD?
+    var anyCancallable: Set<AnyCancellable> = Set<AnyCancellable>()
+    
+    func clear() {
+        while !navigationPath.isEmpty {
+            pop()
+        }
+    }
 
     func push(_ destination: RD) {
         navigationPath.append(destination)
