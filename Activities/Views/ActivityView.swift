@@ -93,6 +93,13 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(vm: ActivityViewModel(activity: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService())).getActivity(), onDone: {}, onClose: {}))
+        ActivityView(vm: ActivityViewModel(
+            activity: FakeActivityService(
+                personService: FakePersonService(),
+                apiService: APIService(
+                    ratingService: RatingService())).getActivity(),
+            onDone: {},
+            onClose: {})
+        )
     }
 }

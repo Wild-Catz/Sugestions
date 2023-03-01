@@ -17,7 +17,7 @@ protocol MainViewModelProtocol: ObservableObject {
     var showCongratulationsBanner: Bool { get set }
     var person: Person { get }
     func onButtonTap()
-    func closeShowBannerTap();
+    func closeShowBannerTap()
 }
 
 class MainViewModel: MainViewModelProtocol {
@@ -101,6 +101,13 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(person: FakePersonService().getPerson(), activity: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService())).getActivity(), showCongratulationsBanner: false, onCongratsClose: { }, onDetailsScreen: { }))
+        MainView(viewModel: MainViewModel(person: FakePersonService().getPerson(),
+                                          activity: FakeActivityService(
+                                            personService: FakePersonService(),
+                                            apiService: APIService(
+                                                ratingService: RatingService())).getActivity(),
+                                          showCongratulationsBanner: false,
+                                          onCongratsClose: { },
+                                          onDetailsScreen: { }))
     }
 }
