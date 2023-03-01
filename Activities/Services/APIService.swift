@@ -7,25 +7,49 @@
 
 import Foundation
 
+struct GetActivityResponse {
+    let activity: ActivityAPI
+    let isDone: Bool
+    let categoryOfTheDay: Category
+}
+
 protocol APIServiceProtocol {
-    func getActivity(for profile: Person) -> Activity
+    func getActivity(for profile: Person) -> GetActivityResponse
     func rateActivity(_ activity: Activity, with feedback: Feedback, for profile: Person)
     func getQuestions(for activity: Activity) -> [Question]
 }
 
 final class APIService {
     let ratingService: RatingServiceProtocol
-
+    var today: Day?
+    
     init(ratingService: RatingServiceProtocol) {
         self.ratingService =  ratingService
     }
 
-    private func suggestActivity(in category: Category) -> Activity {
+    private func suggestActivity(in category: Category) -> ActivityAPI {
         let activity = getActivities(in: category).randomElement()
         return activity ?? Self.errorActivity
     }
     
-    private func getActivities(in category: Category) -> [Activity] {
+    private func ppp(profile: Person) {
+        let categories = profile.categories
+        let history = profile.history
+        let lastdays = history.suffix(categories.count - 1).map { $0.category }
+        let category = categories.filter { category in
+            !lastdays.contains(where: { $0 == category })
+        }
+            .map {
+                (ratingService.getCategoryRating(category: $0), $0)
+            }
+            .sorted { $0.0 < $1.0 }
+            .first?.1
+        if let category = category {
+            self.today = Day(activity: suggestActivity(in: category), category: category, isDone: false)
+        }
+    }
+    
+    private func getActivities(in category: Category) -> [ActivityAPI] {
         let currentRatings = RatingService.dict
         return Self.activities
             .filter { $0.categories.contains(category) }
@@ -40,27 +64,18 @@ final class APIService {
 }
 
 extension APIService: APIServiceProtocol {
-    func getActivity(for profile: Person) -> Activity {
-        let categories = profile.categories
-        let history = profile.history
-        let lastdays = history.suffix(categories.count - 1).map { $0.category }
-        let category = categories.filter { category in
-            !lastdays.contains(where: { $0 == category })
-        }
-        .map {
-            (ratingService.getCategoryRating(category: $0), $0)
-        }
-        .sorted { $0.0 < $1.0 }
-        .first?.1
-        if let category = category {
-            return suggestActivity(in: category)
+    func getActivity(for profile: Person) -> GetActivityResponse {
+        if let today = self.today {
+            return GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
         } else {
-            return Self.errorActivity
+            ppp(profile: profile)
+            return getActivity(for: profile)
         }
     }
 
     func rateActivity(_ activity: Activity, with feedback: Feedback, for profile: Person) {
         ratingService.rateActivity(activity: activity, feedback: feedback)
+        self.today?.isDone = true
     }
     
     func getQuestions(for activity: Activity) -> [Question] {
@@ -71,7 +86,7 @@ extension APIService: APIServiceProtocol {
 }
 
 extension APIService {
-    private static let activities: [Activity] = [
+    private static let activities: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
               description: "I dont know now",
@@ -113,7 +128,7 @@ extension APIService {
              )
     ]
 
-    private static let errorActivity: Activity = .init(id: 404,
+    private static let errorActivity: ActivityAPI = .init(id: 404,
                                                        name: "Error Activity",
                                                        description: "Error description",
                                                        tips: ["Error"],

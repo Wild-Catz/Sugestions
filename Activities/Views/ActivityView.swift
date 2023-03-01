@@ -15,6 +15,7 @@ struct DetailedActivity {
     let description: String
     var tips: [Tip]
     var need: String
+    var isDone: Bool
 
     init(activity: Activity) {
         self.image = nil
@@ -22,6 +23,7 @@ struct DetailedActivity {
         self.description = activity.description
         self.tips = activity.tips
         self.need = activity.need
+        self.isDone = activity.isDone
     }
 }
 
@@ -34,13 +36,11 @@ protocol ActivityViewModelProtocol: ObservableObject {
 final class ActivityViewModel: ActivityViewModelProtocol {
     @Published var activity: DetailedActivity
     
-    private let activityService: ActivityServiceProtocol
     private let onDone: () -> Void
     private let onClose: () -> Void
 
-    init(activityService: ActivityServiceProtocol, onDone: @escaping () -> Void, onClose: @escaping () -> Void) {
-        self.activityService = activityService
-        self.activity = .init(activity: activityService.getActivity())
+    init(activity: Activity, onDone: @escaping () -> Void, onClose: @escaping () -> Void) {
+        self.activity = DetailedActivity(activity: activity)
         self.onDone = onDone
         self.onClose = onClose
     }
@@ -72,6 +72,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
             VStack {
                 Spacer()
                 WCButton(action: vm.onButtonTapped, text: "Done")
+                    .disabled(vm.activity.isDone)
             }
             VStack {
                 HStack {
@@ -92,6 +93,6 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityView(vm: ActivityViewModel(activityService: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService())), onDone: {}, onClose: {}))
+        ActivityView(vm: ActivityViewModel(activity: FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService())).getActivity(), onDone: {}, onClose: {}))
     }
 }

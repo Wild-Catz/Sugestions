@@ -12,7 +12,7 @@ struct MainButtonView: View {
         GeometryReader { proxy in
             VStack(spacing: 0) {
                 ZStack {
-                    Color.purple
+                    Color.yellow
                     VStack {
                         Text("THE ACTIVITY")
                         Text("OF THE DAY")
