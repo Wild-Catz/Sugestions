@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 private enum Const {
     static var bottomPadding: CGFloat = 33
@@ -13,28 +14,44 @@ private enum Const {
 }
 
 protocol MainViewModelProtocol: ObservableObject {
+    var showCongratulationsBanner: Bool { get set }
     var person: Person { get }
     func onButtonTap()
+    func closeShowBannerTap()
 }
 
 class MainViewModel: MainViewModelProtocol {
-    var personService: PersonServiceProtocol
-    @Published var person: Person
     var onDetailsScreen: () -> Void
+    var onCongratsClose: () -> Void
+    
+    @Published var person: Person
+    @Published var activity: Activity
+    @Published var showCongratulationsBanner: Bool
 
-    init(personService: PersonServiceProtocol, onDetailsScreen: @escaping () -> Void) {
+    init(person: Person,
+         activity: Activity,
+         showCongratulationsBanner: Bool,
+         onCongratsClose: @escaping () -> Void,
+         onDetailsScreen: @escaping () -> Void) {
+        self.person = person
+        self.activity = activity
+        self.showCongratulationsBanner = showCongratulationsBanner
         self.onDetailsScreen = onDetailsScreen
-        self.personService = personService
-        self.person = personService.getPerson()
+        self.onCongratsClose = onCongratsClose
     }
 
     func onButtonTap() {
         onDetailsScreen()
     }
+    
+    func closeShowBannerTap() {
+        self.showCongratulationsBanner = false
+        onCongratsClose()
+    }
 }
 
 struct MainView<VM: MainViewModelProtocol>: View {
-    let viewModel: VM
+    @ObservedObject var viewModel: VM
 
     var body: some View {
         VStack {
@@ -65,6 +82,14 @@ struct MainView<VM: MainViewModelProtocol>: View {
         }
         .background(Color("MainBackgroundScreen"))
         .toolbar(.hidden)
+        .blur(radius: viewModel.showCongratulationsBanner ? 30 : 0)
+        .overlay {
+            if viewModel.showCongratulationsBanner {
+                CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, action: {
+                    self.viewModel.closeShowBannerTap()
+                })
+            }
+        }
     }
 
     var shape: some View {
@@ -76,6 +101,13 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(personService: FakePersonService(), onDetailsScreen: { }))
+        MainView(viewModel: MainViewModel(person: FakePersonService().getPerson(),
+                                          activity: FakeActivityService(
+                                            personService: FakePersonService(),
+                                            apiService: APIService(
+                                                ratingService: RatingService())).getActivity(),
+                                          showCongratulationsBanner: false,
+                                          onCongratsClose: { },
+                                          onDetailsScreen: { }))
     }
 }

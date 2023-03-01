@@ -10,22 +10,23 @@ import SwiftUI
 protocol RateViewModelProtocol: ObservableObject {
     var feedbackPublisher: Published<Feedback>.Publisher { get }
     var feedback: Feedback { get }
+    func done()
 }
 
-final class RateViewModel<AS: ActivityServiceProtocol>: RateViewModelProtocol {
+final class RateViewModel: RateViewModelProtocol {
     var feedbackPublisher: Published<Feedback>.Publisher { self.$feedback }
             
     @Published var feedback: Feedback
+    private let onDone: (Feedback) -> Void
     
-    
-    private let activityService: AS
-    private let activity: Activity
-    
-    init(activityService: AS) {
-        self.activityService = activityService
-        self.activity = activityService.getActivity()
+    init(questions: [Question], onDone: @escaping (Feedback) -> Void) {
         self.feedback = [:]
-        activityService.getQuestions(activity: activity).forEach { feedback[$0] = .normal }
+        self.onDone = onDone
+        questions.forEach { feedback[$0] = .normal }
+    }
+    
+    func done() {
+        onDone(feedback)
     }
 }
 
@@ -55,7 +56,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
                 
             }
             Spacer()
-            WCButton(action: {} , text: "Done")
+            WCButton(action: { vm.done() } , text: "Done")
         }
         .toolbar(.hidden)
     }
