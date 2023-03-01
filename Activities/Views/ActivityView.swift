@@ -56,9 +56,17 @@ final class ActivityViewModel: ActivityViewModelProtocol {
 
 // swiftlint::disable line_length
 
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGPoint = .zero
+
+    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+    }
+}
+
 struct ActivityView<VM: ActivityViewModelProtocol>: View {
     let vm: VM
-
+    @State private var scrollPosition: CGPoint = .zero
+    
     var body: some View {
         ZStack {
             ActivityBigView(
@@ -69,7 +77,23 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                 description: vm.activity.description,
                 tipsAndTricls: vm.activity.tips
             )
+            .coordinateSpace(name: "Scroll")
+            .background(GeometryReader { geometry in
+                Color.clear
+                    .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
+            })
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                self.scrollPosition = value
+            }
+            .background(GeometryReader { proxy in
+                Color.clear.onAppear { print("-----total \(proxy.size.height)")
+                    print("-----also total \(proxy.frame(in: .named("Scroll")).size.height)")
+                    print("-----aaalso total \(proxy.frame(in: .named("Scroll")).origin.y)")
+                }
+            })
+
             VStack {
+                Text("Scroll offset: \(scrollPosition.y)")
                 Spacer()
                 WCButton(action: vm.onButtonTapped, text: "Done")
             }
@@ -77,10 +101,11 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                 HStack {
                     Spacer()
                     Button(action: vm.onCloseButtonTapped) {
-                        Text("Close")
-                            .foregroundColor(.primary)
-                            .font(.title2)
+                        Image(systemName: "x.circle.fill")
+                           .foregroundColor(.primary)
+                            .font(.system(size: 30))
                     }
+                    .padding(.horizontal)
                 }
                 Spacer()
             }
