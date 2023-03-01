@@ -79,8 +79,10 @@ extension APIService: APIServiceProtocol {
     }
     
     func getQuestions(for activity: Activity) -> [Question] {
-        Self.questions.filter { activity.categories.contains($0.category) }
-    }
+            return [.init(text: "AAA?", category: .fineMotory),
+                    .init(text: "BBB?", category: .receptive),
+                    .init(text: "CCC?", category: .receptive)]
+        }
 }
 
 extension APIService {
