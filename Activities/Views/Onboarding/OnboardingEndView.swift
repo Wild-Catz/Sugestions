@@ -27,7 +27,7 @@ struct OnboardingEndView<VM: OnboardingEndViewModel>: View {
     let vm: VM
     
     var body: some View {
-        VStack(spacing: 60) {
+        VStack() {
             Text("onboarding_end_title")
                 .font(.largeTitle)
                 .bold()
@@ -43,6 +43,7 @@ struct OnboardingEndView<VM: OnboardingEndViewModel>: View {
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+            Spacer()
             WCButton(action: vm.onButtonTapped, text: "Let's do it!")
         }
         .padding()

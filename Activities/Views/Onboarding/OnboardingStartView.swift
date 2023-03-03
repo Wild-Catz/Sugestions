@@ -27,12 +27,13 @@ struct OnboardingStartView<VM: OnboardingViewModelProtocol>: View {
         let vm: VM
     
     var body: some View {
-        VStack(spacing: 60) {
+        VStack {
             Text("onboarding_welcome")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
                 .bold()
                 .padding(.top)
+            Spacer()
 //            GeometryReader { proxy in
 //                Image("Onboarding")
 //                    .resizable()
@@ -43,6 +44,7 @@ struct OnboardingStartView<VM: OnboardingViewModelProtocol>: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 240)
+            Spacer()
             Text("onboarding_welcome_text")
                 .font(.title)
                 .fontWeight(.semibold)
