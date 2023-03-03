@@ -10,6 +10,7 @@ import SwiftUI
 struct CirclesView: View {
     @Binding var rate: Int
     let borderSize: Int
+    let color: Color
     
     var body: some View {
         HStack {
@@ -17,7 +18,7 @@ struct CirclesView: View {
                 Spacer()
                 Circle()
                     .strokeBorder(.black, lineWidth: 4)
-                    .background(Circle().fill(index <= rate ? Color.orange : Color.clear))
+                    .background(Circle().fill(index <= rate ? self.color : Color.clear))
                     .onTapGesture {
                         self.rate = index
                     }
@@ -30,6 +31,6 @@ struct CirclesView: View {
 
 struct CirclesView_Previews: PreviewProvider {
     static var previews: some View {
-        CirclesView(rate: .constant(3), borderSize: 5)
+        CirclesView(rate: .constant(3), borderSize: 5, color: .purple)
     }
 }

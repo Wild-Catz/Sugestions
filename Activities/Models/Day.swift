@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Day {
+struct Day: Codable {
     let activity: ActivityAPI
     let category: Category
     var isDone: Bool
+    let generatedTime: Date
 }

@@ -23,10 +23,11 @@ final class ActivityModule: Module {
     }
     private var presentingView: PresentingView<R, ActivityModule>!
     private let router = R()
-    private let activityService = FakeActivityService(personService: FakePersonService(), apiService: APIService(ratingService: RatingService()))
-    private let personService = FakePersonService()
+    private let activityService = FakeActivityService()
+    private let personService = FakePersonService(ratingService: RatingService())
     
     init() {
+        router.push(.mainScreen)
         self.presentingView = PresentingView(router: router, factory: self, root: .mainScreen)
     }
 }
@@ -76,7 +77,7 @@ extension ActivityModule: ScreenFactory {
     
     @ViewBuilder func makeRateScreen() -> some View {
         let activity: Activity = self.activityService.getActivity()
-        RateView(vm: RateViewModel(questions: self.activityService.getQuestions(activity: activity)) {
+        RateView(vm: RateViewModel(category: activity.category, questions: self.activityService.getQuestions(activity: activity)) {
             self.activityService.rateActivity(activity: activity, feedback: $0)
             self.router.pop()
             self.router.pop()

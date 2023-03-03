@@ -16,6 +16,8 @@ private enum Const {
 protocol MainViewModelProtocol: ObservableObject {
     var showCongratulationsBanner: Bool { get set }
     var person: Person { get }
+    var activity: Activity { get }
+
     func onButtonTap()
     func closeShowBannerTap()
 }
@@ -24,8 +26,8 @@ class MainViewModel: MainViewModelProtocol {
     var onDetailsScreen: () -> Void
     var onCongratsClose: () -> Void
     
-    @Published var person: Person
-    @Published var activity: Activity
+    var person: Person
+    var activity: Activity
     @Published var showCongratulationsBanner: Bool
 
     init(person: Person,
@@ -72,7 +74,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
             Button(action: viewModel.onButtonTap) {
-                MainButtonView()
+                MainButtonView(model: .init(activity: viewModel.activity))
                     .frame(height: 400)
                     .padding(.horizontal, 10)
             }
@@ -85,9 +87,9 @@ struct MainView<VM: MainViewModelProtocol>: View {
         .blur(radius: viewModel.showCongratulationsBanner ? 30 : 0)
         .overlay {
             if viewModel.showCongratulationsBanner {
-                CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, action: {
+                CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, color: Color(viewModel.activity.category.rawValue)) {
                     self.viewModel.closeShowBannerTap()
-                })
+                }
             }
         }
     }
@@ -101,11 +103,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(person: FakePersonService().getPerson(),
-                                          activity: FakeActivityService(
-                                            personService: FakePersonService(),
-                                            apiService: APIService(
-                                                ratingService: RatingService())).getActivity(),
+        MainView(viewModel: MainViewModel(person: FakePersonService(ratingService: RatingService()).getPerson(), activity: FakeActivityService().getActivity(),
                                           showCongratulationsBanner: false,
                                           onCongratsClose: { },
                                           onDetailsScreen: { }))

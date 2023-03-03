@@ -71,16 +71,7 @@ struct ActivityBigView: View {
                     .padding(.top, 30)
                     .padding(.bottom, 60)
                 }
-                .background(GeometryReader { proxy -> Color in
-                    DispatchQueue.main.async {
-                        offset = -proxy.frame(in: .named("scroll")).origin.y
-                    }
-//                    print(offset)
-//                    print("also \(proxy.frame(in: .named("Scroll")).size.height)")
-                    return Color.clear
-                })
             }
-            .coordinateSpace(name: "Scroll")
         }
         .ignoresSafeArea(edges: .top)
     }

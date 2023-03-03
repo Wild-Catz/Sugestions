@@ -13,9 +13,10 @@ struct DetailedActivity {
     let image: UIImage?
     let name: String
     let description: String
-    var tips: [Tip]
-    var need: String
-    var isDone: Bool
+    let tips: [Tip]
+    let need: String
+    let isDone: Bool
+    let category: Category
 
     init(activity: Activity) {
         self.image = nil
@@ -24,6 +25,7 @@ struct DetailedActivity {
         self.tips = activity.tips
         self.need = activity.need
         self.isDone = activity.isDone
+        self.category = activity.category
     }
 }
 
@@ -71,31 +73,15 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
         ZStack {
             ActivityBigView(
                 activityName: vm.activity.name,
-                primaryColor: .purple,
-                titleColor: .purple.opacity(0.4),
+                primaryColor: Color(vm.activity.category.rawValue),
+                titleColor: Color(vm.activity.category.rawValue).opacity(0.5),
                 whatYouNeedLabel: vm.activity.need,
                 description: vm.activity.description,
                 tipsAndTricls: vm.activity.tips
             )
-            .coordinateSpace(name: "Scroll")
-            .background(GeometryReader { geometry in
-                Color.clear
-                    .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
-            })
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                self.scrollPosition = value
-            }
-            .background(GeometryReader { proxy in
-                Color.clear.onAppear { print("-----total \(proxy.size.height)")
-                    print("-----also total \(proxy.frame(in: .named("Scroll")).size.height)")
-                    print("-----aaalso total \(proxy.frame(in: .named("Scroll")).origin.y)")
-                }
-            })
-
             VStack {
-                Text("Scroll offset: \(scrollPosition.y)")
                 Spacer()
-                WCButton(action: vm.onButtonTapped, text: "Done")
+                WCButton(action: vm.onButtonTapped, text: "Done", color: Color(vm.activity.category.rawValue))
                     .disabled(vm.activity.isDone)
             }
             VStack {
@@ -119,10 +105,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityView(vm: ActivityViewModel(
-            activity: FakeActivityService(
-                personService: FakePersonService(),
-                apiService: APIService(
-                    ratingService: RatingService())).getActivity(),
+            activity: FakeActivityService().getActivity(),
             onDone: {},
             onClose: {})
         )

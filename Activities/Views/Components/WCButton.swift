@@ -10,10 +10,11 @@ import SwiftUI
 struct WCButton: View {
     let action: () -> Void
     let text: String
+    let color: Color
     
     var body: some View {
         Button(action: action) {
-            Color.purple
+            color
                 .overlay {
                     Text(text)
                         .foregroundColor(.primary)
@@ -31,6 +32,6 @@ struct WCButton: View {
 
 struct WCButton_Previews: PreviewProvider {
     static var previews: some View {
-        WCButton(action: {}, text: "Some")
+        WCButton(action: {}, text: "Some", color: .yellow)
     }
 }

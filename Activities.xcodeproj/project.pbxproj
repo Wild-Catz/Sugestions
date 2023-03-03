@@ -30,11 +30,12 @@
 		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
-		67CB2394299F79BD000C42DE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2393299F79BD000C42DE /* Router.swift */; };
-		67CB2396299F7B4D000C42DE /* PresentingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2395299F7B4D000C42DE /* PresentingView.swift */; };
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
 		67CB239C299FC460000C42DE /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB239B299FC460000C42DE /* Activity.swift */; };
 		67CB239E299FC4B3000C42DE /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB239D299FC4B3000C42DE /* Mark.swift */; };
+		67D4112329B24794008831E9 /* ActivityModuleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112229B24794008831E9 /* ActivityModuleCoordinator.swift */; };
+		67D4112629B24D89008831E9 /* PresentingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112429B24D89008831E9 /* PresentingView.swift */; };
+		67D4112729B24D89008831E9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* Router.swift */; };
 		67FF220329AF8B2600E89542 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67525FCC29AB5C5A0072F741 /* APIService.swift */; };
 		67FF220529AF8B6A00E89542 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FF220429AF8B6A00E89542 /* Day.swift */; };
 /* End PBXBuildFile section */
@@ -77,11 +78,12 @@
 		67772C1F29A607A90096F498 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
-		67CB2393299F79BD000C42DE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		67CB2395299F7B4D000C42DE /* PresentingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingView.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67CB239B299FC460000C42DE /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		67CB239D299FC4B3000C42DE /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		67D4112229B24794008831E9 /* ActivityModuleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModuleCoordinator.swift; sourceTree = "<group>"; };
+		67D4112429B24D89008831E9 /* PresentingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentingView.swift; sourceTree = "<group>"; };
+		67D4112529B24D89008831E9 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		67FF220429AF8B6A00E89542 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +195,7 @@
 		67CB238F299F78CF000C42DE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				67CB2390299F78E8000C42DE /* ActivityModule.swift */,
+				67D4112129B2476F008831E9 /* Activity */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -201,8 +203,8 @@
 		67CB2392299F79B0000C42DE /* Routing */ = {
 			isa = PBXGroup;
 			children = (
-				67CB2393299F79BD000C42DE /* Router.swift */,
-				67CB2395299F7B4D000C42DE /* PresentingView.swift */,
+				67D4112429B24D89008831E9 /* PresentingView.swift */,
+				67D4112529B24D89008831E9 /* Router.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -237,12 +239,29 @@
 		67CB239F299FCB83000C42DE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				67D4111B29B104C5008831E9 /* API */,
 				67525FCD29AB5C5B0072F741 /* ActivityService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		67D4111B29B104C5008831E9 /* API */ = {
+			isa = PBXGroup;
+			children = (
 				67525FCC29AB5C5A0072F741 /* APIService.swift */,
 				67525FCB29AB5C5A0072F741 /* PersonService.swift */,
 				67525FCE29AB5C5B0072F741 /* RatingService.swift */,
 			);
-			path = Services;
+			path = API;
+			sourceTree = "<group>";
+		};
+		67D4112129B2476F008831E9 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				67CB2390299F78E8000C42DE /* ActivityModule.swift */,
+				67D4112229B24794008831E9 /* ActivityModuleCoordinator.swift */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,17 +400,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				67FF220329AF8B2600E89542 /* APIService.swift in Sources */,
-				67CB2396299F7B4D000C42DE /* PresentingView.swift in Sources */,
 				67CB2399299FC429000C42DE /* MainView.swift in Sources */,
 				67525FD229AB5C5B0072F741 /* RatingService.swift in Sources */,
 				67525FD829ACFD780072F741 /* CirclesView.swift in Sources */,
 				67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */,
 				67525FD629ACF4440072F741 /* Difficult.swift in Sources */,
 				67CB239C299FC460000C42DE /* Activity.swift in Sources */,
-				67CB2394299F79BD000C42DE /* Router.swift in Sources */,
 				67525F8929A7810B0072F741 /* Person.swift in Sources */,
 				67525FCF29AB5C5B0072F741 /* PersonService.swift in Sources */,
+				67D4112329B24794008831E9 /* ActivityModuleCoordinator.swift in Sources */,
+				67D4112629B24D89008831E9 /* PresentingView.swift in Sources */,
 				67CB239E299FC4B3000C42DE /* Mark.swift in Sources */,
+				67D4112729B24D89008831E9 /* Router.swift in Sources */,
 				67525FDA29AD05BB0072F741 /* WCButton.swift in Sources */,
 				67772C2229A608770096F498 /* ActivityView.swift in Sources */,
 				67525FD129AB5C5B0072F741 /* ActivityService.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Difficult {
+struct Difficult: Codable {
     let receptive: Int
     let expressive: Int
     let problemSolving: Int

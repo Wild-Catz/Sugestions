@@ -16,14 +16,10 @@ protocol ActivityServiceProtocol {
 }
 
 final class FakeActivityService {
-    private let apiService: APIServiceProtocol
-    private let personService: PersonServiceProtocol
+    private let apiService: APIServiceProtocol = APIService(personService: FakePersonService(ratingService: RatingService()))
+    private let personService: PersonServiceProtocol = FakePersonService(ratingService: RatingService())
     private var banner: Bool = false
 
-    init(personService: PersonServiceProtocol, apiService: APIServiceProtocol) {
-        self.apiService = apiService
-        self.personService = personService
-    }
 }
 
 extension FakeActivityService: ActivityServiceProtocol {
@@ -33,7 +29,8 @@ extension FakeActivityService: ActivityServiceProtocol {
     }
     
     func getActivity() -> Activity {
-            let response = apiService.getActivity(for: personService.getPerson())
+        let person = personService.getPerson()
+        let response = apiService.getActivity(for: person)
             let activity = Activity(id: response.activity.id,
                                     name: response.activity.name,
                                     description: response.activity.description,
@@ -45,11 +42,11 @@ extension FakeActivityService: ActivityServiceProtocol {
     }
 
     func rateActivity(activity: Activity, feedback: Feedback) {
-        apiService.rateActivity(activity, with: feedback, for: personService.getPerson())
+        apiService.rateActivity(activity.id, with: feedback, for: personService.getPerson())
         self.shouldShowBanner = true
     }
     
     func getQuestions(activity: Activity) -> [Question] {
-        apiService.getQuestions(for: activity)
+        apiService.getQuestions(for: activity.id)
     }
 }

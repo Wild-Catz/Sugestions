@@ -10,6 +10,7 @@ import SwiftUI
 protocol RateViewModelProtocol: ObservableObject {
     var feedbackPublisher: Published<Feedback>.Publisher { get }
     var feedback: Feedback { get }
+    var category: Category { get }
     func done()
 }
 
@@ -18,10 +19,12 @@ final class RateViewModel: RateViewModelProtocol {
             
     @Published var feedback: Feedback
     private let onDone: (Feedback) -> Void
-    
-    init(questions: [Question], onDone: @escaping (Feedback) -> Void) {
+    let category: Category
+
+    init(category: Category, questions: [Question], onDone: @escaping (Feedback) -> Void) {
         self.feedback = [:]
         self.onDone = onDone
+        self.category = category
         questions.forEach { feedback[$0] = .normal }
     }
     
@@ -46,9 +49,10 @@ struct RateView<VM: RateViewModelProtocol>: View {
             Spacer()
             ForEach(vm.feedback.map { $0.key }, id: \.self) { question in
                 VStack {
-                    Text(question.text)
+                    Text(LocalizedStringKey(question.text))
                         .font(.title2)
-                    CirclesView(rate: .constant(3), borderSize: 5)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    CirclesView(rate: .constant(3), borderSize: 5, color: Color(vm.category.rawValue))
                         .frame(height: 41)
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal, 23)
@@ -56,7 +60,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
                 
             }
             Spacer()
-            WCButton(action: { vm.done() } , text: "Done")
+            WCButton(action: { vm.done() } , text: "Done", color: Color(vm.category.rawValue))
         }
         .toolbar(.hidden)
     }

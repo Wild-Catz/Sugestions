@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct PresentingView<R: RouterProtocol, F: ScreenFactory>: View where R.RD == F.RD {
-    @ObservedObject private var router: R // Router
+    @StateObject private var router: R // Router
     weak private var factory: F? // Factory
     private let root: R.RD // Router.RoutingDestination
 
     init(router: R, factory: F, root: R.RD) {
-        self.router = router
+        self._router = StateObject(wrappedValue: router)
         self.factory = factory
         self.root = root
     }

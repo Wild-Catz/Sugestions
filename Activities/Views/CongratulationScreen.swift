@@ -10,6 +10,7 @@ import SwiftUI
 struct CongratulationScreen: View {
     let image: Image
     let imageSize: CGFloat
+    let color: Color
     let action: () -> Void
     
     var body: some View {
@@ -19,7 +20,7 @@ struct CongratulationScreen: View {
                 .foregroundColor(.white)
                 .frame(width: imageSize, height: imageSize)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.yellow)
+                .background(color)
                 .opacity(0.95)
                 .overlay {
                     VStack {
@@ -47,6 +48,6 @@ struct CongratulationScreen: View {
 
 struct CongratulationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, action: {})
+        CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, color: .purple, action: {})
     }
 }

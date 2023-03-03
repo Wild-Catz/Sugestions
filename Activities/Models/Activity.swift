@@ -11,7 +11,7 @@ typealias ActivityID = Int
 typealias Tip = String
 typealias Need = String
 
-struct ActivityAPI {
+struct ActivityAPI: Codable {
     let id: ActivityID
     let name: String
     let description: String
