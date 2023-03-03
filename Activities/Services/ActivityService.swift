@@ -11,6 +11,7 @@ protocol ActivityServiceProtocol {
     func getActivity() -> Activity
     func rateActivity(activity: Activity, feedback: Feedback)
     func getQuestions(activity: Activity) -> [Question]
+    func getOnboardingQuestions() -> [String]
     var shouldShowBanner: Bool { get set }
 
 }
@@ -51,5 +52,9 @@ extension FakeActivityService: ActivityServiceProtocol {
     
     func getQuestions(activity: Activity) -> [Question] {
         apiService.getQuestions(for: activity)
+    }
+    
+    func getOnboardingQuestions() -> [String] {
+        apiService.getOnboardingQuestions()
     }
 }

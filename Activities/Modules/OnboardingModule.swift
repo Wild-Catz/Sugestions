@@ -56,19 +56,18 @@ extension OnboardingModule: ScreenFactory {
     }
 
     @ViewBuilder func makeStartScreen() -> some View {
-        OnboardingStartView(vm: OnboardingViewModel() { [weak self] in
+        OnboardingStartView(vm: OnboardingViewModel { [weak self] in
             self?.router.push(.userData)
         })
     }
                             
     @ViewBuilder func makeUserDataScreen() -> some View {
         OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { self.router.push(.question)
-        }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false)
+        }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false, disableButton: false)
     }
     
     @ViewBuilder func makeQuestionScreen() -> some View {
-        OnboardingQuestion(vm: OnboardingQuestionViewModel(onCategoriesView: {})
-        )
+        OnboardingQuestion(vm: OnboardingQuestionViewModel(questions: activityService.getOnboardingQuestions(), onCategoriesView: {}))
     }
     typealias RD = RoutingDestination
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 protocol OnboardingQuestionViewModelProtocol: ObservableObject {
+    var questions: [String] { get }
     func getRating()
     func onButtonTapped()
 }
@@ -19,7 +20,10 @@ final class OnboardingQuestionViewModel: OnboardingQuestionViewModelProtocol {
     
     let onCategoriesView: () -> Void
     
-    init(onCategoriesView: @escaping () -> Void) {
+    let questions: [String]
+    
+    init(questions: [String], onCategoriesView: @escaping () -> Void) {
+        self.questions = questions
         self.onCategoriesView = onCategoriesView
     }
     
@@ -30,15 +34,16 @@ final class OnboardingQuestionViewModel: OnboardingQuestionViewModelProtocol {
 
 struct OnboardingQuestion<VM: OnboardingQuestionViewModelProtocol>: View {
     let vm: VM
+//    let questions = vm.getQuestions()
     
     var body: some View {
         TabView {
-            ForEach(1..<9) { index in
+            ForEach(0..<8) { index in
                 VStack {
-                    if index == 1 {
+                    if index == 7 {
                         Spacer()
                     }
-                    Text("How well does your child understands verbal instructions?")
+                    Text(LocalizedStringKey(vm.questions[index]))
                         .font(.title)
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
@@ -48,22 +53,24 @@ struct OnboardingQuestion<VM: OnboardingQuestionViewModelProtocol>: View {
                         .frame(height: 41)
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
-                    if index == 1 {
-                        Spacer()
-                        WCButton(action: vm.onButtonTapped, text: "Submit")
-                            .padding(.bottom, 50)
+                        .padding(.bottom, index != 7 ? 120 : 0)
+                        if index == 7 {
+                            Spacer()
+                            WCButton(action: vm.onButtonTapped, text: "Submit")
+                                .padding(.bottom, 50)
+                        }
                     }
-                }
-                .padding(.horizontal)
+                    .padding(.horizontal)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
         .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .toolbar(.hidden)
     }
 }
 
 struct OnboardingQuestion_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingQuestion(vm: OnboardingQuestionViewModel(onCategoriesView: { }))
+        OnboardingQuestion(vm: OnboardingQuestionViewModel(questions: ["How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?", "How well does your child understand verbal instructions?"], onCategoriesView: { }))
     }
 }

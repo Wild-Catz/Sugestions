@@ -8,16 +8,32 @@
 import SwiftUI
 
 protocol OnboardingUserDataViewModelProtocol: ObservableObject {
+    func isDisabled() -> Bool
     func onButtonTapped()
     func getUserData()
 }
 
 final class OnboardingUserDataViewModel: OnboardingUserDataViewModelProtocol {
-    
     let onQuestionView: () -> Void
+    var userName: String
+    var gender: Gender
+    @State var disableButton: Bool
     
     init(onQuestionView: @escaping () -> Void) {
         self.onQuestionView = onQuestionView
+        self.userName = ""
+        self.gender = .none
+        self.disableButton = false
+    }
+    
+    func isDisabled() -> Bool {
+        if userName == "" || gender != .none {
+        disableButton = true
+        }
+        else {
+            disableButton = false
+        }
+        return disableButton
     }
     
     func onButtonTapped() {
@@ -35,6 +51,7 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
     @State var gender: Gender
     @State var isSelectedF: Bool
     @State var isSelectedM: Bool
+    @State var disableButton: Bool
     
     var body: some View {
         VStack(spacing: 60) {
@@ -93,6 +110,7 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
             
             Spacer()
             WCButton(action: vm.onButtonTapped, text: "Next")
+            .disabled(vm.isDisabled())
         }
         .padding()
         .toolbar(.hidden)
@@ -101,6 +119,6 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
 
 struct OnboardingUserDataView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false)
+        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false, disableButton: false)
     }
 }

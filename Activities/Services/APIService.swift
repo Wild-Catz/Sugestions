@@ -17,6 +17,7 @@ protocol APIServiceProtocol {
     func getActivity(for profile: Person) -> GetActivityResponse
     func rateActivity(_ activity: Activity, with feedback: Feedback, for profile: Person)
     func getQuestions(for activity: Activity) -> [Question]
+    func getOnboardingQuestions() -> [String]
 }
 
 final class APIService {
@@ -79,31 +80,34 @@ extension APIService: APIServiceProtocol {
     }
     
     func getQuestions(for activity: Activity) -> [Question] {
-            return [.init(text: "AAA?", category: .fineMotory),
-                    .init(text: "BBB?", category: .receptive),
-                    .init(text: "CCC?", category: .receptive)]
+            return [.init(id: 1, text: "AAA?", category: .fineMotory),
+                    .init(id: 2, text: "BBB?", category: .receptive),
+                    .init(id: 3, text: "CCC?", category: .receptive)]
         }
+    
+    func getOnboardingQuestions() -> [String] {
+        return APIService.onboardingQuestions.map { $0.text }
+    }
+    
 }
 
 extension APIService {
     private static let questions: [Question] = [
-        .init(text: "receptive_question_feedback", category: .receptive),
-        .init(text: "expressive_question_feedback", category: .expressive),
-        .init(text: "problemSolving_question_feedback", category: .problemSolving),
-        .init(text: "fineMotory_question_feedback", category: .fineMotory)
+        .init(id: 1, text: "receptive_question_feedback", category: .receptive),
+        .init(id: 2, text: "expressive_question_feedback", category: .expressive),
+        .init(id: 3, text: "problemSolving_question_feedback", category: .problemSolving),
+        .init(id: 4, text: "fineMotory_question_feedback", category: .fineMotory)
     ]
     
     private static let onboardingQuestions: [Question] = [
-        .init(text: "receptive_onboarding_1", category: .receptive),
-        .init(text: "receptive_onboarding_2", category: .receptive),
-        .init(text: "receptive_onboarding_3", category: .receptive),
-        .init(text: "expressive_onboarding_1", category: .expressive),
-        .init(text: "expressive_onboarding_2", category: .expressive),
-        .init(text: "expressive_onboarding_3", category: .expressive),
-        .init(text: "problemSolving_onboarding_1", category: .problemSolving),
-        .init(text: "problemSolving_onboarding_2", category: .problemSolving),
-        .init(text: "fineMotory_onboarding_1", category: .fineMotory),
-        .init(text: "fineMotory_onboarding_2", category: .fineMotory)
+        .init(id: 1, text: "receptive_onboarding_1", category: .receptive),
+        .init(id: 2, text: "receptive_onboarding_2", category: .receptive),
+        .init(id: 3, text: "expressive_onboarding_1", category: .expressive),
+        .init(id: 4, text: "expressive_onboarding_2", category: .expressive),
+        .init(id: 5, text: "problemSolving_onboarding_1", category: .problemSolving),
+        .init(id: 6, text: "problemSolving_onboarding_2", category: .problemSolving),
+        .init(id: 7, text: "fineMotory_onboarding_1", category: .fineMotory),
+        .init(id: 8, text: "fineMotory_onboarding_2", category: .fineMotory)
     ]
     
     private static let activities: [ActivityAPI] = [
