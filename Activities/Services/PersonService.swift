@@ -30,7 +30,7 @@ final class FakePersonService {
 
 extension FakePersonService: PersonServiceProtocol {
     func getPerson() -> Person {
-        return Person(name: name, categories: categories, history: [])
+        return Person(name: name, categories: categories, history: [], gender: .male)
     }
 
     func setWishCatgories(categories: Set<Category>) {

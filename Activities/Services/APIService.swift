@@ -93,6 +93,19 @@ extension APIService {
         .init(text: "fineMotory_question_feedback", category: .fineMotory)
     ]
     
+    private static let onboardingQuestions: [Question] = [
+        .init(text: "receptive_onboarding_1", category: .receptive),
+        .init(text: "receptive_onboarding_2", category: .receptive),
+        .init(text: "receptive_onboarding_3", category: .receptive),
+        .init(text: "expressive_onboarding_1", category: .expressive),
+        .init(text: "expressive_onboarding_2", category: .expressive),
+        .init(text: "expressive_onboarding_3", category: .expressive),
+        .init(text: "problemSolving_onboarding_1", category: .problemSolving),
+        .init(text: "problemSolving_onboarding_2", category: .problemSolving),
+        .init(text: "fineMotory_onboarding_1", category: .fineMotory),
+        .init(text: "fineMotory_onboarding_2", category: .fineMotory)
+    ]
+    
     private static let activities: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
@@ -133,6 +146,36 @@ extension APIService {
               difficult: .init(receptive: 5, expressive: 3, problemSolving: 2, fineMotory: 1),
               categories: .init(arrayLiteral: .expressive, .fineMotory, .receptive)
              )
+    ]
+    
+    private static let activities_m_en: [ActivityAPI] = [
+        .init(id: 0,
+              name: "First Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+              categories: .init(arrayLiteral: .receptive))
+    ]
+    
+    private static let activities_f_en: [ActivityAPI] = [
+        .init(id: 0,
+              name: "First Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+              categories: .init(arrayLiteral: .receptive))
+    ]
+    
+    private static let activities_m_it: [ActivityAPI] = [
+        .init(id: 0,
+              name: "First Activity",
+              description: "I dont know now",
+              tips: ["Be gay", "Be whoever you want"],
+              need: "You need something maybe",
+              difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+              categories: .init(arrayLiteral: .receptive))
     ]
 
     private static let errorActivity: ActivityAPI = .init(id: 404,

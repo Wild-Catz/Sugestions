@@ -15,12 +15,25 @@ struct CirclesView: View {
         HStack {
             ForEach(0..<5) { index in
                 Spacer()
-                Circle()
-                    .strokeBorder(.black, lineWidth: 4)
-                    .background(Circle().fill(index <= rate ? Color.orange : Color.clear))
-                    .onTapGesture {
-                        self.rate = index
+                Button {
+                    self.rate = index
+                } label: {
+                    if index <= rate {
+                        Image(systemName: "circle.fill")
+                            .font(.system(size:41))
+                            .foregroundColor(Color.primary)
+                    } else {
+                        Image(systemName: "circle")
+                            .font(.system(size:41))
+                            .foregroundColor(Color.primary)
                     }
+                }
+//                Circle()
+//                    .strokeBorder(.black, lineWidth: 2)
+//                    .background(Circle().fill(index <= rate ? Color.orange : Color.clear))
+//                    .onTapGesture {
+//                        self.rate = index
+//                    }
                 Spacer()
             }
         }
