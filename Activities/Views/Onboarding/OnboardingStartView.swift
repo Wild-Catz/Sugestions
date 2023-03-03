@@ -30,8 +30,15 @@ struct OnboardingStartView<VM: OnboardingViewModelProtocol>: View {
         VStack(spacing: 60) {
             Text("onboarding_welcome")
                 .font(.largeTitle)
+                .multilineTextAlignment(.center)
                 .bold()
                 .padding(.top)
+//            GeometryReader { proxy in
+//                Image("Onboarding")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: proxy.size.width * 0.7)
+//            }
             Image("Onboarding")
                 .resizable()
                 .scaledToFit()

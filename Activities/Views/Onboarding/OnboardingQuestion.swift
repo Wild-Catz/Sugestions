@@ -33,8 +33,11 @@ struct OnboardingQuestion<VM: OnboardingQuestionViewModelProtocol>: View {
     
     var body: some View {
         TabView {
-            ForEach(1..<11) { index in
+            ForEach(1..<9) { index in
                 VStack {
+                    if index == 1 {
+                        Spacer()
+                    }
                     Text("How well does your child understands verbal instructions?")
                         .font(.title)
                         .fontWeight(.semibold)
@@ -45,8 +48,10 @@ struct OnboardingQuestion<VM: OnboardingQuestionViewModelProtocol>: View {
                         .frame(height: 41)
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
-                    if index == 10 {
+                    if index == 1 {
+                        Spacer()
                         WCButton(action: vm.onButtonTapped, text: "Submit")
+                            .padding(.bottom, 50)
                     }
                 }
                 .padding(.horizontal)

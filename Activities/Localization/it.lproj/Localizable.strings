@@ -10,7 +10,7 @@
 
 // OnboardingStartView
 
-"onboarding_welcome" = "Ciao, è un piacere vederti";
+"onboarding_welcome" = "Ciao, \nè un piacere vederti";
 "onboarding_welcome_text" = "Prima di cominciare, vorrei farti qualche domanda per costruire al meglio il tuo personale percorso";
 "Let's do it!" = "Cominciamo!";
 
@@ -23,10 +23,8 @@
 // Onboarding_question
 "receptive_onboarding_1" = "Quanto bene capisce le istruzioni verbali?";
 "receptive_onboarding_2" = "Quanto bene comprende le parole d’uso comune?";
-"receptive_onboarding_3" = "Quant'è facile per lui comprendere nuove parole?";
 "expressive_onboarding_1" = "Quanto spesso esprime le sue necessità a parole?";
 "expressive_onboarding_2" = "Quanto bene riesce a costruire frasi?";
-"expressive_onboarding_3" = "Quante parole conosce?";
 "problemSolving_onboarding_1" = "Quanto è capace di imitare azioni?";
 "problemSolving_onboarding_2" = "How well can your child abstract concepts?";
 "fineMotory_onboarding_1" = "Quanto bene riesce a maneggiare oggetti (come forchette, matite, bicchieri, etc)?";

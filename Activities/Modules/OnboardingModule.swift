@@ -63,7 +63,7 @@ extension OnboardingModule: ScreenFactory {
                             
     @ViewBuilder func makeUserDataScreen() -> some View {
         OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { self.router.push(.question)
-        }), userName: "", gender: .male)
+        }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false)
     }
     
     @ViewBuilder func makeQuestionScreen() -> some View {

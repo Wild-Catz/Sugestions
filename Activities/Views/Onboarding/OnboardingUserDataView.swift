@@ -13,6 +13,7 @@ protocol OnboardingUserDataViewModelProtocol: ObservableObject {
 }
 
 final class OnboardingUserDataViewModel: OnboardingUserDataViewModelProtocol {
+    
     let onQuestionView: () -> Void
     
     init(onQuestionView: @escaping () -> Void) {
@@ -31,8 +32,9 @@ final class OnboardingUserDataViewModel: OnboardingUserDataViewModelProtocol {
 struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
     let vm: VM
     @State var userName: String
-//    @State var gender: String
     @State var gender: Gender
+    @State var isSelectedF: Bool
+    @State var isSelectedM: Bool
     
     var body: some View {
         VStack(spacing: 60) {
@@ -58,40 +60,32 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
                     HStack {
                         Button {
                             gender = .female
+                            isSelectedF = true
+                            isSelectedM = false
                         } label: {
                             ZStack {
-                                Text("👧🏻")
-                                    .fontWeight(.medium)
-                                    .font(.title2)
                                 RoundedRectangle(cornerRadius: 13)
                                     .frame(height: 107)
-                                    .foregroundColor(.gray.opacity(0.20))
+                                    .foregroundColor(isSelectedF == false ? .gray.opacity(0.20) : .pink.opacity(0.20))
+                                Text("👧🏻")
+                                    .fontWeight(.medium)
+                                    .font(.largeTitle)
                             }
                         }
                         Button {
                             gender = .male
+                            isSelectedM = true
+                            isSelectedF = false
                         } label: {
                             ZStack {
-                                Text("👦🏻")
-                                    .fontWeight(.medium)
-                                    .font(.title2)
                                 RoundedRectangle(cornerRadius: 13)
                                     .frame(height: 107)
-                                    .foregroundColor(.gray.opacity(0.20))
+                                    .foregroundColor(isSelectedM == false ? .gray.opacity(0.20) : .blue.opacity(0.20))
+                                Text("👦🏻")
+                                    .fontWeight(.medium)
+                                    .font(.largeTitle)
                             }
                         }
-                        
-//                        ForEach(Gender.allCases, id: \.rawValue) { gen in
-//                            Button {
-//                                print(1)
-//                            } label: {
-//                                SquareSelector(selectorContent: $gender)
-//                            }
-//                            .onAppear {
-//                                gender = gen.rawValue
-//                            }
-//                            .buttonStyle(.plain)
-//                        }
                     }
                 }
 
@@ -107,6 +101,6 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
 
 struct OnboardingUserDataView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { }), userName: "", gender: .male)
+        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false)
     }
 }
