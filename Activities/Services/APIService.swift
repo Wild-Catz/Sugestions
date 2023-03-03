@@ -148,7 +148,7 @@ extension APIService {
              )
     ]
     
-    private static let activities_m_en: [ActivityAPI] = [
+    private static let activitiesMaleEN: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
               description: "I dont know now",
@@ -158,7 +158,7 @@ extension APIService {
               categories: .init(arrayLiteral: .receptive))
     ]
     
-    private static let activities_f_en: [ActivityAPI] = [
+    private static let activitiesFemaleEN: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
               description: "I dont know now",
@@ -168,7 +168,7 @@ extension APIService {
               categories: .init(arrayLiteral: .receptive))
     ]
     
-    private static let activities_m_it: [ActivityAPI] = [
+    private static let activitiesMaleIT: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
               description: "I dont know now",
