@@ -14,7 +14,7 @@ struct CirclesView: View {
     
     var body: some View {
         HStack {
-            ForEach(0..<5) { index in
+            ForEach(1..<6) { index in
                 Spacer()
                 Circle()
                     .strokeBorder(.black, lineWidth: 4)

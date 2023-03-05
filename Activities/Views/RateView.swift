@@ -7,29 +7,67 @@
 
 import SwiftUI
 
+struct RateQuestion: Hashable {
+    enum Ready: Hashable {
+        case ready(Mark)
+        case notReady
+    }
+    
+    let id: QuestionID
+    let text: String
+    let category: Category
+    var ready: Ready
+    
+    init(question: Question) {
+        self.id = question.id
+        self.text = question.text
+        self.category = question.category
+        self.ready = .notReady
+    }
+}
+
 protocol RateViewModelProtocol: ObservableObject {
-    var feedbackPublisher: Published<Feedback>.Publisher { get }
-    var feedback: Feedback { get }
     var category: Category { get }
+    var questions: [RateQuestion] { get }
+    var isButtonEnabled: Bool { get }
     func done()
+    func onMarkChange(on questionID: QuestionID, mark: Mark)
 }
 
 final class RateViewModel: RateViewModelProtocol {
-    var feedbackPublisher: Published<Feedback>.Publisher { self.$feedback }
-            
-    @Published var feedback: Feedback
+    var questions: [RateQuestion]
     private let onDone: (Feedback) -> Void
     let category: Category
-
+    @Published var isButtonEnabled: Bool = false
+    
     init(category: Category, questions: [Question], onDone: @escaping (Feedback) -> Void) {
-        self.feedback = [:]
         self.onDone = onDone
         self.category = category
-        questions.forEach { feedback[$0] = .normal }
+        self.questions = questions.map { RateQuestion(question: $0) }
     }
     
     func done() {
+        let feedback = questions.reduce(Dictionary<QuestionID,Mark>()) { partialResult, question in
+            var result = partialResult
+            if case let .ready(mark) = question.ready {
+                result[question.id] = mark
+            } else {
+                fatalError()
+            }
+            return result
+        }
         onDone(feedback)
+    }
+    
+    func onMarkChange(on arrayIndex: Int , mark: Mark) {
+        self.questions[arrayIndex].ready = .ready(mark)
+        isButtonEnabled = questions.allSatisfy {
+            if case let .ready(_) = $0.ready {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 }
 
@@ -47,20 +85,14 @@ struct RateView<VM: RateViewModelProtocol>: View {
                 .font(.title)
                 .fontWeight(.medium)
             Spacer()
-            ForEach(vm.feedback.map { $0.key }, id: \.self) { question in
-                VStack {
-                    Text(LocalizedStringKey(question.text))
-                        .font(.title2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    CirclesView(rate: .constant(3), borderSize: 5, color: Color(vm.category.rawValue))
-                        .frame(height: 41)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 23)
-                }
-                
+            ForEach(vm.questions.indices, id: \.self) { index in
+                QuestionView(question: vm.questions[index], color: Color(vm.category.rawValue), mark: 0, onMarkChange: {
+                    vm.onMarkChange(on: index, mark: Mark.fiveSystem(from: $0))
+                })
             }
             Spacer()
             WCButton(action: { vm.done() } , text: "Done", color: Color(vm.category.rawValue))
+                .disabled(!vm.isButtonEnabled)
         }
         .toolbar(.hidden)
     }

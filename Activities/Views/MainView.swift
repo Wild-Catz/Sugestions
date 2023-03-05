@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import API
 
 private enum Const {
     static var bottomPadding: CGFloat = 33
@@ -103,7 +104,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(person: FakePersonService(ratingService: RatingService()).getPerson(), activity: FakeActivityService().getActivity(),
+        MainView(viewModel: MainViewModel(person: self.personService.getPerson(with: 0), activity: self.activityService.getActivity(for: 0),
                                           showCongratulationsBanner: false,
                                           onCongratsClose: { },
                                           onDetailsScreen: { }))

@@ -6,10 +6,9 @@
 //
 
 import Foundation
-
 typealias PersonID = Int
 
-struct Person: Codable {
+struct Person {
     let id: PersonID
     let name: String
     let categories: Set<Category>

@@ -7,31 +7,33 @@
 
 import Foundation
 
-struct GetActivityResponse {
+struct GetActivityResponse: Encodable {
     let activity: ActivityAPI
     let isDone: Bool
     let categoryOfTheDay: Category
 }
 
-protocol APIServiceProtocol {
-    func getActivity(for profile: Person) -> GetActivityResponse
-    func rateActivity(_ activity: ActivityID, with feedback: Feedback, for profile: Person)
-    func getQuestions(for activity: ActivityID) -> [Question]
+public protocol APIServiceProtocol {
+    func getActivity(for profileID: Int) -> Data
+    func rateActivity(_ activity: Int, with feedback: [Int: Int], for profile: Int)
+    func getQuestions(for activity: Int) -> Data
 }
 
-final class APIService {
+public final class APIService {
     let ud = UserDefaultsManager()
-    let personService: PersonServiceProtocol
+    let personService: PersonServiceProtocol = FakePersonService(ratingService: RatingService())
     var today: Day?
     
-    init(personService: PersonServiceProtocol) {
-        today = ud.load(Day.self, forKey: "current")
-        print(DateInterval(start: today?.generatedTime ?? Date(), end: Date()).duration)
+    public init() {
+        self.today = ud.load(Day.self, forKey: "current")
         if let time = today?.generatedTime,
-           DateInterval(start: time, end: Date()).duration > 30 {
+           DateInterval(start: time, end: Date()).duration > 15 {
             today = nil
         }
-        self.personService = personService
+    }
+    
+    deinit {
+        ud.save(today!, forKey: "current")
     }
 
     private func suggestActivity(in category: Category) -> ActivityAPI {
@@ -72,36 +74,48 @@ final class APIService {
 }
 
 extension APIService: APIServiceProtocol {
-    func getActivity(for profile: Person) -> GetActivityResponse {
-        if let today = self.today {
-            return GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
+    public func getActivity(for profileID: Int) -> Data {
+        if let today = self.today,
+           today.activity.id != 404 {
+            let response = GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
+            let encoder = JSONEncoder()
+            return try! encoder.encode(response)
+            
         } else {
+            let profile = personService.getPerson(with: profileID)
             ppp(profile: profile)
-            return getActivity(for: profile)
-        }
-    }
-
-    func rateActivity(_ activity: ActivityID, with feedback: Feedback, for profile: Person) {
-        if let today = today,
-           let activity = Self.activities.first(where: { $0.id == activity }) {
-            personService.setDoneExercise(activity: activity.id, category: today.category, feedback: feedback)
-            self.today?.isDone = true
-            ud.save(self.today, forKey: "current")
+            return getActivity(for: profileID)
         }
     }
     
-    func getQuestions(for activity: ActivityID) -> [Question] {
+    public func rateActivity(_ activity: Int, with feedback: [Int: Int], for profile: Int) {
+        let feedback = Dictionary(uniqueKeysWithValues: feedback.map { key, value in
+            (Self.questions[key], Mark(rawValue: value)!)
+        })
+        if var today = today,
+           let activity = Self.activities.first(where: { $0.id == activity }) {
+            personService.setDoneExercise(activity: activity.id, category: today.category, feedback: feedback)
+            today.isDone = true
+            ud.save(today, forKey: "current")
+            self.today = today
+            print(ud.load(Day.self, forKey: "current")?.isDone)
+        }
+    }
+    
+    public func getQuestions(for activity: Int) -> Data {
         let activity = Self.activities.first { $0.id == activity } ?? Self.errorActivity
-        return Self.questions.filter { activity.categories.contains($0.category) }
+        let response = Self.questions.filter { activity.categories.contains($0.category) }
+        let encoder = JSONEncoder()
+        return try! encoder.encode(response)
     }
 }
 
 extension APIService {
     private static let questions: [Question] = [
-        .init(text: "receptive_question_feedback", category: .receptive),
-        .init(text: "expressive_question_feedback", category: .expressive),
-        .init(text: "problemSolving_question_feedback", category: .problemSolving),
-        .init(text: "fineMotory_question_feedback", category: .fineMotory)
+        .init(id: 0, text: "receptive_question_feedback", category: .receptive),
+        .init(id: 1, text: "expressive_question_feedback", category: .expressive),
+        .init(id: 2, text: "problemSolving_question_feedback", category: .problemSolving),
+        .init(id: 3, text: "fineMotory_question_feedback", category: .fineMotory)
     ]
     
     private static let activities: [ActivityAPI] = [
@@ -134,7 +148,7 @@ extension APIService {
               tips: ["Be gay", "Be whoever you want"],
               need: "You need something maybe",
               difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .fineMotory, .receptive, .problemSolving)
+              categories: .init(arrayLiteral: .fineMotory, .receptive, .expressive)
             ),
         .init(id: 4,
               name: "Fifth Activity",

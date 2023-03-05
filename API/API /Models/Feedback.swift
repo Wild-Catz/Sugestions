@@ -15,4 +15,4 @@ struct Question: Hashable, Codable {
     let category: Category
 }
 
-typealias Feedback = [QuestionID: Mark]
+typealias Feedback = [Question: Mark]

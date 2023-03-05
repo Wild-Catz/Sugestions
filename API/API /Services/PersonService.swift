@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PersonServiceProtocol {
-    func getPerson() -> Person
+    func getPerson(with id: PersonID) -> Person
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
 }
@@ -32,8 +32,12 @@ final class FakePersonService {
 }
 
 extension FakePersonService: PersonServiceProtocol {
+    func getPerson(with id: PersonID) -> Person {
+        Person(id: 3, name: name, categories: categories, history: self.history)
+    }
+    
     func getPerson() -> Person {
-        return Person(name: name, categories: categories, history: self.history)
+        return Person(id: 3, name: name, categories: categories, history: self.history)
     }
 
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback) {

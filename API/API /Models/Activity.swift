@@ -11,12 +11,12 @@ typealias ActivityID = Int
 typealias Tip = String
 typealias Need = String
 
-struct Activity {
+struct ActivityAPI: Codable {
     let id: ActivityID
     let name: String
     let description: String
     let tips: [Tip]
     let need: String
-    let category: Category
-    var isDone: Bool
+    let difficult: Difficult
+    let categories: Set<Category>
 }
