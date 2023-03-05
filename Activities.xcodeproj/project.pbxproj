@@ -26,7 +26,6 @@
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
 		67D4112729B24D89008831E9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* Router.swift */; };
 		67D4112A29B4BA1A008831E9 /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = 67D4112929B4BA1A008831E9 /* Stinsen */; };
-		67D4119F29B4D170008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D4117A29B4D10B008831E9 /* libAPI.a */; };
 		67D411A529B4D205008831E9 /* PersonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A429B4D205008831E9 /* PersonService.swift */; };
 		67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */; };
 		67D411B129B4D769008831E9 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A929B4D769008831E9 /* Mark.swift */; };
@@ -37,6 +36,7 @@
 		67D411B729B4D769008831E9 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411AF29B4D769008831E9 /* History.swift */; };
 		67D411B829B4D769008831E9 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411B029B4D769008831E9 /* Feedback.swift */; };
 		67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */; };
+		67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D411F729B4E700008831E9 /* libAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +54,16 @@
 			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
 			remoteInfo = API;
 		};
-		67D4119029B4D14F008831E9 /* PBXContainerItemProxy */ = {
+		67D411F629B4E700008831E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 67D4118C29B4D14F008831E9 /* API.xcodeproj */;
+			containerPortal = 67D411F229B4E700008831E9 /* API.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
+			remoteInfo = API;
+		};
+		67D4120F29B4E72A008831E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67D411FA29B4E72A008831E9 /* API.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
 			remoteInfo = API;
@@ -86,7 +93,6 @@
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67D4112529B24D89008831E9 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		67D4117529B4D10B008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = ../../API/API.xcodeproj; sourceTree = "<group>"; };
-		67D4118C29B4D14F008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = ../../API/API.xcodeproj; sourceTree = "<group>"; };
 		67D411A429B4D205008831E9 /* PersonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonService.swift; sourceTree = "<group>"; };
 		67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewProvider + Constants.swift"; sourceTree = "<group>"; };
 		67D411A929B4D769008831E9 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 		67D411AF29B4D769008831E9 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		67D411B029B4D769008831E9 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityResponse.swift; sourceTree = "<group>"; };
+		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
+		67D411FA29B4E72A008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = API.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67D4119F29B4D170008831E9 /* libAPI.a in Frameworks */,
+				67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */,
 				67D4112A29B4BA1A008831E9 /* Stinsen in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,7 +130,7 @@
 		67170561299E119F00C033B2 = {
 			isa = PBXGroup;
 			children = (
-				67D4118C29B4D14F008831E9 /* API.xcodeproj */,
+				67D411F929B4E72A008831E9 /* API */,
 				6717056C299E119F00C033B2 /* Activities */,
 				67772BF929A3C8110096F498 /* ActivitiesTests */,
 				6717056B299E119F00C033B2 /* Products */,
@@ -196,6 +204,7 @@
 		67772C0A29A602F80096F498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67D411F229B4E700008831E9 /* API.xcodeproj */,
 				67D4117529B4D10B008831E9 /* API.xcodeproj */,
 			);
 			name = Frameworks;
@@ -262,14 +271,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		67D4118D29B4D14F008831E9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				67D4119129B4D14F008831E9 /* libAPI.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		67D411A829B4D769008831E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +292,30 @@
 				67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		67D411F329B4E700008831E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67D411F729B4E700008831E9 /* libAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		67D411F929B4E72A008831E9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				67D411FA29B4E72A008831E9 /* API.xcodeproj */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		67D411FB29B4E72A008831E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67D4121029B4E72A008831E9 /* libAPI.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,8 +407,12 @@
 					ProjectRef = 67D4117529B4D10B008831E9 /* API.xcodeproj */;
 				},
 				{
-					ProductGroup = 67D4118D29B4D14F008831E9 /* Products */;
-					ProjectRef = 67D4118C29B4D14F008831E9 /* API.xcodeproj */;
+					ProductGroup = 67D411FB29B4E72A008831E9 /* Products */;
+					ProjectRef = 67D411FA29B4E72A008831E9 /* API.xcodeproj */;
+				},
+				{
+					ProductGroup = 67D411F329B4E700008831E9 /* Products */;
+					ProjectRef = 67D411F229B4E700008831E9 /* API.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -402,11 +431,18 @@
 			remoteRef = 67D4117929B4D10B008831E9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		67D4119129B4D14F008831E9 /* libAPI.a */ = {
+		67D411F729B4E700008831E9 /* libAPI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAPI.a;
-			remoteRef = 67D4119029B4D14F008831E9 /* PBXContainerItemProxy */;
+			remoteRef = 67D411F629B4E700008831E9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		67D4121029B4E72A008831E9 /* libAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAPI.a;
+			remoteRef = 67D4120F29B4E72A008831E9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
