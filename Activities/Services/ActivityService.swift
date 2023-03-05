@@ -46,7 +46,7 @@ extension FakeActivityService: ActivityServiceProtocol {
 
     func rateActivity(activity: Activity, for personID: PersonID, feedback: Feedback) {
         let feedback = Dictionary(uniqueKeysWithValues: feedback.map { key, value in
-            ( key.id, value.rawValue)
+            ( key, value.rawValue)
         })
         apiService.rateActivity(activity.id, with: feedback, for: personID)
         self.shouldShowBanner = true
@@ -56,6 +56,5 @@ extension FakeActivityService: ActivityServiceProtocol {
         let response = apiService.getQuestions(for: activity.id)
         let decoder = JSONDecoder()
         return try! decoder.decode([Question].self, from: response)
-        
     }
 }

@@ -25,12 +25,15 @@ public final class APIService {
     var today: Day?
     
     public init() {
-        today = ud.load(Day.self, forKey: "current")
-        print(DateInterval(start: today?.generatedTime ?? Date(), end: Date()).duration)
+        self.today = ud.load(Day.self, forKey: "current")
         if let time = today?.generatedTime,
-           DateInterval(start: time, end: Date()).duration > 40 {
+           DateInterval(start: time, end: Date()).duration > 15 {
             today = nil
         }
+    }
+    
+    deinit {
+        ud.save(today!, forKey: "current")
     }
 
     private func suggestActivity(in category: Category) -> ActivityAPI {
@@ -72,7 +75,8 @@ public final class APIService {
 
 extension APIService: APIServiceProtocol {
     public func getActivity(for profileID: Int) -> Data {
-        if let today = self.today {
+        if let today = self.today,
+           today.activity.id != 404 {
             let response = GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
             let encoder = JSONEncoder()
             return try! encoder.encode(response)
@@ -88,11 +92,13 @@ extension APIService: APIServiceProtocol {
         let feedback = Dictionary(uniqueKeysWithValues: feedback.map { key, value in
             (Self.questions[key], Mark(rawValue: value)!)
         })
-        if let today = today,
+        if var today = today,
            let activity = Self.activities.first(where: { $0.id == activity }) {
             personService.setDoneExercise(activity: activity.id, category: today.category, feedback: feedback)
-            self.today?.isDone = true
-            ud.save(self.today, forKey: "current")
+            today.isDone = true
+            ud.save(today, forKey: "current")
+            self.today = today
+            print(ud.load(Day.self, forKey: "current")?.isDone)
         }
     }
     
@@ -142,7 +148,7 @@ extension APIService {
               tips: ["Be gay", "Be whoever you want"],
               need: "You need something maybe",
               difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .fineMotory, .receptive, .problemSolving)
+              categories: .init(arrayLiteral: .fineMotory, .receptive, .expressive)
             ),
         .init(id: 4,
               name: "Fifth Activity",

@@ -13,14 +13,14 @@ import Stinsen
 protocol MainScreenFactory: AnyObject {
     func makeMainScreen() -> AnyView
     func makeDeailedActivityScreen() -> AnyView
-    func makeRateScreen()  -> AnyView
+    func makeRateScreen() -> AnyView
 }
 
 final class MainCordinator<F: MainScreenFactory> : NavigationCoordinatable {
     let stack = NavigationStack(initial: \MainCordinator.mainScreen)
     weak var factory: F? 
 
-    @Root var mainScreen = makeMainScreen
+    @Route(.push) var mainScreen = makeMainScreen
     @Route(.push) var detailsScreen = makeDeailedActivityScreen
     @Route(.push) var rateUsScreen = makeRateScreen
 }

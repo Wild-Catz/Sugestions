@@ -37,6 +37,7 @@
 		67D411B829B4D769008831E9 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411B029B4D769008831E9 /* Feedback.swift */; };
 		67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */; };
 		67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D411F729B4E700008831E9 /* libAPI.a */; };
+		67D4124729B51969008831E9 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4124629B51969008831E9 /* QuestionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,23 +48,9 @@
 			remoteGlobalIDString = 67170569299E119F00C033B2;
 			remoteInfo = Activities;
 		};
-		67D4117929B4D10B008831E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67D4117529B4D10B008831E9 /* API.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
-			remoteInfo = API;
-		};
 		67D411F629B4E700008831E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 67D411F229B4E700008831E9 /* API.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
-			remoteInfo = API;
-		};
-		67D4120F29B4E72A008831E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67D411FA29B4E72A008831E9 /* API.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 67D4115029B4CEBB008831E9;
 			remoteInfo = API;
@@ -92,7 +79,6 @@
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67D4112529B24D89008831E9 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		67D4117529B4D10B008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = ../../API/API.xcodeproj; sourceTree = "<group>"; };
 		67D411A429B4D205008831E9 /* PersonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonService.swift; sourceTree = "<group>"; };
 		67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewProvider + Constants.swift"; sourceTree = "<group>"; };
 		67D411A929B4D769008831E9 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
@@ -104,7 +90,7 @@
 		67D411B029B4D769008831E9 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityResponse.swift; sourceTree = "<group>"; };
 		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
-		67D411FA29B4E72A008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = API.xcodeproj; sourceTree = "<group>"; };
+		67D4124629B51969008831E9 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +166,7 @@
 				67525FC929AA44760072F741 /* ActivityBigView.swift */,
 				67525FD729ACFD780072F741 /* CirclesView.swift */,
 				67525FD929AD05BB0072F741 /* WCButton.swift */,
+				67D4124629B51969008831E9 /* QuestionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				67D411F229B4E700008831E9 /* API.xcodeproj */,
-				67D4117529B4D10B008831E9 /* API.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -263,14 +249,6 @@
 			path = Activity;
 			sourceTree = "<group>";
 		};
-		67D4117629B4D10B008831E9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				67D4117A29B4D10B008831E9 /* libAPI.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		67D411A829B4D769008831E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,17 +283,8 @@
 		67D411F929B4E72A008831E9 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				67D411FA29B4E72A008831E9 /* API.xcodeproj */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		67D411FB29B4E72A008831E9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				67D4121029B4E72A008831E9 /* libAPI.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,7 +337,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					67170569299E119F00C033B2 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -403,14 +372,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 67D4117629B4D10B008831E9 /* Products */;
-					ProjectRef = 67D4117529B4D10B008831E9 /* API.xcodeproj */;
-				},
-				{
-					ProductGroup = 67D411FB29B4E72A008831E9 /* Products */;
-					ProjectRef = 67D411FA29B4E72A008831E9 /* API.xcodeproj */;
-				},
-				{
 					ProductGroup = 67D411F329B4E700008831E9 /* Products */;
 					ProjectRef = 67D411F229B4E700008831E9 /* API.xcodeproj */;
 				},
@@ -424,25 +385,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		67D4117A29B4D10B008831E9 /* libAPI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAPI.a;
-			remoteRef = 67D4117929B4D10B008831E9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		67D411F729B4E700008831E9 /* libAPI.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAPI.a;
 			remoteRef = 67D411F629B4E700008831E9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		67D4121029B4E72A008831E9 /* libAPI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAPI.a;
-			remoteRef = 67D4120F29B4E72A008831E9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -509,6 +456,7 @@
 				67D411B529B4D769008831E9 /* Difficult.swift in Sources */,
 				67D411B729B4D769008831E9 /* History.swift in Sources */,
 				67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */,
+				67D4124729B51969008831E9 /* QuestionView.swift in Sources */,
 				67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */,
 				67525FD429AB5FAB0072F741 /* RateView.swift in Sources */,
 				67525FC729AA42930072F741 /* UserDefaultsStorage.swift in Sources */,
@@ -555,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -615,6 +564,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -673,7 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Activities/Preview Content\"";
-				DEVELOPMENT_TEAM = VC6GB9QS62;
+				DEVELOPMENT_TEAM = 5U55B3662Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -686,7 +636,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activities;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activitie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -702,7 +652,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Activities/Preview Content\"";
-				DEVELOPMENT_TEAM = VC6GB9QS62;
+				DEVELOPMENT_TEAM = 5U55B3662Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -715,7 +665,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activities;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activitie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

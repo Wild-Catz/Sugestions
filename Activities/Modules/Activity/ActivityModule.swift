@@ -57,11 +57,10 @@ extension ActivityModule: MainScreenFactory {
         let activity: Activity = self.activityService.getActivity(for: 0)
         let onDone: (Feedback) -> Void = {
             self.activityService.rateActivity(activity: activity, for: 0, feedback: $0)
-            self.cordinator.popToRoot()
+            self.cordinator.route(to: \.mainScreen)
         }
         let vm = RateViewModel(category: self.activityService.getActivity(for: 0).category , questions: self.activityService.getQuestions(activity: activity), onDone: onDone)
         let rateView = RateView(vm: vm)
         return AnyView(rateView)
-            
     }
 }
