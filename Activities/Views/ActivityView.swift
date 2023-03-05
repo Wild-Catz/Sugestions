@@ -105,7 +105,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityView(vm: ActivityViewModel(
-            activity: FakeActivityService().getActivity(),
+            activity: Self.activityService.getActivity(for: 0),
             onDone: {},
             onClose: {})
         )

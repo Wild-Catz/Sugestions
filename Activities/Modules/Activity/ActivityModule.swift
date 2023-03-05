@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import API
 // swiftlint:disable type_name
 
 protocol Module {
@@ -16,73 +16,52 @@ protocol Module {
 }
 
 final class ActivityModule: Module {
-    private typealias R = Router<RoutingDestination>
-
     @ViewBuilder var rootView: some View {
-        self.presentingView
+        cordinator.view()
     }
-    private var presentingView: PresentingView<R, ActivityModule>!
-    private let router = R()
-    private let activityService = FakeActivityService()
-    private let personService = FakePersonService(ratingService: RatingService())
+    let cordinator: MainCordinator<ActivityModule>
+    private let activityService: ActivityServiceProtocol
+    private let personService: PersonServiceProtocol
     
     init() {
-        router.push(.mainScreen)
-        self.presentingView = PresentingView(router: router, factory: self, root: .mainScreen)
+        let apiLayer: APIServiceProtocol = APIService()
+        self.activityService = FakeActivityService(api: apiLayer)
+        self.personService = PersonService(api: apiLayer)
+        self.cordinator = MainCordinator()
+        self.cordinator.factory = self
     }
 }
 
-extension ActivityModule {
-    enum RoutingDestination: RoutingDestinationProtocol {
-        case mainScreen
-        case detailsScreen
-        case rateUsScreen
-    }
-}
-
-extension ActivityModule.RoutingDestination: Identifiable {
-    var id: String { "\(self)" }
-}
-
-extension ActivityModule: ScreenFactory {
-    @ViewBuilder func view(for destination: RoutingDestination) -> some View {
-        switch destination {
-        case .detailsScreen:
-            makeDeailedActivityScreen()
-        case .mainScreen:
-            makeMainScreen()
-        case .rateUsScreen:
-            makeRateScreen()
-        }
-    }
-
-    @ViewBuilder func makeMainScreen() -> some View {
-        MainView(viewModel: MainViewModel(
-            person: personService.getPerson(),
-            activity: activityService.getActivity(),
+extension ActivityModule: MainScreenFactory {
+    func makeMainScreen() -> AnyView {
+        return AnyView(MainView(viewModel: MainViewModel(
+            person: personService.getPerson(with: 0),
+            activity: activityService.getActivity(for: 0),
             showCongratulationsBanner: activityService.shouldShowBanner,
             onCongratsClose: { self.activityService.shouldShowBanner = false },
-            onDetailsScreen: { self.router.push(.detailsScreen) })
-                 )
+            onDetailsScreen: {
+                self.cordinator.route(to: \.detailsScreen)
+            })))
     }
-
-    @ViewBuilder func makeDeailedActivityScreen() -> some View {
-        ActivityView(
+    
+    func makeDeailedActivityScreen() -> AnyView {
+        return AnyView(ActivityView(
             vm: ActivityViewModel(
-                activity: activityService.getActivity(),
-                onDone: { self.router.push(.rateUsScreen) },
-                onClose: { self.router.pop() }
-            ))
+                activity: activityService.getActivity(for: 0),
+                onDone: { self.cordinator.route(to: \.rateUsScreen) },
+                onClose: { self.cordinator.popToRoot() }
+            )))
     }
     
-    @ViewBuilder func makeRateScreen() -> some View {
-        let activity: Activity = self.activityService.getActivity()
-        RateView(vm: RateViewModel(category: activity.category, questions: self.activityService.getQuestions(activity: activity)) {
-            self.activityService.rateActivity(activity: activity, feedback: $0)
-            self.router.pop()
-            self.router.pop()
-        })
+    func makeRateScreen() -> AnyView {
+        let activity: Activity = self.activityService.getActivity(for: 0)
+        let onDone: (Feedback) -> Void = {
+            self.activityService.rateActivity(activity: activity, for: 0, feedback: $0)
+            self.cordinator.popToRoot()
+        }
+        let vm = RateViewModel(category: self.activityService.getActivity(for: 0).category , questions: self.activityService.getQuestions(activity: activity), onDone: onDone)
+        let rateView = RateView(vm: vm)
+        return AnyView(rateView)
+            
     }
-    
-    typealias RD = RoutingDestination
 }

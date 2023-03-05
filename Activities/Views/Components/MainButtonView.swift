@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import API
 struct MainButtonModel {
     let name: String
     let description: String
@@ -68,6 +68,6 @@ struct MainButtonView: View {
 
 struct MainButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        MainButtonView(model: .init(activity: FakeActivityService().getActivity()))
+        MainButtonView(model: .init(activity: self.activityService.getActivity(for: 0)))
     }
 }

@@ -7,7 +7,10 @@
 
 import Foundation
 
+typealias QuestionID = Int
+
 struct Question: Hashable, Codable {
+    let id: QuestionID
     let text: String
     let category: Category
 }

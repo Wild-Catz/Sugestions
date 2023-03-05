@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct Person {
+typealias PersonID = Int
+
+struct Person: Codable {
+    let id: PersonID
     let name: String
     let categories: Set<Category>
     let history: [History]

@@ -6,56 +6,47 @@
 //
 
 import SwiftUI
-import Combine
+import Stinsen
 
 // swiftlint:disable type_name
 
-protocol RoutingDestinationProtocol: Identifiable, Hashable { }
-
-protocol RouterProtocol: ObservableObject {
-    associatedtype RD = RoutingDestinationProtocol
-    var navigationPath: NavigationPath { get set }
-    var presentedView: RD? { get set }
-
-    func push(_ destination: RD)
-    func pop()
-    func present(_ destination: RD)
-    func dismiss()
-    func clear()
+protocol MainScreenFactory: AnyObject {
+    func makeMainScreen() -> AnyView
+    func makeDeailedActivityScreen() -> AnyView
+    func makeRateScreen()  -> AnyView
 }
 
-protocol ScreenFactory: AnyObject {
-    associatedtype RD: RoutingDestinationProtocol
-    associatedtype Vi: View
+final class MainCordinator<F: MainScreenFactory> : NavigationCoordinatable {
+    let stack = NavigationStack(initial: \MainCordinator.mainScreen)
+    weak var factory: F? 
 
-    func view(for destination: RD) -> Vi
+    @Root var mainScreen = makeMainScreen
+    @Route(.push) var detailsScreen = makeDeailedActivityScreen
+    @Route(.push) var rateUsScreen = makeRateScreen
 }
 
-final class Router<RD: RoutingDestinationProtocol>: RouterProtocol {
-    @Published var navigationPath = NavigationPath()
-    @Published var presentedView: RD?
-    var anyCancallable: Set<AnyCancellable> = Set<AnyCancellable>()
-    
-    func clear() {
-        while !navigationPath.isEmpty {
-            pop()
+extension MainCordinator {
+    @ViewBuilder func makeMainScreen() -> some View {
+        if let factory = self.factory {
+            factory.makeMainScreen()
+        } else {
+            EmptyView()
         }
     }
 
-    func push(_ destination: RD) {
-        navigationPath.append(destination)
+    @ViewBuilder func makeDeailedActivityScreen() -> some View {
+        if let factory = self.factory {
+            factory.makeDeailedActivityScreen()
+        } else {
+            EmptyView()
+        }
     }
-
-    func pop() {
-        guard !navigationPath.isEmpty else { return }
-        navigationPath.removeLast()
-    }
-
-    func present(_ destination: RD) {
-        presentedView = destination
-    }
-
-    func dismiss() {
-        presentedView = nil
+    
+    @ViewBuilder func makeRateScreen() -> some View {
+        if let factory = self.factory {
+            factory.makeRateScreen()
+        } else {
+            EmptyView()
+        }
     }
 }

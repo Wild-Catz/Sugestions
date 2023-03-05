@@ -13,7 +13,9 @@ struct ActivitiesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            module.rootView
+            NavigationView {
+                module.rootView
+            }
         }
     }
 }
