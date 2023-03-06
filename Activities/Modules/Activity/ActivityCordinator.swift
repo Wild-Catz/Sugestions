@@ -21,8 +21,8 @@ final class MainCordinator<F: MainScreenFactory> : NavigationCoordinatable {
     weak var factory: F? 
 
     @Route(.push) var mainScreen = makeMainScreen
-    @Route(.push) var detailsScreen = makeDeailedActivityScreen
-    @Route(.push) var rateUsScreen = makeRateScreen
+    @Route(.fullScreen) var detailsScreen = makeDeailedActivityScreen
+    @Route(.fullScreen) var rateUsScreen = makeRateScreen
 }
 
 extension MainCordinator {

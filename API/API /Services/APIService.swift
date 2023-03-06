@@ -27,7 +27,7 @@ public final class APIService {
     public init() {
         self.today = ud.load(Day.self, forKey: "current")
         if let time = today?.generatedTime,
-           DateInterval(start: time, end: Date()).duration > 15 {
+           DateInterval(start: time, end: Date()).duration > 30 {
             today = nil
         }
     }
@@ -60,7 +60,8 @@ public final class APIService {
     }
     
     private func getActivities(in category: Category) -> [ActivityAPI] {
-        let currentRatings = RatingService.dict
+        let currentRatings = personService.getAllCategoriesRating()
+        print(currentRatings)
         return Self.activities
             .filter { $0.categories.contains(category) }
         
@@ -98,7 +99,6 @@ extension APIService: APIServiceProtocol {
             today.isDone = true
             ud.save(today, forKey: "current")
             self.today = today
-            print(ud.load(Day.self, forKey: "current")?.isDone)
         }
     }
     
