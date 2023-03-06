@@ -24,7 +24,7 @@
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
-		67D4112729B24D89008831E9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* Router.swift */; };
+		67D4112729B24D89008831E9 /* ActivityCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* ActivityCordinator.swift */; };
 		67D4112A29B4BA1A008831E9 /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = 67D4112929B4BA1A008831E9 /* Stinsen */; };
 		67D411A529B4D205008831E9 /* PersonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A429B4D205008831E9 /* PersonService.swift */; };
 		67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */; };
@@ -78,7 +78,7 @@
 		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		67D4112529B24D89008831E9 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		67D4112529B24D89008831E9 /* ActivityCordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCordinator.swift; sourceTree = "<group>"; };
 		67D411A429B4D205008831E9 /* PersonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonService.swift; sourceTree = "<group>"; };
 		67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewProvider + Constants.swift"; sourceTree = "<group>"; };
 		67D411A929B4D769008831E9 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
@@ -91,6 +91,7 @@
 		67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityResponse.swift; sourceTree = "<group>"; };
 		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
 		67D4124629B51969008831E9 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		67D4124B29B5F167008831E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +117,6 @@
 		67170561299E119F00C033B2 = {
 			isa = PBXGroup;
 			children = (
-				67D411F929B4E72A008831E9 /* API */,
 				6717056C299E119F00C033B2 /* Activities */,
 				67772BF929A3C8110096F498 /* ActivitiesTests */,
 				6717056B299E119F00C033B2 /* Products */,
@@ -136,12 +136,12 @@
 		6717056C299E119F00C033B2 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				67D4124B29B5F167008831E9 /* Info.plist */,
 				67D411A829B4D769008831E9 /* Models */,
 				67525FC829AA429A0072F741 /* Core */,
 				67772C1129A6049B0096F498 /* Localization */,
 				67CB239F299FCB83000C42DE /* Services */,
 				67CB2397299FC416000C42DE /* Views */,
-				67CB2392299F79B0000C42DE /* Routing */,
 				67CB238F299F78CF000C42DE /* Modules */,
 				6717056D299E119F00C033B2 /* ActivitiesApp.swift */,
 				67170571299E11A000C033B2 /* Assets.xcassets */,
@@ -212,14 +212,6 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		67CB2392299F79B0000C42DE /* Routing */ = {
-			isa = PBXGroup;
-			children = (
-				67D4112529B24D89008831E9 /* Router.swift */,
-			);
-			path = Routing;
-			sourceTree = "<group>";
-		};
 		67CB2397299FC416000C42DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +236,7 @@
 		67D4112129B2476F008831E9 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				67D4112529B24D89008831E9 /* ActivityCordinator.swift */,
 				67CB2390299F78E8000C42DE /* ActivityModule.swift */,
 			);
 			path = Activity;
@@ -278,13 +271,6 @@
 				67D411F729B4E700008831E9 /* libAPI.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		67D411F929B4E72A008831E9 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,7 +431,7 @@
 				67D411B429B4D769008831E9 /* Category.swift in Sources */,
 				67525FD829ACFD780072F741 /* CirclesView.swift in Sources */,
 				67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */,
-				67D4112729B24D89008831E9 /* Router.swift in Sources */,
+				67D4112729B24D89008831E9 /* ActivityCordinator.swift in Sources */,
 				67525FDA29AD05BB0072F741 /* WCButton.swift in Sources */,
 				67772C2229A608770096F498 /* ActivityView.swift in Sources */,
 				67525FD129AB5C5B0072F741 /* ActivityService.swift in Sources */,
@@ -626,21 +612,24 @@
 				DEVELOPMENT_TEAM = 5U55B3662Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Activities/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activitie;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -655,21 +644,24 @@
 				DEVELOPMENT_TEAM = 5U55B3662Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Activities/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activitie;
+				PRODUCT_BUNDLE_IDENTIFIER = wildcatz.Activities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
