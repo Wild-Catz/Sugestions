@@ -11,13 +11,14 @@ struct WCButton: View {
     let action: () -> Void
     let text: String
     let color: Color
+    let colorFor: Color
     
     var body: some View {
         Button(action: action) {
             color
                 .overlay {
                     Text(text)
-                        .foregroundColor(.primary)
+                        .foregroundColor(colorFor)
                         .font(.title3)
                         .bold()
                 }
@@ -32,6 +33,6 @@ struct WCButton: View {
 
 struct WCButton_Previews: PreviewProvider {
     static var previews: some View {
-        WCButton(action: {}, text: "Some", color: .yellow)
+        WCButton(action: {}, text: "Some", color: .yellow, colorFor: .black )
     }
 }

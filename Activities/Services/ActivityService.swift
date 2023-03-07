@@ -12,6 +12,7 @@ protocol ActivityServiceProtocol: AnyObject {
     func getActivity(for personID: PersonID) -> Activity
     func rateActivity(activity: Activity, for personID: PersonID, feedback: Feedback)
     func getQuestions(activity: Activity) -> [Question]
+    func getOnboardingQuestions() -> [Question]
     var shouldShowBanner: Bool { get set }
 }
 
@@ -25,6 +26,12 @@ final class FakeActivityService {
 }
 
 extension FakeActivityService: ActivityServiceProtocol {
+    func getOnboardingQuestions() -> [Question] {
+        let response = apiService.getOnboardingQuestions()
+        let decoder = JSONDecoder()
+        return try! decoder.decode([Question].self, from: response)
+    }
+    
     var shouldShowBanner: Bool {
         get { banner }
         set { banner = newValue }

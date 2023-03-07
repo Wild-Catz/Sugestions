@@ -91,7 +91,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
                 })
             }
             Spacer()
-            WCButton(action: { vm.done() } , text: "Done", color: Color(vm.category.rawValue))
+            WCButton(action: { vm.done() } , text: "Done", color: Color(vm.category.rawValue), colorFor: .white)
                 .disabled(!vm.isButtonEnabled)
         }
         .toolbar(.hidden)
