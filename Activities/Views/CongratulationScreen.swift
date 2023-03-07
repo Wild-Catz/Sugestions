@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CongratulationScreen: View {
     let image: Image
-    let imageSize: CGFloat
+    let imageWidth: CGFloat
+    let aspectRatio: CGFloat
     let color: Color
     let action: () -> Void
     
@@ -18,7 +19,7 @@ struct CongratulationScreen: View {
             image
                 .resizable()
                 .foregroundColor(.white)
-                .frame(width: imageSize, height: imageSize)
+                .frame(width: imageWidth, height: imageWidth * aspectRatio)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(color)
                 .opacity(0.95)
@@ -48,6 +49,6 @@ struct CongratulationScreen: View {
 
 struct CongratulationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, color: .purple, action: {})
+        CongratulationScreen(image: Image(systemName: "heart.fill"), imageWidth: 300, aspectRatio: 1.5, color: .purple, action: {})
     }
 }

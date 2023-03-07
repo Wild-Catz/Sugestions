@@ -11,7 +11,6 @@ import API
 
 protocol Module {
     associatedtype V: View
-
     @ViewBuilder var rootView: V { get }
 }
 

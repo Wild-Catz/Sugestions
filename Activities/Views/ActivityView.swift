@@ -83,6 +83,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                 Spacer()
                 WCButton(action: vm.onButtonTapped, text: "Done", color: Color(vm.activity.category.rawValue))
                     .disabled(vm.activity.isDone)
+                    .buttonStyle(.plain)
             }
             VStack {
                 HStack {

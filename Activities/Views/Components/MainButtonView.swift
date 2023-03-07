@@ -44,7 +44,6 @@ struct MainButtonView: View {
                         .frame(width: proxy.size.width * 0.95 * 1.5, height: proxy.size.width * 0.95)
                         .offset(y: proxy.size.height / 3.8)
                 }
-
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(model.name)

@@ -38,6 +38,7 @@
 		67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */; };
 		67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D411F729B4E700008831E9 /* libAPI.a */; };
 		67D4124729B51969008831E9 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4124629B51969008831E9 /* QuestionView.swift */; };
+		67D4124F29B66A99008831E9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4124E29B66A99008831E9 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
 		67D4124629B51969008831E9 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		67D4124B29B5F167008831E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		67D4124E29B66A99008831E9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				67525FD729ACFD780072F741 /* CirclesView.swift */,
 				67525FD929AD05BB0072F741 /* WCButton.swift */,
 				67D4124629B51969008831E9 /* QuestionView.swift */,
+				67D4124E29B66A99008831E9 /* CustomButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				67CB2399299FC429000C42DE /* MainView.swift in Sources */,
 				67D411B429B4D769008831E9 /* Category.swift in Sources */,
 				67525FD829ACFD780072F741 /* CirclesView.swift in Sources */,
+				67D4124F29B66A99008831E9 /* CustomButton.swift in Sources */,
 				67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */,
 				67D4112729B24D89008831E9 /* ActivityCordinator.swift in Sources */,
 				67525FDA29AD05BB0072F741 /* WCButton.swift in Sources */,
