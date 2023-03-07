@@ -16,11 +16,19 @@ private enum Const {
 protocol RatingServiceProtocol {
     func rateActivity(activity: ActivityID, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
+    func getAllCategoriesRating() -> [Category: Int]
 }
 
 final class RatingService {
+    let ud = UserDefaultsManager()
+    var rating: [Category: Int]
+    
+    init() {
+        self.rating = ud.load([Category:Int].self, forKey: "rating") ?? Self.dict
+    }
+    
     private func getRate(category: Category) -> Int {
-        return Self.dict[category]!
+        return rating[category]!
     }
 
     private func changeRate(category: Category, mark: Mark) {
@@ -28,11 +36,16 @@ final class RatingService {
         rate += mark.rawValue
         if rate > Const.max { rate = Const.max }
         if rate < Const.min { rate = Const.min }
-        Self.dict[category] = rate
+        rating[category] = rate
+        ud.save(rating, forKey: "rating")
     }
 }
 
 extension RatingService: RatingServiceProtocol {
+    func getAllCategoriesRating() -> [Category: Int] {
+        rating
+    }
+    
     func getCategoryRating(category: Category) -> Int {
         getRate(category: category)
     }
@@ -46,6 +59,6 @@ extension RatingService: RatingServiceProtocol {
 
 extension RatingService {
     static var dict: [Category: Int] = [
-        .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
+        .problemSolving: 7, .expressive: 7, .fineMotory: 7, .receptive: 7
     ]
 }
