@@ -24,7 +24,7 @@
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
-		67D4112729B24D89008831E9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* Router.swift */; };
+		67D4112729B24D89008831E9 /* MainCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* MainCordinator.swift */; };
 		67D4112A29B4BA1A008831E9 /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = 67D4112929B4BA1A008831E9 /* Stinsen */; };
 		67D411A529B4D205008831E9 /* PersonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A429B4D205008831E9 /* PersonService.swift */; };
 		67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */; };
@@ -38,6 +38,14 @@
 		67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */; };
 		67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D411F729B4E700008831E9 /* libAPI.a */; };
 		67D4124729B51969008831E9 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4124629B51969008831E9 /* QuestionView.swift */; };
+		E13BE2E529B629940044ACA1 /* OnboardingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2E429B629940044ACA1 /* OnboardingModule.swift */; };
+		E13BE2EE29B62A710044ACA1 /* OnboardingUserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */; };
+		E13BE2EF29B62A710044ACA1 /* OnboardingEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2EA29B62A710044ACA1 /* OnboardingEndView.swift */; };
+		E13BE2F029B62A710044ACA1 /* OnboardingQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2EB29B62A710044ACA1 /* OnboardingQuestion.swift */; };
+		E13BE2F129B62A710044ACA1 /* OnboardingCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2EC29B62A710044ACA1 /* OnboardingCategoriesView.swift */; };
+		E13BE2F229B62A710044ACA1 /* OnboardingStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2ED29B62A710044ACA1 /* OnboardingStartView.swift */; };
+		E13BE2F429B62AE40044ACA1 /* OnboardingCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2F329B62AE40044ACA1 /* OnboardingCordinator.swift */; };
+		E13BE2F629B6305B0044ACA1 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2F529B6305B0044ACA1 /* Gender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +86,7 @@
 		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		67D4112529B24D89008831E9 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		67D4112529B24D89008831E9 /* MainCordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCordinator.swift; sourceTree = "<group>"; };
 		67D411A429B4D205008831E9 /* PersonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonService.swift; sourceTree = "<group>"; };
 		67D411A629B4D432008831E9 /* PreviewProvider + Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewProvider + Constants.swift"; sourceTree = "<group>"; };
 		67D411A929B4D769008831E9 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
@@ -91,6 +99,14 @@
 		67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityResponse.swift; sourceTree = "<group>"; };
 		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
 		67D4124629B51969008831E9 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		E13BE2E429B629940044ACA1 /* OnboardingModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingModule.swift; sourceTree = "<group>"; };
+		E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUserDataView.swift; sourceTree = "<group>"; };
+		E13BE2EA29B62A710044ACA1 /* OnboardingEndView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEndView.swift; sourceTree = "<group>"; };
+		E13BE2EB29B62A710044ACA1 /* OnboardingQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingQuestion.swift; sourceTree = "<group>"; };
+		E13BE2EC29B62A710044ACA1 /* OnboardingCategoriesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCategoriesView.swift; sourceTree = "<group>"; };
+		E13BE2ED29B62A710044ACA1 /* OnboardingStartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingStartView.swift; sourceTree = "<group>"; };
+		E13BE2F329B62AE40044ACA1 /* OnboardingCordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCordinator.swift; sourceTree = "<group>"; };
+		E13BE2F529B6305B0044ACA1 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +132,6 @@
 		67170561299E119F00C033B2 = {
 			isa = PBXGroup;
 			children = (
-				67D411F929B4E72A008831E9 /* API */,
 				6717056C299E119F00C033B2 /* Activities */,
 				67772BF929A3C8110096F498 /* ActivitiesTests */,
 				6717056B299E119F00C033B2 /* Products */,
@@ -207,6 +222,7 @@
 		67CB238F299F78CF000C42DE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E13BE2E329B629870044ACA1 /* Onboarding */,
 				67D4112129B2476F008831E9 /* Activity */,
 			);
 			path = Modules;
@@ -215,7 +231,8 @@
 		67CB2392299F79B0000C42DE /* Routing */ = {
 			isa = PBXGroup;
 			children = (
-				67D4112529B24D89008831E9 /* Router.swift */,
+				67D4112529B24D89008831E9 /* MainCordinator.swift */,
+				E13BE2F329B62AE40044ACA1 /* OnboardingCordinator.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -223,6 +240,7 @@
 		67CB2397299FC416000C42DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E13BE2E829B629C30044ACA1 /* Onboarding */,
 				67525FC129A914C40072F741 /* Components */,
 				67CB2398299FC429000C42DE /* MainView.swift */,
 				67772C2129A608770096F498 /* ActivityView.swift */,
@@ -257,6 +275,7 @@
 				67D411AA29B4D769008831E9 /* Person.swift */,
 				67D411AC29B4D769008831E9 /* Category.swift */,
 				67D411AD29B4D769008831E9 /* Difficult.swift */,
+				E13BE2F529B6305B0044ACA1 /* Gender.swift */,
 				67D411AE29B4D769008831E9 /* Activity.swift */,
 				67D411AF29B4D769008831E9 /* History.swift */,
 				67D411B029B4D769008831E9 /* Feedback.swift */,
@@ -280,11 +299,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		67D411F929B4E72A008831E9 /* API */ = {
+		E13BE2E329B629870044ACA1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				E13BE2E429B629940044ACA1 /* OnboardingModule.swift */,
 			);
-			path = API;
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E13BE2E829B629C30044ACA1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E13BE2ED29B62A710044ACA1 /* OnboardingStartView.swift */,
+				E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */,
+				E13BE2EB29B62A710044ACA1 /* OnboardingQuestion.swift */,
+				E13BE2EC29B62A710044ACA1 /* OnboardingCategoriesView.swift */,
+				E13BE2EA29B62A710044ACA1 /* OnboardingEndView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,12 +474,16 @@
 			files = (
 				67D411B129B4D769008831E9 /* Mark.swift in Sources */,
 				67CB2399299FC429000C42DE /* MainView.swift in Sources */,
+				E13BE2F029B62A710044ACA1 /* OnboardingQuestion.swift in Sources */,
+				E13BE2F129B62A710044ACA1 /* OnboardingCategoriesView.swift in Sources */,
 				67D411B429B4D769008831E9 /* Category.swift in Sources */,
+				E13BE2F429B62AE40044ACA1 /* OnboardingCordinator.swift in Sources */,
 				67525FD829ACFD780072F741 /* CirclesView.swift in Sources */,
 				67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */,
-				67D4112729B24D89008831E9 /* Router.swift in Sources */,
+				67D4112729B24D89008831E9 /* MainCordinator.swift in Sources */,
 				67525FDA29AD05BB0072F741 /* WCButton.swift in Sources */,
 				67772C2229A608770096F498 /* ActivityView.swift in Sources */,
+				E13BE2E529B629940044ACA1 /* OnboardingModule.swift in Sources */,
 				67525FD129AB5C5B0072F741 /* ActivityService.swift in Sources */,
 				67D411B629B4D769008831E9 /* Activity.swift in Sources */,
 				67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */,
@@ -455,12 +491,16 @@
 				67D411A529B4D205008831E9 /* PersonService.swift in Sources */,
 				67D411B529B4D769008831E9 /* Difficult.swift in Sources */,
 				67D411B729B4D769008831E9 /* History.swift in Sources */,
+				E13BE2EE29B62A710044ACA1 /* OnboardingUserDataView.swift in Sources */,
+				E13BE2EF29B62A710044ACA1 /* OnboardingEndView.swift in Sources */,
 				67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */,
 				67D4124729B51969008831E9 /* QuestionView.swift in Sources */,
 				67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */,
 				67525FD429AB5FAB0072F741 /* RateView.swift in Sources */,
+				E13BE2F229B62A710044ACA1 /* OnboardingStartView.swift in Sources */,
 				67525FC729AA42930072F741 /* UserDefaultsStorage.swift in Sources */,
 				67D411B229B4D769008831E9 /* Person.swift in Sources */,
+				E13BE2F629B6305B0044ACA1 /* Gender.swift in Sources */,
 				67525FCA29AA44760072F741 /* ActivityBigView.swift in Sources */,
 				67525FDC29AE3D9E0072F741 /* CongratulationScreen.swift in Sources */,
 				67D411B829B4D769008831E9 /* Feedback.swift in Sources */,

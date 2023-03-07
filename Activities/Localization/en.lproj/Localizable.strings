@@ -8,6 +8,40 @@
 
 "dayly_activity_label" = "Do you want to discover the activity of the day?";
 
+// OnboardingStartView
+
+"onboarding_welcome" = "Hi, happy to see you";
+"onboarding_welcome_text" = "Before we start, I would like to ask you some questions in order to better shape your path";
+"Let's do it!" = "Let's do it!";
+
+// OnboardingUserDataView
+"onboarding_user_data" = "Nice to meet you!";
+"onboarding_user_name" = "What's your name?";
+"onboarding_gender" = "Who are you taking care of?";
+"Next" = "Next";
+
+// Onboarding_question
+"receptive_onboarding_1" = "How well does your child understand verbal instructions?";
+"receptive_onboarding_2" = "How well does your child understand common daily words?";
+"expressive_onboarding_1" = "How often does your child express his/her needs through words?";
+"expressive_onboarding_2" = "How well does your child manage to create sentences?";
+"problemSolving_onboarding_1" = "How capable is your child to replicate actions?";
+"problemSolving_onboarding_2" = "How well can your child abstract concepts?";
+"fineMotory_onboarding_1" = "How well can your child handle small objects (pencils, frocks, glass, etc)?";
+"fineMotory_onboarding_2" = "How well can your child handle objects with 2 hands simultaneously?";
+"Submit" = "Submit";
+
+// OnboardingCategoriesView
+
+"onboarding_categories_title" = "Which of the following categories are you interested in? ";
+"onboarding_subtitle" = "Select at least one";
+"Start" = "Start";
+
+// OnboardingEndView
+"onboarding_end_title" = "All set up";
+"onboarding_end_subtitle" = "Ready to start";
+"Let's go!" = "Let's go!";
+
 // MainView
 
 "Welcome back," = "Welcome back,";

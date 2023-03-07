@@ -17,7 +17,7 @@ struct CirclesView: View {
             ForEach(1..<6) { index in
                 Spacer()
                 Circle()
-                    .strokeBorder(.black, lineWidth: 4)
+                    .strokeBorder(.black, lineWidth: 2)
                     .background(Circle().fill(index <= rate ? self.color : Color.clear))
                     .onTapGesture {
                         self.rate = index

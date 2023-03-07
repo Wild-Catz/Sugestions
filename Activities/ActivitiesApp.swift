@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ActivitiesApp: App {
-    let module = ActivityModule()
+    let module = OnboardingModule()
 
     var body: some Scene {
         WindowGroup {

@@ -17,6 +17,7 @@ public protocol APIServiceProtocol {
     func getActivity(for profileID: Int) -> Data
     func rateActivity(_ activity: Int, with feedback: [Int: Int], for profile: Int)
     func getQuestions(for activity: Int) -> Data
+    func getOnboardingQuestions() -> Data
 }
 
 public final class APIService {
@@ -74,6 +75,12 @@ public final class APIService {
 }
 
 extension APIService: APIServiceProtocol {
+    public func getOnboardingQuestions() -> Data {
+        let response = Self.onboardingQuestions
+        let encoder = JSONEncoder()
+        return try! encoder.encode(response)
+    }
+    
     public func getActivity(for profileID: Int) -> Data {
         if let today = self.today,
            today.activity.id != 404 {
@@ -118,6 +125,17 @@ extension APIService {
         .init(id: 3, text: "fineMotory_question_feedback", category: .fineMotory)
     ]
     
+    private static let onboardingQuestions: [Question] = [
+        .init(id: 1, text: "receptive_onboarding_1", category: .receptive),
+        .init(id: 2, text: "receptive_onboarding_2", category: .receptive),
+        .init(id: 3, text: "expressive_onboarding_1", category: .expressive),
+        .init(id: 4, text: "expressive_onboarding_2", category: .expressive),
+        .init(id: 5, text: "problemSolving_onboarding_1", category: .problemSolving),
+        .init(id: 6, text: "problemSolving_onboarding_2", category: .problemSolving),
+        .init(id: 7, text: "fineMotory_onboarding_1", category: .fineMotory),
+        .init(id: 8, text: "fineMotory_onboarding_2", category: .fineMotory)
+    ]
+    
     private static let activities: [ActivityAPI] = [
         .init(id: 0,
               name: "First Activity",
@@ -159,6 +177,27 @@ extension APIService {
               categories: .init(arrayLiteral: .expressive, .fineMotory, .receptive)
              )
     ]
+        
+        private static let activitiesFemaleEN: [ActivityAPI] = [
+            .init(id: 0,
+                  name: "First Activity",
+                  description: """
+                    """,
+                  tips: ["", ""],
+                  need: "",
+                  difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+                  categories: .init(arrayLiteral: .problemSolving))
+        ]
+        
+        private static let activitiesMaleIT: [ActivityAPI] = [
+            .init(id: 0,
+                  name: "First Activity",
+                  description: "I dont know now",
+                  tips: ["Be gay", "Be whoever you want"],
+                  need: "You need something maybe",
+                  difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
+                  categories: .init(arrayLiteral: .receptive))
+        ]
 
     private static let errorActivity: ActivityAPI = .init(id: 404,
                                                        name: "Error Activity",

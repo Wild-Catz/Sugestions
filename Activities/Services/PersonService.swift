@@ -26,7 +26,7 @@ final class PersonService {
 
 extension PersonService: PersonServiceProtocol {
     func getPerson(with id: Int) -> Person {
-        Person(id: 0, name: "Some", categories: .init(arrayLiteral: .expressive), history: [])
+        Person(id: 0, name: "Some", categories: .init(arrayLiteral: .expressive), history: [], gender: .none)
     }
     
     func createPerson() {

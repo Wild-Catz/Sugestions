@@ -14,4 +14,5 @@ struct Person: Codable {
     let name: String
     let categories: Set<Category>
     let history: [History]
+    let gender: Gender
 }
