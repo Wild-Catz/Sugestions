@@ -25,15 +25,24 @@ struct ActivityBigView: View {
                     ZStack {
                         primaryColor
                             .ignoresSafeArea()
-                        VStack {
-                            Text("daily_activity_lable_1")
-                            Text("daily_activity_lable_2")
-                        }
-                        .font(.title2)
-                        .bold()
                     }
                     .ignoresSafeArea()
                     .frame(height: proxy.size.height/2)
+                    .overlay {
+                        VStack(spacing: 0) {
+                            VStack {
+                                Text("daily_activity_lable_1")
+                                Text("daily_activity_lable_2")
+                            }
+                            .font(.title2)
+                            .bold()
+                            .padding(.top, 25)
+                            Image("illustration")
+                                .resizable()
+                                .frame(width: proxy.size.width * 0.9, height: proxy.size.width * 0.9 / 1.5)
+                        }
+
+                    }
                     ZStack(alignment: .leading) {
                         titleColor
                         Text(activityName)
@@ -72,8 +81,13 @@ struct ActivityBigView: View {
                     .padding(.bottom, 60)
                 }
             }
+            .overlay(alignment: .top, content: {
+                primaryColor
+            .edgesIgnoringSafeArea(.top)
+            .frame(height: 0)
+        })
         }
-        .ignoresSafeArea(edges: .top)
+//        .ignoresSafeArea(edges: .top)
     }
 }
 

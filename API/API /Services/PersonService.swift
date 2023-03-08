@@ -30,10 +30,6 @@ final class FakePersonService {
 }
 
 extension FakePersonService: PersonServiceProtocol {
-    func getAllCategoriesRating() -> [Category : Int] {
-        ratingService.getAllCategoriesRating()
-    }
-    
     func savePerson(person: Person, feedback: Feedback) {
         let onPerson = Person(id: 0, gender: person.gender, name: person.name, categories: person.categories, history: [])
         ud.save(onPerson, forKey: "person")
@@ -57,7 +53,11 @@ extension FakePersonService: PersonServiceProtocol {
     }
     
     func getCategoryRating(category: Category) -> Int {
-        return ratingService.getCategoryRating(category: category)
+        ratingService.getCategoryRating(category: category)
+    }
+    
+    func getAllCategoriesRating() -> [Category: Int] {
+        ratingService.getAllCategoriesRating()
     }
 }
 

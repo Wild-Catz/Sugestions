@@ -21,6 +21,8 @@
 		67D4123A29B4E896008831E9 /* PersonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4123729B4E896008831E9 /* PersonService.swift */; };
 		67D4123B29B4E896008831E9 /* RatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4123829B4E896008831E9 /* RatingService.swift */; };
 		E13BE2F829B772DD0044ACA1 /* ActivitiesMaleEN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2F729B772DD0044ACA1 /* ActivitiesMaleEN.swift */; };
+		E13BE2FB29B784560044ACA1 /* ActivitiesMaleIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2FA29B784560044ACA1 /* ActivitiesMaleIT.swift */; };
+		E13BE2FD29B7E9A90044ACA1 /* ActivitiesFemaleEN.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2FC29B7E9A90044ACA1 /* ActivitiesFemaleEN.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +53,8 @@
 		67D4123729B4E896008831E9 /* PersonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonService.swift; sourceTree = "<group>"; };
 		67D4123829B4E896008831E9 /* RatingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingService.swift; sourceTree = "<group>"; };
 		E13BE2F729B772DD0044ACA1 /* ActivitiesMaleEN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMaleEN.swift; sourceTree = "<group>"; };
+		E13BE2FA29B784560044ACA1 /* ActivitiesMaleIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMaleIT.swift; sourceTree = "<group>"; };
+		E13BE2FC29B7E9A90044ACA1 /* ActivitiesFemaleEN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesFemaleEN.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				E13BE2F729B772DD0044ACA1 /* ActivitiesMaleEN.swift */,
+				E13BE2FA29B784560044ACA1 /* ActivitiesMaleIT.swift */,
+				E13BE2FC29B7E9A90044ACA1 /* ActivitiesFemaleEN.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 				67D4122D29B4E808008831E9 /* Person.swift in Sources */,
 				67D4122F29B4E808008831E9 /* Category.swift in Sources */,
 				67D4123A29B4E896008831E9 /* PersonService.swift in Sources */,
+				E13BE2FD29B7E9A90044ACA1 /* ActivitiesFemaleEN.swift in Sources */,
 				67D4123329B4E808008831E9 /* Feedback.swift in Sources */,
 				67D4123229B4E808008831E9 /* History.swift in Sources */,
 				67D4123929B4E896008831E9 /* APIService.swift in Sources */,
@@ -201,6 +208,7 @@
 				67D4123129B4E808008831E9 /* Activity.swift in Sources */,
 				E13BE2F829B772DD0044ACA1 /* ActivitiesMaleEN.swift in Sources */,
 				67D4123029B4E808008831E9 /* Difficult.swift in Sources */,
+				E13BE2FB29B784560044ACA1 /* ActivitiesMaleIT.swift in Sources */,
 				67D4122C29B4E808008831E9 /* Mark.swift in Sources */,
 				67D4122E29B4E808008831E9 /* Day.swift in Sources */,
 				67D4122B29B4E808008831E9 /* UserDefaultsStorage.swift in Sources */,

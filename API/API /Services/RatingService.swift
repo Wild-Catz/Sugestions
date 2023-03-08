@@ -45,6 +45,7 @@ final class RatingService {
         if rate > Const.max { rate = Const.max }
         if rate < Const.min { rate = Const.min }
         dict[category] = rate
+        ud.save(dict, forKey: "rating")
     }
 }
 
@@ -83,5 +84,5 @@ extension RatingService: RatingServiceProtocol {
 extension RatingService {
     static var defaultDifficulties: [Category: Int] = [
         .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
-    ]
+        ]
 }

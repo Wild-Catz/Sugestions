@@ -52,7 +52,7 @@ final class RateViewModel: RateViewModelProtocol {
             if case let .ready(mark) = question.ready {
                 result[question.id] = mark
             } else {
-                fatalError()
+                assertionFailure("Shouldnt be not ready")
             }
             return result
         }
@@ -62,7 +62,7 @@ final class RateViewModel: RateViewModelProtocol {
     func onMarkChange(on arrayIndex: Int , mark: Mark) {
         self.questions[arrayIndex].ready = .ready(mark)
         isButtonEnabled = questions.allSatisfy {
-            if case .ready(_) = $0.ready {
+            if case .ready = $0.ready {
                 return true
             } else {
                 return false
@@ -84,6 +84,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
             Text("Rate it to create your path more specific")
                 .font(.title)
                 .fontWeight(.medium)
+                .multilineTextAlignment(.center)
             Spacer()
             ForEach(vm.questions.indices, id: \.self) { index in
                 QuestionView(question: vm.questions[index], color: Color(vm.category.rawValue), mark: 0, onMarkChange: {

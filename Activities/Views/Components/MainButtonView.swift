@@ -32,11 +32,18 @@ struct MainButtonView: View {
                     VStack {
                         Text("THE ACTIVITY")
                         Text("OF THE DAY")
+                        Spacer()
                     }
                     .font(.title.bold())
+                    .padding(.top, 25)
                 }
                 .frame(height: proxy.size.height * 2/3)
-                
+                .overlay {
+                    Image("illustration")
+                        .resizable()
+                        .frame(width: proxy.size.width * 0.95 * 1.5, height: proxy.size.width * 0.95)
+                        .offset(y: proxy.size.height / 3.8)
+                }
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(model.name)
@@ -58,7 +65,7 @@ struct MainButtonView: View {
                     }
                 }
                 .frame(height: proxy.size.height * 1/3)
-                .padding(.leading, 24)
+                .padding(.horizontal, 24)
                 .background(.white)
             }
             .cornerRadius(13)

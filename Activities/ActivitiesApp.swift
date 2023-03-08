@@ -19,12 +19,12 @@ struct ContentView: View {
 
 @main
 struct ActivitiesApp: App {
-    
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 ContentView()
             }
+            .environment(\.colorScheme, .light)
         }
     }
 }
