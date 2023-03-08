@@ -18,7 +18,10 @@ struct QuestionView: View {
         VStack {
             Text(LocalizedStringKey(question.text))
                 .font(.title2)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
+                .padding(.bottom)
+                .multilineTextAlignment(.center)
             CirclesView(rate: $mark, borderSize: 5, color: color)
                 .frame(height: 41)
                 .frame(maxWidth: .infinity)

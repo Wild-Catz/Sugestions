@@ -67,9 +67,9 @@ struct MainView<VM: MainViewModelProtocol>: View {
                         .bold()
                 }
                 Spacer()
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 48, height: 48)
+//                Image(systemName: "person.circle")
+//                    .resizable()
+//                    .frame(width: 48, height: 48)
             }
             .padding(.top, 40)
             .padding(.horizontal, 20)

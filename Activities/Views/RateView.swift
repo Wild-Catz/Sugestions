@@ -84,6 +84,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
             Text("Rate it to create your path more specific")
                 .font(.title)
                 .fontWeight(.medium)
+                .multilineTextAlignment(.center)
             Spacer()
             ForEach(vm.questions.indices, id: \.self) { index in
                 QuestionView(question: vm.questions[index], color: Color(vm.category.rawValue), mark: 0, onMarkChange: {

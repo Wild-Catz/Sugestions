@@ -72,8 +72,13 @@ struct ActivityBigView: View {
                     .padding(.bottom, 60)
                 }
             }
+            .overlay(alignment: .top, content: {
+                primaryColor
+            .edgesIgnoringSafeArea(.top)
+            .frame(height: 0)
+        })
         }
-        .ignoresSafeArea(edges: .top)
+//        .ignoresSafeArea(edges: .top)
     }
 }
 

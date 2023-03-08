@@ -24,6 +24,7 @@ public final class APIService {
     let ud = UserDefaultsManager()
     let personService: PersonServiceProtocol = FakePersonService(ratingService: RatingService())
     var today: Day?
+    //var currentLanguage = UserDefaults.standard.stringArray(forKey: "AppleLanguages")
     
     public init() {
         self.today = ud.load(Day.self, forKey: "current")
@@ -62,12 +63,15 @@ public final class APIService {
     
     private func getActivities(in category: Category) -> [ActivityAPI] {
         let currentRatings = RatingService.dict
-        return Self.activities
+        return Self.activitiesMaleIT
             .filter { $0.categories.contains(category) }
         
-            .filter { $0.difficult.difficultDict().allSatisfy {
-                currentRatings[$0.key]! >= $0.value
-            } }
+            .filter {
+                $0.difficult.difficultDict().allSatisfy {
+                    currentRatings[$0.key]! >= $0.value
+                }
+    
+            }
             .sorted { act1, act2 -> Bool in
                 act1.difficult.getDifficult(category: category) < act2.difficult.getDifficult(category: category)
             }
@@ -82,12 +86,12 @@ extension APIService: APIServiceProtocol {
     }
     
     public func getActivity(for profileID: Int) -> Data {
-        if let today = self.today,
-           today.activity.id != 404 {
+        //if currentLanguage == "it-IT"
+        
+        if let today = self.today {
             let response = GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
             let encoder = JSONEncoder()
             return try! encoder.encode(response)
-            
         } else {
             let profile = personService.getPerson(with: profileID)
             ppp(profile: profile)
@@ -100,7 +104,7 @@ extension APIService: APIServiceProtocol {
             (Self.questions[key], Mark(rawValue: value)!)
         })
         if var today = today,
-           let activity = Self.activities.first(where: { $0.id == activity }) {
+           let activity = Self.activitiesMaleIT.first(where: { $0.id == activity }) {
             personService.setDoneExercise(activity: activity.id, category: today.category, feedback: feedback)
             today.isDone = true
             ud.save(today, forKey: "current")
@@ -110,7 +114,7 @@ extension APIService: APIServiceProtocol {
     }
     
     public func getQuestions(for activity: Int) -> Data {
-        let activity = Self.activities.first { $0.id == activity } ?? Self.errorActivity
+        let activity = Self.activitiesMaleIT.first { $0.id == activity } ?? Self.errorActivity
         let response = Self.questions.filter { activity.categories.contains($0.category) }
         let encoder = JSONEncoder()
         return try! encoder.encode(response)
@@ -135,48 +139,6 @@ extension APIService {
         .init(id: 7, text: "fineMotory_onboarding_1", category: .fineMotory),
         .init(id: 8, text: "fineMotory_onboarding_2", category: .fineMotory)
     ]
-    
-    private static let activities: [ActivityAPI] = [
-        .init(id: 0,
-              name: "First Activity",
-              description: "I dont know now",
-              tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe",
-              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .receptive)),
-        .init(id: 1,
-              name: "Second Activity",
-              description: "I dont know now",
-              tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .problemSolving, .expressive)
-             ),
-        .init(id: 2,
-              name: "Third Activity",
-              description: "I dont know now",
-              tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe",
-              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .fineMotory, .problemSolving)
-             ),
-        .init(id: 3,
-              name: "Fourth Activity",
-              description: "I dont know now",
-              tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe",
-              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .fineMotory, .receptive, .expressive)
-            ),
-        .init(id: 4,
-              name: "Fifth Activity",
-              description: "I dont know now",
-              tips: ["Be gay", "Be whoever you want"],
-              need: "You need something maybe",
-              difficult: .init(receptive: 1, expressive: 1, problemSolving: 1, fineMotory: 1),
-              categories: .init(arrayLiteral: .expressive, .fineMotory, .receptive)
-             )
-    ]
         
         private static let activitiesFemaleEN: [ActivityAPI] = [
             .init(id: 0,
@@ -187,16 +149,6 @@ extension APIService {
                   need: "",
                   difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
                   categories: .init(arrayLiteral: .problemSolving))
-        ]
-        
-        private static let activitiesMaleIT: [ActivityAPI] = [
-            .init(id: 0,
-                  name: "First Activity",
-                  description: "I dont know now",
-                  tips: ["Be gay", "Be whoever you want"],
-                  need: "You need something maybe",
-                  difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
-                  categories: .init(arrayLiteral: .receptive))
         ]
 
     private static let errorActivity: ActivityAPI = .init(id: 404,

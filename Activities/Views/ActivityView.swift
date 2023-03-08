@@ -89,6 +89,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                     Spacer()
                     Button(action: vm.onCloseButtonTapped) {
                         Image(systemName: "x.circle.fill")
+                            .padding(.top, 5)
                            .foregroundColor(.primary)
                             .font(.system(size: 30))
                     }

@@ -9,13 +9,14 @@ import SwiftUI
 
 @main
 struct ActivitiesApp: App {
-    let module = OnboardingModule()
+    let module = ActivityModule()
 
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 module.rootView
             }
+            .environment(\.colorScheme, .light)
         }
     }
 }
