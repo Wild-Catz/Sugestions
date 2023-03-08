@@ -10,17 +10,38 @@ import API
 
 // swiftlint:disable type_name
 
+private struct OnboardPersonFactory {
+    var name: String?
+    var categories: Set<Category>?
+    var feedback: Feedback?
+    var gender: Gender?
+    
+    func getPerson() -> OnboardingPerson? {
+        guard let name = name else { return nil }
+        guard let categories = categories else { return nil }
+        guard let feedback = feedback else { return nil }
+        guard let gender = gender else { return nil }
+        return OnboardingPerson(name: name, categories: categories, feedback: feedback, gender: gender)
+    }
+}
+
 final class OnboardingModule: Module {
-    @ViewBuilder var rootView: some View {
+    @ViewBuilder var rootView: AnyView {
         cordinator.view()
     }
-    private let activityService = FakeActivityService(api: APIService())
+    private let toActivityModule: () -> Void
+    private var personFactory: OnboardPersonFactory = OnboardPersonFactory()
+    private let personService: PersonServiceProtocol
+    private let activityService: ActivityServiceProtocol
+
     let cordinator: OnboardingCordinator<OnboardingModule>
 
-    init() {
+    init(activityService: ActivityServiceProtocol, personService: PersonServiceProtocol, toActivityModule: @escaping () -> Void) {
+        self.personService = personService
+        self.activityService = activityService
+        self.toActivityModule = toActivityModule
         self.cordinator = OnboardingCordinator()
         self.cordinator.factory = self
-
     }
 }
 
@@ -35,28 +56,41 @@ extension OnboardingModule: OnboardingScreenFactory {
     func makeUserDataScreen() -> AnyView {
         let view = OnboardingUserDataView(
             vm: OnboardingUserDataViewModel(
-                onQuestionView: { self.cordinator.route(to: \.questionScreen )}),
-            userName: "",
-            gender: .none,
-            isSelectedF: false,
-            isSelectedM: false,
-            disableButton: false
+                onQuestionView: { userName, gender in
+                    self.personFactory.name = userName
+                    self.personFactory.gender = gender
+                    self.cordinator.route(to: \.questionScreen)
+                    
+                }),
+            userName: ""
          )
         return AnyView(view)
     }
     
     func makeQuestionScreen() -> AnyView {
-        let view = OnboardingQuestion(vm: OnboardingQuestionViewModel(questions: activityService.getOnboardingQuestions(), onCategoriesView: {self.cordinator.route(to: \.categoriesScreen )}))
+        let view = OnboardingQuestion(vm: OnboardingQuestionViewModel(questions: activityService.getOnboardingQuestions(), onCategoriesView: { feedback in
+            self.personFactory.feedback = feedback
+            self.cordinator.route(to: \.categoriesScreen)
+        }))
         return AnyView(view)
     }
     
     func makeCategoriesScreen() -> AnyView {
-        let view = OnboardingCategoriesView(vm: OnboardingCategoriesViewModel(onEndView: {self.cordinator.route(to: \.endScreen )}), selectedCategories: [(category: .receptive, select: false), (category: .expressive, select: false), (category: .problemSolving, select: false), (category: .fineMotory, select: false)], isDisabled: 0)
+        let vm = OnboardingCategoriesViewModel { categories in
+            self.personFactory.categories = categories
+            self.cordinator.route(to: \.endScreen)
+        }
+        let view = OnboardingCategoriesView(vm: vm)
         return AnyView(view)
     }
     
     func makeEndScreen() -> AnyView {
-        let view = OnboardingEndView(vm: OnboardingEndViewModel())
+        let view = OnboardingEndView(vm: OnboardingEndViewModel { [weak self] in
+            let person = self?.personFactory.getPerson()
+            guard let person = person else { fatalError() }
+            self?.personService.createPerson(onboardingPerson: person)
+            self?.toActivityModule()
+        })
         return AnyView(view)
     }
 }
