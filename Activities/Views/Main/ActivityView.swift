@@ -81,7 +81,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
             )
             VStack {
                 Spacer()
-                WCButton(action: vm.onButtonTapped, text: "Done", color: Color(vm.activity.category.rawValue), colorFor: .black)
+                WCButton(action: vm.onButtonTapped, text: "done", color: Color(vm.activity.category.rawValue), colorFor: .black)
                     .disabled(vm.activity.isDone)
                     .buttonStyle(.plain)
             }
@@ -90,7 +90,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                     Spacer()
                     Button(action: vm.onCloseButtonTapped) {
                         Image(systemName: "x.circle.fill")
-                            .padding(.top, 5)
+                            .padding(.top, 20)
                            .foregroundColor(.primary)
                             .font(.system(size: 30))
                     }

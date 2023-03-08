@@ -29,13 +29,13 @@
 "problemSolving_onboarding_2" = "Quanto bene riesce ad astrarre i concetti?";
 "fineMotory_onboarding_1" = "Quanto bene riesce a maneggiare oggetti (come forchette, matite, bicchieri, etc)?";
 "fineMotory_onboarding_2" = "Quanto bene riesce ad utilizzare oggetti usando 2 mani contemporaneamente?";
-"Invia" = "Invia";
+"Submit" = "Invia";
 
 // OnboardingCategoriesView
 
 "onboarding_categories_title" = "Quali delle seguenti categorie ti interessano?";
 "onboarding_subtitle" = "Selezionane almeno una";
-"Start" = "Cominciamo";
+"Save" = "Salva";
 
 // OnboardingEndView
 "onboarding_end_title" = "Tutto pronto";
@@ -53,10 +53,15 @@
 
 // ActivityVIew
 
-"start_button_label" = "Comincia";
+"done" = "Fatto";
+"what_you_need" = "Materiale necessario";
+"description_label" = "Descrizione dell'attività";
+"tips_label" = "Suggerimenti";
 
 // RateView
 
+"rateView_title" = "Benfatto!";
+"rateView_subtitle" = "Aiutaci a rendere il tuo percorso più personalizzato";
 "receptive_question_feedback" = "Quanto ha compreso quello che dicevi durante l’attività?";
 "expressive_question_feedback" = "Quanto facilmente è riuscito ad esprimersi il bambino?";
 "problemSolving_question_feedback" = "Quanto è stato facile comprendere l’attività?";
