@@ -59,6 +59,6 @@ extension RatingService: RatingServiceProtocol {
 
 extension RatingService {
     static var dict: [Category: Int] = [
-        .problemSolving: 7, .expressive: 7, .fineMotory: 7, .receptive: 7
+        .problemSolving: 6, .expressive: 5, .fineMotory: 4, .receptive: 3
     ]
 }

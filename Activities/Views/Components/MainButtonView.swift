@@ -65,7 +65,7 @@ struct MainButtonView: View {
                     }
                 }
                 .frame(height: proxy.size.height * 1/3)
-                .padding(.leading, 24)
+                .padding(.horizontal, 24)
                 .background(.white)
             }
             .cornerRadius(13)
