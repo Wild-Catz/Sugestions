@@ -39,7 +39,7 @@ public final class APIService {
     let ud = UserDefaultsManager()
     let personService: PersonServiceProtocol = FakePersonService(ratingService: RatingService())
     var today: Day?
-    //var currentLanguage = UserDefaults.standard.stringArray(forKey: "AppleLanguages")
+    let langStr = Locale.current.languageCode
     
     public init() {
         self.today = ud.load(Day.self, forKey: "current")
@@ -55,7 +55,7 @@ public final class APIService {
 
     private func suggestActivity(in category: Category) -> ActivityAPI {
         let activity = getActivities(in: category).randomElement()
-        return activity ?? Self.errorActivity
+        return activity ?? Self.activitiesMaleIT.randomElement()!
     }
     
     private func ppp(profile: Person) {
@@ -77,8 +77,27 @@ public final class APIService {
     }
     
     private func getActivities(in category: Category) -> [ActivityAPI] {
+        let gender = personService.getPerson(with: 0).gender
+        var activities: [ActivityAPI] = []
+        if let langStr = langStr {
+            if langStr == "en" {
+                if gender == .male {
+                    activities = Self.activitiesMaleEN
+                } else {
+                    activities = Self.activitiesFemaleEN
+                }
+            } else if langStr == "it" {
+                    if gender == .male {
+                        activities = Self.activitiesMaleIT
+                    } else {
+                        activities = Self.activitiesFemaleEN
+                }
+            } else {
+                activities = Self.activitiesMaleEN
+            }
+        }
         let currentRatings = personService.getAllCategoriesRating()
-        return Self.activitiesMaleIT
+        return activities
             .filter { $0.categories.contains(category) }
         
             .filter {

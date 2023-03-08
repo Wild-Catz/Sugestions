@@ -23,6 +23,7 @@
 		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
 		67B8597929B8C448004F8836 /* CategoryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8597829B8C448004F8836 /* CategoryButtonView.swift */; };
+		67B8598529B8E7AD004F8836 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8598429B8E7AD004F8836 /* MainCoordinator.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
 		67D4112729B24D89008831E9 /* ActivityCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* ActivityCordinator.swift */; };
@@ -89,6 +90,7 @@
 		67772C1F29A607A90096F498 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		67B8597829B8C448004F8836 /* CategoryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonView.swift; sourceTree = "<group>"; };
+		67B8598429B8E7AD004F8836 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67D4112529B24D89008831E9 /* ActivityCordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCordinator.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				E13BE2E329B629870044ACA1 /* Onboarding */,
 				67D4112129B2476F008831E9 /* Activity */,
 				67D4125229B7779E008831E9 /* ModuleAssembley.swift */,
+				67B8598429B8E7AD004F8836 /* MainCoordinator.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				67525FD829ACFD780072F741 /* CirclesView.swift in Sources */,
 				67D4124F29B66A99008831E9 /* CustomButton.swift in Sources */,
 				67525FC529A9166F0072F741 /* MainButtonView.swift in Sources */,
+				67B8598529B8E7AD004F8836 /* MainCoordinator.swift in Sources */,
 				67D4112729B24D89008831E9 /* ActivityCordinator.swift in Sources */,
 				67525FDA29AD05BB0072F741 /* WCButton.swift in Sources */,
 				67772C2229A608770096F498 /* ActivityView.swift in Sources */,

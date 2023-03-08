@@ -17,7 +17,7 @@ final class ActivityModule: Module {
     @ViewBuilder var rootView: AnyView {
         cordinator.view()
     }
-    let cordinator: MainCordinator<ActivityModule>
+    let cordinator: MainCordinator
     private let activityService: ActivityServiceProtocol
     private let personService: PersonServiceProtocol
     

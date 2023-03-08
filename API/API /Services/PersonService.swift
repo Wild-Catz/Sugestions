@@ -18,13 +18,16 @@ protocol PersonServiceProtocol {
 final class FakePersonService {
     let ud = UserDefaultsManager()
     let ratingService: RatingServiceProtocol
-    var person: Person
+    var person: Person {
+        get {
+            ud.load(Person.self, forKey: "person") ?? Self.defaultPerson
+        }
+        set {
+            ud.save(newValue, forKey: "person")
+        }
+    }
 
     init(ratingService: RatingServiceProtocol) {
-        if ud.load(Bool.self, forKey: "first_launch") == nil {
-            ud.save(Set<Category>.init(arrayLiteral: .expressive, .fineMotory, .problemSolving, .receptive), forKey: "categories")
-        }
-        self.person = ud.load(Person.self, forKey: "person") ?? Self.defaultPerson
         self.ratingService = ratingService
     }
 }

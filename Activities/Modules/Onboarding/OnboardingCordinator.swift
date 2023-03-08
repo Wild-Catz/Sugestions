@@ -18,9 +18,9 @@ protocol OnboardingScreenFactory: AnyObject {
     func makeEndScreen() -> AnyView
 }
 
-final class OnboardingCordinator<F: OnboardingScreenFactory> : NavigationCoordinatable {
+final class OnboardingCordinator : NavigationCoordinatable {
     let stack = NavigationStack(initial: \OnboardingCordinator.startScreen)
-    weak var factory: F?
+    weak var factory: OnboardingScreenFactory?
 
     @Route(.push) var startScreen = makeStartScreen
     @Route(.push) var userDataScreen = makeuserDataScreen

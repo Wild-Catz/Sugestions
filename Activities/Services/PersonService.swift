@@ -29,12 +29,11 @@ extension PersonService: PersonServiceProtocol {
         let jsonEncoder = JSONEncoder()
         let data = try! jsonEncoder.encode(onboardingPerson)
         apiLayer.saveUser(userData: data)
+        ud.save(true, forKey: "firstLaunch")
     }
     
     func getPerson(with id: Int) -> Person {
         let jsonDecoder = JSONDecoder()
         return try! jsonDecoder.decode(Person.self, from: apiLayer.getPerson())
     }
-    
-    
 }

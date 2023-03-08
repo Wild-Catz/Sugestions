@@ -109,7 +109,7 @@ struct MainView<VM: MainViewModelProtocol>: View {
                             offset = gesture.translation
                         }
                         .onEnded { _ in
-                            if abs(offset.width) > 50 || abs(offset.height) > 50 {
+                            if abs(offset.width) > 80 || abs(offset.height) > 80 {
                                 viewModel.closeShowBannerTap()
                             } else {
                                 withAnimation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 1)) {

@@ -24,7 +24,13 @@ final class ModuleAssembly: ObservableObject {
             }
         }
         self.activityModule = ActivityModule()
-        self.currentModule = onboardingModule
+        
+        if let firstLaunch = UserDefaultsManager().load(Bool.self, forKey: "firstLaunch"),
+           firstLaunch == true {
+            self.currentModule = activityModule
+        } else {
+            self.currentModule = onboardingModule
+        }
     }
     
     func makeActivityModule() -> ActivityModule {
