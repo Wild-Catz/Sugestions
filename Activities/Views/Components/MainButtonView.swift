@@ -30,8 +30,8 @@ struct MainButtonView: View {
                 ZStack {
                     Color(model.category.rawValue)
                     VStack {
-                        Text("THE ACTIVITY")
-                        Text("OF THE DAY")
+                        Text("daily_activity_lable_1")
+                        Text("daily_activity_lable_2")
                         Spacer()
                     }
                     .font(.title.bold())

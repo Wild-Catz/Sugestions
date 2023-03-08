@@ -76,13 +76,20 @@ struct MainView<VM: MainViewModelProtocol>: View {
             .padding(.top, 40)
             .padding(.horizontal, 20)
             .padding(.bottom, 30)
-            Button(action: viewModel.onButtonTap) {
                 MainButtonView(model: .init(activity: viewModel.activity))
+                    .disabled(self.viewModel.showCongratulationsBanner)
                     .frame(height: 400)
                     .padding(.horizontal, 10)
-            }
-            .disabled(self.viewModel.showCongratulationsBanner)
-            .buttonStyle(.plain)
+                    .onTapGesture {
+                        viewModel.onButtonTap()
+                    }
+//            Button(action: viewModel.onButtonTap) {
+//                MainButtonView(model: .init(activity: viewModel.activity))
+//                    .frame(height: 400)
+//                    .padding(.horizontal, 10)
+//            }
+//            .disabled(self.viewModel.showCongratulationsBanner)
+//            .buttonStyle(.plain)
             Spacer()
         }
         .background(Color("MainBackgroundScreen"))

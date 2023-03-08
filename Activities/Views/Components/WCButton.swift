@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WCButton: View {
     let action: () -> Void
-    let text: String
+    let text: LocalizedStringKey
     let color: Color
     let colorFor: Color
     

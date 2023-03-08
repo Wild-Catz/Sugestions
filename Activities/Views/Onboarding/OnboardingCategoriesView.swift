@@ -138,7 +138,7 @@ struct OnboardingCategoriesView<VM: OnboardingCategoriesViewModel>: View {
             }
             .padding(.top, 50)
             Spacer()
-            WCButton(action: vm.onButtonTapped, text: "Start", color: .black, colorFor: .white)
+            WCButton(action: vm.onButtonTapped, text: "Save", color: .black, colorFor: .white)
                 .disabled(isDisabled == 0)
         }
         .padding()

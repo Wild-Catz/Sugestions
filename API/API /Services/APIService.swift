@@ -63,7 +63,7 @@ public final class APIService {
     
     private func getActivities(in category: Category) -> [ActivityAPI] {
         let currentRatings = RatingService.dict
-        return Self.activitiesMaleIT
+        return Self.activitiesMaleEN
             .filter { $0.categories.contains(category) }
         
             .filter {
@@ -104,7 +104,7 @@ extension APIService: APIServiceProtocol {
             (Self.questions[key], Mark(rawValue: value)!)
         })
         if var today = today,
-           let activity = Self.activitiesMaleIT.first(where: { $0.id == activity }) {
+           let activity = Self.activitiesMaleEN.first(where: { $0.id == activity }) {
             personService.setDoneExercise(activity: activity.id, category: today.category, feedback: feedback)
             today.isDone = true
             ud.save(today, forKey: "current")
@@ -113,7 +113,7 @@ extension APIService: APIServiceProtocol {
     }
     
     public func getQuestions(for activity: Int) -> Data {
-        let activity = Self.activitiesMaleIT.first { $0.id == activity } ?? Self.errorActivity
+        let activity = Self.activitiesMaleEN.first { $0.id == activity } ?? Self.errorActivity
         let response = Self.questions.filter { activity.categories.contains($0.category) }
         let encoder = JSONEncoder()
         return try! encoder.encode(response)
@@ -138,17 +138,6 @@ extension APIService {
         .init(id: 7, text: "fineMotory_onboarding_1", category: .fineMotory),
         .init(id: 8, text: "fineMotory_onboarding_2", category: .fineMotory)
     ]
-        
-        private static let activitiesFemaleEN: [ActivityAPI] = [
-            .init(id: 0,
-                  name: "First Activity",
-                  description: """
-                    """,
-                  tips: ["", ""],
-                  need: "",
-                  difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 4),
-                  categories: .init(arrayLiteral: .problemSolving))
-        ]
 
     private static let errorActivity: ActivityAPI = .init(id: 404,
                                                        name: "Error Activity",

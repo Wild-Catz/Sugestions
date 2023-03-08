@@ -76,15 +76,16 @@ struct RateView<VM: RateViewModelProtocol>: View {
     
     var body: some View {
         VStack {
-            Text("Well Done!")
+            Text("rateView_title")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.top, 50)
                 .padding(.bottom, 26)
-            Text("Rate it to create your path more specific")
+            Text("rateView_subtitle")
                 .font(.title)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
+                .padding(.horizontal)
             Spacer()
             ForEach(vm.questions.indices, id: \.self) { index in
                 QuestionView(question: vm.questions[index], color: Color(vm.category.rawValue), mark: 0, onMarkChange: {
@@ -92,7 +93,7 @@ struct RateView<VM: RateViewModelProtocol>: View {
                 })
             }
             Spacer()
-            WCButton(action: { vm.done() } , text: "Done", color: Color(vm.category.rawValue), colorFor: .white)
+            WCButton(action: { vm.done() } , text: "done", color: Color(vm.category.rawValue), colorFor: .white)
                 .disabled(!vm.isButtonEnabled)
         }
         .toolbar(.hidden)

@@ -8,7 +8,7 @@
 import Foundation
 
 extension APIService {
-    private static let activitiesFemaleEN: [ActivityAPI] = [
+    internal static let activitiesFemaleEN: [ActivityAPI] = [
             .init(id: 1,
                   name: "Pass me that",
                   description: """

@@ -35,7 +35,7 @@
 
 "onboarding_categories_title" = "Which of the following categories are you interested in? ";
 "onboarding_subtitle" = "Select at least one";
-"Start" = "Start";
+"Save" = "Save";
 
 // OnboardingEndView
 "onboarding_end_title" = "All set up";
@@ -53,10 +53,15 @@
 
 // ActivityView
 
-"start_button_label" = "Start";
+"done" = "Done";
+"what_you_need" = "What you need";
+"description_label" = "Activity description";
+"tips_label" = "Tips and tricks";
 
 // RateView
 
+"rateView_title" = "Well Done!";
+"rateView_subtitle" = "Help us make your path more personalized";
 "receptive_question_feedback" = "How much did the child comprehend you during the activity?";
 "expressive_question_feedback" = "How well did the child manage to express himself?";
 "problemSolving_question_feedback" = "How well did the child understand the activity?";

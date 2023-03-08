@@ -21,7 +21,7 @@ struct ActivityBigView: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
+                LazyVStack(alignment: .leading, spacing: 0, pinnedViews: .sectionHeaders) {
                     ZStack {
                         primaryColor
                             .ignoresSafeArea()
@@ -43,7 +43,7 @@ struct ActivityBigView: View {
                         }
 
                     }
-                    ZStack(alignment: .leading) {
+                    Section(header: ZStack(alignment: .leading) {
                         titleColor
                         Text(activityName)
                             .font(.title2)
@@ -52,42 +52,55 @@ struct ActivityBigView: View {
                             .frame(width: proxy.size.width*0.7)
                             .padding(.leading, 20)
                             .padding(.vertical, 25)
-                    }
-                    VStack(alignment: .leading) {
-                        Text(whatYouNeedLabel)
-                            .font(.title2)
-                            .padding(.bottom, 45)
-                        Text("Activity description")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .padding(.bottom, 20)
-                        Text(description)
-                            .font(.title2)
-                            .padding(.bottom, 45)
-                        Text("Tips and tricks")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .padding(.bottom, 20)
-
-                        ForEach(tipsAndTricls, id: \.self) { tip in
-                            Text(tip)
-                                .font(.title2)
-                                .padding(.bottom, 20)
                         }
-                        
+                        .frame(maxWidth: .infinity)
+                        .background(.white)
+                    ) {
+                        VStack {
+                            VStack(alignment: .leading) {
+                                Text("what_you_need")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 20)
+                                Text(whatYouNeedLabel)
+                                    .font(.title2)
+                                    .padding(.bottom, 45)
+                                Text("description_label")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 20)
+                                Text(description)
+                                    .font(.title2)
+                                    .padding(.bottom, 45)
+                                Text("tips_label")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 20)
+
+                                ForEach(tipsAndTricls, id: \.self) { tip in
+                                    Text(tip)
+                                        .font(.title2)
+                                        .padding(.bottom, 20)
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 30)
+                            .padding(.bottom, 100)
+                        }
+                        .background(.white)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 30)
-                    .padding(.bottom, 60)
                 }
             }
+            .background(primaryColor)
             .overlay(alignment: .top, content: {
                 primaryColor
             .edgesIgnoringSafeArea(.top)
             .frame(height: 0)
         })
         }
-//        .ignoresSafeArea(edges: .top)
+        .background(.white)
+        .ignoresSafeArea(edges: .bottom)
+//        .padding(.bottom, 250)
     }
 }
 
