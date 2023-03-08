@@ -7,6 +7,19 @@
 
 import Foundation
 
+struct GetPersonResponse: Encodable {
+    struct History: Encodable {
+        let activityId: ActivityID
+        let category: Category
+        let rate: [Int: Mark]
+    }
+    let id: PersonID
+    let gender: Gender
+    let name: String
+    let categories: Set<Category>
+    let history: [History] = []
+}
+
 struct GetActivityResponse: Encodable {
     let activity: ActivityAPI
     let isDone: Bool
@@ -18,6 +31,8 @@ public protocol APIServiceProtocol {
     func rateActivity(_ activity: Int, with feedback: [Int: Int], for profile: Int)
     func getQuestions(for activity: Int) -> Data
     func getOnboardingQuestions() -> Data
+    func saveUser(userData: Data)
+    func getPerson() -> Data
 }
 
 public final class APIService {
@@ -61,7 +76,7 @@ public final class APIService {
     }
     
     private func getActivities(in category: Category) -> [ActivityAPI] {
-        let currentRatings = RatingService.dict
+        let currentRatings = personService.getAllCategoriesRating()
         return Self.activities
             .filter { $0.categories.contains(category) }
         
@@ -75,6 +90,26 @@ public final class APIService {
 }
 
 extension APIService: APIServiceProtocol {
+    public func getPerson() -> Data {
+        let person = personService.getPerson(with: 0)
+        let response = GetPersonResponse(id: person.id, gender: person.gender, name: person.name, categories: person.categories)
+        let encoder = JSONEncoder()
+        return try! encoder.encode(response)
+    }
+    
+    public func saveUser(userData: Data) {
+        let decoder = JSONDecoder()
+        let onPerson = try! decoder.decode(OnboardingPerson.self, from: userData)
+        let person = Person(id: 0, gender: onPerson.gender, name: onPerson.name, categories: onPerson.categories, history: [])
+        let feedback = onPerson.feedback.reduce([Question: Mark]()) { partialResult, el in
+            var result = partialResult
+            let question = Self.onboardingQuestions.first { $0.id == el.key }!
+            result[question] = el.value
+            return result
+        }
+        self.personService.savePerson(person: person, feedback: feedback)
+    }
+    
     public func getOnboardingQuestions() -> Data {
         let response = Self.onboardingQuestions
         let encoder = JSONEncoder()
@@ -105,7 +140,6 @@ extension APIService: APIServiceProtocol {
             today.isDone = true
             ud.save(today, forKey: "current")
             self.today = today
-            print(ud.load(Day.self, forKey: "current")?.isDone)
         }
     }
     

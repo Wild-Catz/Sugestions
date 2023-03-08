@@ -10,7 +10,7 @@ import API
 
 protocol PersonServiceProtocol {
     func getPerson(with id: Int) -> Person
-    func createPerson()
+    func createPerson(onboardingPerson: OnboardingPerson)
 }
 
 final class PersonService {
@@ -25,11 +25,16 @@ final class PersonService {
 }
 
 extension PersonService: PersonServiceProtocol {
-    func getPerson(with id: Int) -> Person {
-        Person(id: 0, name: "Some", categories: .init(arrayLiteral: .expressive), history: [], gender: .none)
+    func createPerson(onboardingPerson: OnboardingPerson) {
+        let jsonEncoder = JSONEncoder()
+        let data = try! jsonEncoder.encode(onboardingPerson)
+        apiLayer.saveUser(userData: data)
     }
     
-    func createPerson() {
-        
+    func getPerson(with id: Int) -> Person {
+        let jsonDecoder = JSONDecoder()
+        return try! jsonDecoder.decode(Person.self, from: apiLayer.getPerson())
     }
+    
+    
 }

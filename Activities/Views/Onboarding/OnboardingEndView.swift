@@ -8,13 +8,19 @@
 import SwiftUI
 
 protocol OnboardingEndViewModelProtocol: ObservableObject {
+    var onOnboardingDone: () -> Void { get }
     func onButtonTapped()
 }
 
 final class OnboardingEndViewModel: OnboardingEndViewModelProtocol {
+    let onOnboardingDone: () -> Void
+    
+    init(onOnboardingDone: @escaping () -> Void) {
+        self.onOnboardingDone = onOnboardingDone
+    }
     
     func onButtonTapped() {
-        
+        onOnboardingDone()
     }
 }
 
@@ -48,6 +54,6 @@ struct OnboardingEndView<VM: OnboardingEndViewModel>: View {
 
 struct OnboardingEndView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingEndView(vm: OnboardingEndViewModel())
+        OnboardingEndView(vm: OnboardingEndViewModel(onOnboardingDone: { }))
     }
 }

@@ -16,11 +16,27 @@ private enum Const {
 protocol RatingServiceProtocol {
     func rateActivity(activity: ActivityID, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
+    func setupRatingSystem(with feedback: Feedback)
+    func getAllCategoriesRating() -> [Category: Int]
 }
 
 final class RatingService {
+    let ud = UserDefaultsManager()
+    var dict: [Category: Int] {
+        get {
+            let dict = ud.load([Category: Int].self, forKey: "rating") ?? Self.defaultDifficulties
+            print(dict)
+            return dict
+        }
+        set { ud.save(newValue, forKey: "rating") }
+    }
+    
+    private func setRate(category: Category, rating: Int) {
+        dict[category] = rating
+    }
+    
     private func getRate(category: Category) -> Int {
-        return Self.dict[category]!
+        dict[category]!
     }
 
     private func changeRate(category: Category, mark: Mark) {
@@ -28,11 +44,31 @@ final class RatingService {
         rate += mark.rawValue
         if rate > Const.max { rate = Const.max }
         if rate < Const.min { rate = Const.min }
-        Self.dict[category] = rate
+        dict[category] = rate
     }
 }
 
 extension RatingService: RatingServiceProtocol {
+    func getAllCategoriesRating() -> [Category : Int] {
+        self.dict
+    }
+    
+    func setupRatingSystem(with feedback: Feedback) {
+        Category.allCases.forEach { category in
+            setRate(
+                category: category,
+                rating: feedback
+                    .filter {
+                        $0.key.category == category
+                    }
+                    .map { $0.value }
+                    .map { $0.rawValue + 3 }
+                    .reduce(0, +)
+            )
+            
+        }
+    }
+    
     func getCategoryRating(category: Category) -> Int {
         getRate(category: category)
     }
@@ -45,7 +81,7 @@ extension RatingService: RatingServiceProtocol {
 }
 
 extension RatingService {
-    static var dict: [Category: Int] = [
+    static var defaultDifficulties: [Category: Int] = [
         .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
     ]
 }

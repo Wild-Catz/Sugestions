@@ -62,7 +62,7 @@ final class RateViewModel: RateViewModelProtocol {
     func onMarkChange(on arrayIndex: Int , mark: Mark) {
         self.questions[arrayIndex].ready = .ready(mark)
         isButtonEnabled = questions.allSatisfy {
-            if case let .ready(_) = $0.ready {
+            if case .ready(_) = $0.ready {
                 return true
             } else {
                 return false

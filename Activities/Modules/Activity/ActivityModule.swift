@@ -10,13 +10,11 @@ import API
 // swiftlint:disable type_name
 
 protocol Module {
-    associatedtype V: View
-
-    @ViewBuilder var rootView: V { get }
+    @ViewBuilder var rootView: AnyView { get }
 }
 
 final class ActivityModule: Module {
-    @ViewBuilder var rootView: some View {
+    @ViewBuilder var rootView: AnyView {
         cordinator.view()
     }
     let cordinator: MainCordinator<ActivityModule>

@@ -22,6 +22,7 @@
 		67772C0429A50A9E0096F498 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C0329A50A9E0096F498 /* MainViewModelTests.swift */; };
 		67772C1A29A605DA0096F498 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67772C1C29A605DA0096F498 /* Localizable.strings */; };
 		67772C2229A608770096F498 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67772C2129A608770096F498 /* ActivityView.swift */; };
+		67B8597929B8C448004F8836 /* CategoryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8597829B8C448004F8836 /* CategoryButtonView.swift */; };
 		67CB2391299F78E8000C42DE /* ActivityModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2390299F78E8000C42DE /* ActivityModule.swift */; };
 		67CB2399299FC429000C42DE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB2398299FC429000C42DE /* MainView.swift */; };
 		67D4112729B24D89008831E9 /* MainCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4112529B24D89008831E9 /* MainCordinator.swift */; };
@@ -38,6 +39,8 @@
 		67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */; };
 		67D411F829B4E70A008831E9 /* libAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D411F729B4E700008831E9 /* libAPI.a */; };
 		67D4124729B51969008831E9 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4124629B51969008831E9 /* QuestionView.swift */; };
+		67D4125329B7779E008831E9 /* ModuleAssembley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4125229B7779E008831E9 /* ModuleAssembley.swift */; };
+		67D4125529B78847008831E9 /* BigQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4125429B78847008831E9 /* BigQuestionView.swift */; };
 		E13BE2E529B629940044ACA1 /* OnboardingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2E429B629940044ACA1 /* OnboardingModule.swift */; };
 		E13BE2EE29B62A710044ACA1 /* OnboardingUserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */; };
 		E13BE2EF29B62A710044ACA1 /* OnboardingEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13BE2EA29B62A710044ACA1 /* OnboardingEndView.swift */; };
@@ -84,6 +87,7 @@
 		67772C1B29A605DA0096F498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67772C1F29A607A90096F498 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67772C2129A608770096F498 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		67B8597829B8C448004F8836 /* CategoryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonView.swift; sourceTree = "<group>"; };
 		67CB2390299F78E8000C42DE /* ActivityModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModule.swift; sourceTree = "<group>"; };
 		67CB2398299FC429000C42DE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		67D4112529B24D89008831E9 /* MainCordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCordinator.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		67D411BA29B4DD29008831E9 /* GetActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityResponse.swift; sourceTree = "<group>"; };
 		67D411F229B4E700008831E9 /* API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = API.xcodeproj; path = API/API.xcodeproj; sourceTree = "<group>"; };
 		67D4124629B51969008831E9 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		67D4125229B7779E008831E9 /* ModuleAssembley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleAssembley.swift; sourceTree = "<group>"; };
+		67D4125429B78847008831E9 /* BigQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigQuestionView.swift; sourceTree = "<group>"; };
 		E13BE2E429B629940044ACA1 /* OnboardingModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingModule.swift; sourceTree = "<group>"; };
 		E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingUserDataView.swift; sourceTree = "<group>"; };
 		E13BE2EA29B62A710044ACA1 /* OnboardingEndView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingEndView.swift; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 				67525FD729ACFD780072F741 /* CirclesView.swift */,
 				67525FD929AD05BB0072F741 /* WCButton.swift */,
 				67D4124629B51969008831E9 /* QuestionView.swift */,
+				67D4125429B78847008831E9 /* BigQuestionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -219,11 +226,20 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		67B8597729B8C42F004F8836 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				67B8597829B8C448004F8836 /* CategoryButtonView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		67CB238F299F78CF000C42DE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				E13BE2E329B629870044ACA1 /* Onboarding */,
 				67D4112129B2476F008831E9 /* Activity */,
+				67D4125229B7779E008831E9 /* ModuleAssembley.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -240,12 +256,9 @@
 		67CB2397299FC416000C42DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				67D4125629B796F2008831E9 /* Main */,
 				E13BE2E829B629C30044ACA1 /* Onboarding */,
 				67525FC129A914C40072F741 /* Components */,
-				67CB2398299FC429000C42DE /* MainView.swift */,
-				67772C2129A608770096F498 /* ActivityView.swift */,
-				67525FD329AB5FAB0072F741 /* RateView.swift */,
-				67525FDB29AE3D9E0072F741 /* CongratulationScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,6 +312,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		67D4125629B796F2008831E9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				67CB2398299FC429000C42DE /* MainView.swift */,
+				67772C2129A608770096F498 /* ActivityView.swift */,
+				67525FD329AB5FAB0072F741 /* RateView.swift */,
+				67525FDB29AE3D9E0072F741 /* CongratulationScreen.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		E13BE2E329B629870044ACA1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +334,7 @@
 		E13BE2E829B629C30044ACA1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				67B8597729B8C42F004F8836 /* Components */,
 				E13BE2ED29B62A710044ACA1 /* OnboardingStartView.swift */,
 				E13BE2E929B62A710044ACA1 /* OnboardingUserDataView.swift */,
 				E13BE2EB29B62A710044ACA1 /* OnboardingQuestion.swift */,
@@ -495,6 +520,8 @@
 				E13BE2EF29B62A710044ACA1 /* OnboardingEndView.swift in Sources */,
 				67D411A729B4D432008831E9 /* PreviewProvider + Constants.swift in Sources */,
 				67D4124729B51969008831E9 /* QuestionView.swift in Sources */,
+				67D4125329B7779E008831E9 /* ModuleAssembley.swift in Sources */,
+				67B8597929B8C448004F8836 /* CategoryButtonView.swift in Sources */,
 				67D411BB29B4DD29008831E9 /* GetActivityResponse.swift in Sources */,
 				67525FD429AB5FAB0072F741 /* RateView.swift in Sources */,
 				E13BE2F229B62A710044ACA1 /* OnboardingStartView.swift in Sources */,
@@ -504,6 +531,7 @@
 				67525FCA29AA44760072F741 /* ActivityBigView.swift in Sources */,
 				67525FDC29AE3D9E0072F741 /* CongratulationScreen.swift in Sources */,
 				67D411B829B4D769008831E9 /* Feedback.swift in Sources */,
+				67D4125529B78847008831E9 /* BigQuestionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
