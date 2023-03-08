@@ -34,7 +34,7 @@ final class OnboardingModule: Module {
     private let personService: PersonServiceProtocol
     private let activityService: ActivityServiceProtocol
 
-    let cordinator: OnboardingCordinator<OnboardingModule>
+    let cordinator: OnboardingCordinator
 
     init(activityService: ActivityServiceProtocol, personService: PersonServiceProtocol, toActivityModule: @escaping () -> Void) {
         self.personService = personService

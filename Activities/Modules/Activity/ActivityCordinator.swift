@@ -16,9 +16,9 @@ protocol MainScreenFactory: AnyObject {
     func makeRateScreen() -> AnyView
 }
 
-final class MainCordinator<F: MainScreenFactory> : NavigationCoordinatable {
+final class MainCordinator: NavigationCoordinatable {
     let stack = NavigationStack(initial: \MainCordinator.mainScreen)
-    weak var factory: F? 
+    weak var factory: MainScreenFactory? 
 
     @Route(.push) var mainScreen = makeMainScreen
     @Route(.fullScreen) var detailsScreen = makeDeailedActivityScreen
