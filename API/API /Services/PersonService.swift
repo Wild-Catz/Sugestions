@@ -11,6 +11,7 @@ protocol PersonServiceProtocol {
     func getPerson(with id: PersonID) -> Person
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
+    func getAllCategoriesRating() -> [Category: Int] 
 }
 
 final class FakePersonService {
@@ -33,21 +34,25 @@ final class FakePersonService {
 
 extension FakePersonService: PersonServiceProtocol {
     func getPerson(with id: PersonID) -> Person {
-        Person(id: 3, name: name, categories: categories, history: self.history)
+        Person(id: 0, name: name, categories: categories, history: self.history)
     }
     
     func getPerson() -> Person {
-        return Person(id: 3, name: name, categories: categories, history: self.history)
+        Person(id: 0, name: name, categories: categories, history: self.history)
     }
 
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback) {
         ratingService.rateActivity(activity: activity, feedback: feedback)
-        self.history.append(.init(activityId: activity, category: category, rate: feedback))
+        history.append(.init(activityId: activity, category: category, rate: feedback))
         ud.save(self.history, forKey: "history")
     }
     
     func getCategoryRating(category: Category) -> Int {
-        return ratingService.getCategoryRating(category: category)
+        ratingService.getCategoryRating(category: category)
+    }
+    
+    func getAllCategoriesRating() -> [Category: Int] {
+        ratingService.getAllCategoriesRating()
     }
 
 }

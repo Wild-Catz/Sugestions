@@ -29,7 +29,7 @@ public final class APIService {
     public init() {
         self.today = ud.load(Day.self, forKey: "current")
         if let time = today?.generatedTime,
-           DateInterval(start: time, end: Date()).duration > 15 {
+           DateInterval(start: time, end: Date()).duration > 30 {
             today = nil
         }
     }
@@ -109,7 +109,6 @@ extension APIService: APIServiceProtocol {
             today.isDone = true
             ud.save(today, forKey: "current")
             self.today = today
-            print(ud.load(Day.self, forKey: "current")?.isDone)
         }
     }
     

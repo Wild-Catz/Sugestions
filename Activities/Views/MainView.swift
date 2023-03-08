@@ -18,7 +18,7 @@ protocol MainViewModelProtocol: ObservableObject {
     var showCongratulationsBanner: Bool { get set }
     var person: Person { get }
     var activity: Activity { get }
-
+    
     func onButtonTap()
     func closeShowBannerTap()
 }
@@ -30,7 +30,7 @@ class MainViewModel: MainViewModelProtocol {
     var person: Person
     var activity: Activity
     @Published var showCongratulationsBanner: Bool
-
+    
     init(person: Person,
          activity: Activity,
          showCongratulationsBanner: Bool,
@@ -42,7 +42,7 @@ class MainViewModel: MainViewModelProtocol {
         self.onDetailsScreen = onDetailsScreen
         self.onCongratsClose = onCongratsClose
     }
-
+    
     func onButtonTap() {
         onDetailsScreen()
     }
@@ -55,7 +55,9 @@ class MainViewModel: MainViewModelProtocol {
 
 struct MainView<VM: MainViewModelProtocol>: View {
     @ObservedObject var viewModel: VM
-
+    @State private var offset = CGSize.zero
+    @State private var degree: CGFloat = 0
+    
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -79,8 +81,8 @@ struct MainView<VM: MainViewModelProtocol>: View {
                     .frame(height: 400)
                     .padding(.horizontal, 10)
             }
+            .disabled(self.viewModel.showCongratulationsBanner)
             .buttonStyle(.plain)
-            .foregroundColor(.primary)
             Spacer()
         }
         .background(Color("MainBackgroundScreen"))
@@ -88,13 +90,31 @@ struct MainView<VM: MainViewModelProtocol>: View {
         .blur(radius: viewModel.showCongratulationsBanner ? 30 : 0)
         .overlay {
             if viewModel.showCongratulationsBanner {
-                CongratulationScreen(image: Image(systemName: "heart.fill"), imageSize: 300, color: Color(viewModel.activity.category.rawValue)) {
+                CongratulationScreen(image: Image("congrats"), imageWidth: 200, aspectRatio: 1.72, color: Color(viewModel.activity.category.rawValue)) {
                     self.viewModel.closeShowBannerTap()
                 }
+                .offset(x: offset.width/2, y: offset.height/2)
+                .rotation3DEffect(.degrees(-offset.height / 50.0), axis: (x: 1, y: 1, z: 0))
+
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            offset = gesture.translation
+                        }
+                        .onEnded { _ in
+                            if abs(offset.width) > 50 || abs(offset.height) > 50 {
+                                viewModel.closeShowBannerTap()
+                            } else {
+                                withAnimation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 1)) {
+                                    offset = .zero
+                                }
+                            }
+                        }
+                )
             }
         }
     }
-
+    
     var shape: some View {
         Image("shape")
             .resizable()

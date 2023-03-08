@@ -11,7 +11,6 @@ import API
 
 protocol Module {
     associatedtype V: View
-
     @ViewBuilder var rootView: V { get }
 }
 
@@ -49,7 +48,7 @@ extension ActivityModule: MainScreenFactory {
             vm: ActivityViewModel(
                 activity: activityService.getActivity(for: 0),
                 onDone: { self.cordinator.route(to: \.rateUsScreen) },
-                onClose: { self.cordinator.popToRoot() }
+                onClose: { self.cordinator.popLast() }
             )))
     }
     
