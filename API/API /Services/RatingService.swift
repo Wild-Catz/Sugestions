@@ -16,19 +16,27 @@ private enum Const {
 protocol RatingServiceProtocol {
     func rateActivity(activity: ActivityID, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
+    func setupRatingSystem(with feedback: Feedback)
     func getAllCategoriesRating() -> [Category: Int]
 }
 
 final class RatingService {
     let ud = UserDefaultsManager()
-    var rating: [Category: Int]
+    var dict: [Category: Int] {
+        get {
+            let dict = ud.load([Category: Int].self, forKey: "rating") ?? Self.defaultDifficulties
+            print(dict)
+            return dict
+        }
+        set { ud.save(newValue, forKey: "rating") }
+    }
     
-    init() {
-        self.rating = ud.load([Category:Int].self, forKey: "rating") ?? Self.dict
+    private func setRate(category: Category, rating: Int) {
+        dict[category] = rating
     }
     
     private func getRate(category: Category) -> Int {
-        return rating[category]!
+        dict[category]!
     }
 
     private func changeRate(category: Category, mark: Mark) {
@@ -36,14 +44,30 @@ final class RatingService {
         rate += mark.rawValue
         if rate > Const.max { rate = Const.max }
         if rate < Const.min { rate = Const.min }
-        rating[category] = rate
-        ud.save(rating, forKey: "rating")
+        dict[category] = rate
+        ud.save(dict, forKey: "rating")
     }
 }
 
 extension RatingService: RatingServiceProtocol {
-    func getAllCategoriesRating() -> [Category: Int] {
-        rating
+    func getAllCategoriesRating() -> [Category : Int] {
+        self.dict
+    }
+    
+    func setupRatingSystem(with feedback: Feedback) {
+        Category.allCases.forEach { category in
+            setRate(
+                category: category,
+                rating: feedback
+                    .filter {
+                        $0.key.category == category
+                    }
+                    .map { $0.value }
+                    .map { $0.rawValue + 3 }
+                    .reduce(0, +)
+            )
+            
+        }
     }
     
     func getCategoryRating(category: Category) -> Int {
@@ -58,7 +82,7 @@ extension RatingService: RatingServiceProtocol {
 }
 
 extension RatingService {
-    static var dict: [Category: Int] = [
-        .problemSolving: 6, .expressive: 5, .fineMotory: 4, .receptive: 3
-    ]
+    static var defaultDifficulties: [Category: Int] = [
+        .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
+        ]
 }

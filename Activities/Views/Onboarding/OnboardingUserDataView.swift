@@ -6,52 +6,48 @@
 //
 
 import SwiftUI
+import Combine
 
 protocol OnboardingUserDataViewModelProtocol: ObservableObject {
-    func isDisabled() -> Bool
+    var userName: String { get set }
+    var gender: Gender { get set }
+    var disableButton: Bool { get }
+    func calculateDisabled()
     func onButtonTapped()
-    func getUserData()
 }
 
 final class OnboardingUserDataViewModel: OnboardingUserDataViewModelProtocol {
-    let onQuestionView: () -> Void
-    var userName: String
-    var gender: Gender
-    @State var disableButton: Bool
+    @Published var userName: String {
+        didSet {
+            self.calculateDisabled()
+        }
+    }
+
+    @Published var gender: Gender
+    @Published var disableButton: Bool
     
-    init(onQuestionView: @escaping () -> Void) {
+    let onQuestionView: (String, Gender) -> Void
+    var store = Set<AnyCancellable>()
+
+    init(onQuestionView: @escaping (String, Gender) -> Void) {
         self.onQuestionView = onQuestionView
         self.userName = ""
         self.gender = .none
-        self.disableButton = false
+        self.disableButton = true
     }
     
-    func isDisabled() -> Bool {
-        if userName == "" || gender != .none {
-        disableButton = true
-        }
-        else {
-            disableButton = false
-        }
-        return disableButton
+    func calculateDisabled() {
+        self.disableButton = !(userName != "" && gender != .none)
     }
     
     func onButtonTapped() {
-        onQuestionView()
-    }
-    
-    func getUserData() {
-        
+        onQuestionView(self.userName, self.gender)
     }
 }
 
 struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
-    let vm: VM
+    @ObservedObject var vm: VM
     @State var userName: String
-    @State var gender: Gender
-    @State var isSelectedF: Bool
-    @State var isSelectedM: Bool
-    @State var disableButton: Bool
     
     var body: some View {
         VStack(spacing: 60) {
@@ -65,7 +61,7 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
                     Text("onboarding_user_name")
                         .font(.title2)
                         .fontWeight(.medium)
-                    TextField("Name", text: $userName)
+                    TextField("Name", text: $vm.userName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.bottom, 50)
                 }
@@ -76,28 +72,27 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
                         .padding(.bottom, 10)
                     HStack {
                         Button {
-                            gender = .female
-                            isSelectedF = true
-                            isSelectedM = false
+                            vm.gender = .female
+                            vm.calculateDisabled()
+
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 13)
                                     .frame(height: 107)
-                                    .foregroundColor(isSelectedF == false ? .gray.opacity(0.20) : .pink.opacity(0.20))
+                                    .foregroundColor(vm.gender == .male ? .gray.opacity(0.20) : .pink.opacity(0.20))
                                 Text("👧🏻")
                                     .fontWeight(.medium)
                                     .font(.largeTitle)
                             }
                         }
                         Button {
-                            gender = .male
-                            isSelectedM = true
-                            isSelectedF = false
+                            vm.gender = .male
+                            vm.calculateDisabled()
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 13)
                                     .frame(height: 107)
-                                    .foregroundColor(isSelectedM == false ? .gray.opacity(0.20) : .blue.opacity(0.20))
+                                    .foregroundColor(vm.gender == .female ? .gray.opacity(0.20) : .blue.opacity(0.20))
                                 Text("👦🏻")
                                     .fontWeight(.medium)
                                     .font(.largeTitle)
@@ -110,7 +105,7 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
             
             Spacer()
             WCButton(action: vm.onButtonTapped, text: "Next", color: .black, colorFor: .white)
-            .disabled(vm.isDisabled())
+                .disabled(vm.disableButton)
         }
         .padding()
         .toolbar(.hidden)
@@ -119,6 +114,6 @@ struct OnboardingUserDataView<VM: OnboardingUserDataViewModelProtocol>: View {
 
 struct OnboardingUserDataView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { }), userName: "", gender: .none, isSelectedF: false, isSelectedM: false, disableButton: false)
+        OnboardingUserDataView(vm: OnboardingUserDataViewModel(onQuestionView: { _,_ in }), userName: "")
     }
 }

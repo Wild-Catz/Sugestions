@@ -7,14 +7,22 @@
 
 import SwiftUI
 
+struct ContentView: View {
+    @ObservedObject var assembly = ModuleAssembly()
+    
+    var body: some View {
+        if let module = assembly.currentModule {
+            module.rootView
+        }
+    }
+}
+
 @main
 struct ActivitiesApp: App {
-    let module = ActivityModule()
-
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                module.rootView
+                ContentView()
             }
             .environment(\.colorScheme, .light)
         }

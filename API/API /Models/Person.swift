@@ -8,8 +8,22 @@
 import Foundation
 typealias PersonID = Int
 
-struct Person {
+enum Gender: String, Codable {
+    case male
+    case female
+    case none
+}
+
+struct OnboardingPerson: Codable {
+    let name: String
+    let categories: Set<Category>
+    let feedback: [QuestionID: Mark]
+    let gender: Gender
+}
+
+struct Person: Codable {
     let id: PersonID
+    let gender: Gender
     let name: String
     let categories: Set<Category>
     let history: [History]

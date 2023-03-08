@@ -9,42 +9,47 @@ import Foundation
 
 protocol PersonServiceProtocol {
     func getPerson(with id: PersonID) -> Person
+    func savePerson(person: Person, feedback: Feedback)
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback)
     func getCategoryRating(category: Category) -> Int
-    func getAllCategoriesRating() -> [Category: Int] 
+    func getAllCategoriesRating() -> [Category: Int]
 }
 
 final class FakePersonService {
     let ud = UserDefaultsManager()
-    let name: String
     let ratingService: RatingServiceProtocol
-    var categories: Set<Category>
-    var history: [History]
+    var person: Person
 
     init(ratingService: RatingServiceProtocol) {
         if ud.load(Bool.self, forKey: "first_launch") == nil {
             ud.save(Set<Category>.init(arrayLiteral: .expressive, .fineMotory, .problemSolving, .receptive), forKey: "categories")
         }
-        self.name = ud.load(String.self, forKey: "name") ?? "Frencesco"
-        self.categories = ud.load(Set<Category>.self, forKey: "categories") ?? Set<Category>()
-        self.history = ud.load([History].self, forKey: "history") ?? []
+        self.person = ud.load(Person.self, forKey: "person") ?? Self.defaultPerson
         self.ratingService = ratingService
     }
 }
 
 extension FakePersonService: PersonServiceProtocol {
+    func savePerson(person: Person, feedback: Feedback) {
+        let onPerson = Person(id: 0, gender: person.gender, name: person.name, categories: person.categories, history: [])
+        ud.save(onPerson, forKey: "person")
+        self.ratingService.setupRatingSystem(with: feedback)
+    }
+    
     func getPerson(with id: PersonID) -> Person {
-        Person(id: 0, name: name, categories: categories, history: self.history)
+        self.person
     }
     
     func getPerson() -> Person {
-        Person(id: 0, name: name, categories: categories, history: self.history)
+        self.person
     }
 
     func setDoneExercise(activity: ActivityID, category: Category, feedback: Feedback) {
         ratingService.rateActivity(activity: activity, feedback: feedback)
+        var history = person.history
         history.append(.init(activityId: activity, category: category, rate: feedback))
-        ud.save(self.history, forKey: "history")
+        self.person = Person(id: person.id, gender: person.gender, name: person.name, categories: person.categories, history: history)
+        ud.save(person, forKey: "person")
     }
     
     func getCategoryRating(category: Category) -> Int {
@@ -54,5 +59,8 @@ extension FakePersonService: PersonServiceProtocol {
     func getAllCategoriesRating() -> [Category: Int] {
         ratingService.getAllCategoriesRating()
     }
+}
 
+extension FakePersonService {
+    static let defaultPerson = Person(id: 444, gender: .male, name: "Default", categories: .init(), history: [])
 }
