@@ -232,7 +232,7 @@ extension APIService {
                   difficult: .init(receptive: 1, expressive: 1, problemSolving: 3, fineMotory: 3),
                   categories: .init(arrayLiteral: .problemSolving, .fineMotory)),
             .init(id: 13,
-                  name: "Recognizing body parts on others",
+                  name: "Recognizing body parts",
                   description: """
                     Choose 3 body parts that the child does not recognize on other people (e.g., shoulder, neck, and chest). Sit facing each other and state the goal of the activity, which is to recognize body parts.
 

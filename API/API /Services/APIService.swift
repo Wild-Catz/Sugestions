@@ -55,7 +55,7 @@ public final class APIService {
 
     private func suggestActivity(in category: Category) -> ActivityAPI {
         let activity = getActivities(in: category).randomElement()
-        return activity ?? Self.activitiesMaleIT.randomElement()!
+        return activity ?? Self.activitiesMaleEN.randomElement()!
     }
     
     private func ppp(profile: Person) {
@@ -90,7 +90,7 @@ public final class APIService {
                     if gender == .male {
                         activities = Self.activitiesMaleIT
                     } else {
-                        activities = Self.activitiesFemaleEN
+                        activities = Self.activitiesMaleIT
                 }
             } else {
                 activities = Self.activitiesMaleEN
