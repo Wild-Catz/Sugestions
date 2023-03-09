@@ -68,7 +68,7 @@ struct OnboardingCategoriesView<VM: OnboardingCategoriesViewModel>: View {
                         ForEach(0..<2, id: \.self) { index in
                             CategoryButtonView(
                                 color: Color(vm.selectatbleCategories[index].category.rawValue),
-                                text: vm.selectatbleCategories[index].category.rawValue,
+                                text: Category.completeStrings(str: vm.selectatbleCategories[index].category),
                                 selected: vm.selectatbleCategories[index].isChosen) {
                                     vm.selectatbleCategories[index].isChosen.toggle()
                                 }
@@ -78,7 +78,7 @@ struct OnboardingCategoriesView<VM: OnboardingCategoriesViewModel>: View {
                         ForEach(2..<4, id: \.self) { index in
                             CategoryButtonView(
                                 color: Color(vm.selectatbleCategories[index].category.rawValue),
-                                text: vm.selectatbleCategories[index].category.rawValue,
+                                text: Category.completeStrings(str: vm.selectatbleCategories[index].category),
                                 selected: vm.selectatbleCategories[index].isChosen) {
                                     vm.selectatbleCategories[index].isChosen.toggle()
                                 }

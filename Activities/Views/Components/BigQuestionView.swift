@@ -19,11 +19,10 @@ struct BigQuestionView: View {
                 .font(.title)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
+                .padding(.bottom, 80)
             CirclesView(rate: $mark, borderSize: 5, color: color)
                 .frame(height: 41)
                 .frame(maxWidth: .infinity)
-                .padding(.top, 80)
                 .padding(.horizontal)
             //                .padding(.bottom, index != 7 ? 250 : 0)
             //            if index == 7 {

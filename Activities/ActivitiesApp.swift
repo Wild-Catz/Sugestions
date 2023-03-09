@@ -13,6 +13,7 @@ struct ContentView: View {
     var body: some View {
         if let module = assembly.currentModule {
             module.rootView
+                .environment(\.colorScheme, .light)
         }
     }
 }

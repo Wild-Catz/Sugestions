@@ -29,6 +29,7 @@ extension MainCordinator {
     @ViewBuilder func makeMainScreen() -> some View {
         if let factory = self.factory {
             factory.makeMainScreen()
+                .preferredColorScheme(.light)
         } else {
             EmptyView()
         }
@@ -37,6 +38,7 @@ extension MainCordinator {
     @ViewBuilder func makeDeailedActivityScreen() -> some View {
         if let factory = self.factory {
             factory.makeDeailedActivityScreen()
+                .preferredColorScheme(.light)
         } else {
             EmptyView()
         }
@@ -45,6 +47,7 @@ extension MainCordinator {
     @ViewBuilder func makeRateScreen() -> some View {
         if let factory = self.factory {
             factory.makeRateScreen()
+                .preferredColorScheme(.light)
         } else {
             EmptyView()
         }

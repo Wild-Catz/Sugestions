@@ -39,6 +39,13 @@ struct CongratulationScreen: View {
                         }
                         Spacer()
                     }
+                    VStack {
+                        Text("congratulation_label")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .padding(.top, 65)
+                        Spacer()
+                    }
                 }
                 .cornerRadius(17)
                 .padding(.vertical, 40)

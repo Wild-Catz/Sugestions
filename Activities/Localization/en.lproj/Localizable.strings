@@ -27,7 +27,7 @@
 "expressive_onboarding_2" = "How well does your child manage to create sentences?";
 "problemSolving_onboarding_1" = "How capable is your child to replicate actions?";
 "problemSolving_onboarding_2" = "How well can your child abstract concepts?";
-"fineMotory_onboarding_1" = "How well can your child handle small objects (pencils, frocks, glass, etc)?";
+"fineMotory_onboarding_1" = "How well can your child handle small objects (pencils, glass, etc)?";
 "fineMotory_onboarding_2" = "How well can your child handle objects with 2 hands simultaneously?";
 "Submit" = "Submit";
 
@@ -66,3 +66,7 @@
 "expressive_question_feedback" = "How well did the child manage to express himself?";
 "problemSolving_question_feedback" = "How well did the child understand the activity?";
 "fineMotory_question_feedback" = "How well did the child manage to physically perform the activity?";
+
+// CongratulationScreen
+
+"congratulation_label" = "Congratulation!";

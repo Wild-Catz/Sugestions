@@ -59,11 +59,12 @@ struct OnboardingQuestion<VM: OnboardingQuestionViewModelProtocol>: View {
             ForEach(0..<8) { index in
                 VStack {
                     Spacer()
-                    BigQuestionView(question: vm.questions[index], color: Color(vm.questions[index].category.rawValue), mark: 3) {
-                        vm.onMarkChange(on: index, mark: Mark.fiveSystem(from: $0))
-                    }
-                    Spacer()
+                    BigQuestionView(question: vm.questions[index], color: Color(vm.questions[index].category.rawValue), mark: 1) {
+                            vm.onMarkChange(on: index, mark: Mark.fiveSystem(from: $0))
+                        }
+                        .padding(.bottom, index != 7 ? 250 : -142)
                     if index == 7 {
+                        Spacer()
                         WCButton(action: vm.done, text: "Submit", color: .black, colorFor: .white)
                             .padding(.bottom, 50)
                     }
