@@ -43,6 +43,7 @@ struct MainButtonView: View {
                         .resizable()
                         .frame(width: proxy.size.width * 0.95 * 1.5, height: proxy.size.width * 0.95)
                         .offset(y: proxy.size.height / 3.8)
+                        .shadow(color:Color.black.opacity(0.1), radius: 4, y:4)
                 }
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
@@ -69,6 +70,7 @@ struct MainButtonView: View {
                 .background(.white)
             }
             .cornerRadius(13)
+            .shadow(color: Color.black.opacity(0.1), radius: 4, y: 4)
         }
     }
 }

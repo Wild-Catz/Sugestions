@@ -51,6 +51,7 @@ struct CongratulationScreen: View {
                 .padding(.vertical, 40)
                 .padding(.horizontal, 20)
         }
+        .shadow(color: Color.black.opacity(0.25), radius: 4, y: 4)
     }
 }
 

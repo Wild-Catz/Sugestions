@@ -28,6 +28,8 @@ struct WCButton: View {
         .cornerRadius(13)
         .padding(.horizontal, 40)
         .padding(.bottom, 10)
+        .shadow(color: Color.black.opacity(0.25), radius: 4, y: 4)
+
     }
 }
 
