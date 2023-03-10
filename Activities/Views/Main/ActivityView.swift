@@ -9,6 +9,8 @@
 
 import SwiftUI
 
+// MARK: - DetailedActivity
+
 struct DetailedActivity {
     let image: UIImage?
     let name: String
@@ -17,7 +19,7 @@ struct DetailedActivity {
     let need: String
     let isDone: Bool
     let category: Category
-
+    
     init(activity: Activity) {
         self.image = nil
         self.name = activity.name
@@ -29,18 +31,22 @@ struct DetailedActivity {
     }
 }
 
+// MARK: - ActivityViewModel Protocol
+
 protocol ActivityViewModelProtocol: ObservableObject {
     var activity: DetailedActivity { get }
     func onButtonTapped()
     func onCloseButtonTapped()
 }
 
+// MARK: - ActivityViewModel
+
 final class ActivityViewModel: ActivityViewModelProtocol {
     @Published var activity: DetailedActivity
     
     private let onDone: () -> Void
     private let onClose: () -> Void
-
+    
     init(activity: Activity, onDone: @escaping () -> Void, onClose: @escaping () -> Void) {
         self.activity = DetailedActivity(activity: activity)
         self.onDone = onDone
@@ -56,18 +62,10 @@ final class ActivityViewModel: ActivityViewModelProtocol {
     }
 }
 
-// swiftlint::disable line_length
-
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGPoint = .zero
-
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-    }
-}
+// MARK: - ActivityView
 
 struct ActivityView<VM: ActivityViewModelProtocol>: View {
     let vm: VM
-    @State private var scrollPosition: CGPoint = .zero
     
     var body: some View {
         ZStack {
@@ -91,7 +89,7 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
                     Button(action: vm.onCloseButtonTapped) {
                         Image(systemName: "x.circle.fill")
                             .padding(.top, 20)
-                           .foregroundColor(.primary)
+                            .foregroundColor(.primary)
                             .font(.system(size: 30))
                     }
                     .padding(.horizontal)
@@ -100,14 +98,13 @@ struct ActivityView<VM: ActivityViewModelProtocol>: View {
             }
         }
         .toolbar(.hidden)
-
     }
 }
 
 struct ActivityView_Previews: PreviewProvider {
     static var previews: some View {
         ActivityView(vm: ActivityViewModel(
-            activity: Self.activityService.getActivity(for: 0),
+            activity: Self.activityService.getActivity(),
             onDone: {},
             onClose: {})
         )

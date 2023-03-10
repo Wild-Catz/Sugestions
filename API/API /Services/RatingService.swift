@@ -84,5 +84,5 @@ extension RatingService: RatingServiceProtocol {
 extension RatingService {
     static var defaultDifficulties: [Category: Int] = [
         .problemSolving: 3, .expressive: 1, .fineMotory: 4, .receptive: 3
-        ]
+    ]
 }

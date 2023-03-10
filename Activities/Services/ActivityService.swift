@@ -8,13 +8,17 @@
 import Foundation
 import API
 
+// MARK: - ActivityServiceProtocol
+
 protocol ActivityServiceProtocol: AnyObject {
-    func getActivity(for personID: PersonID) -> Activity
-    func rateActivity(activity: Activity, for personID: PersonID, feedback: Feedback)
+    func getActivity() -> Activity
+    func rateActivity(activity: Activity, feedback: Feedback)
     func getQuestions(activity: Activity) -> [Question]
     func getOnboardingQuestions() -> [Question]
     var shouldShowBanner: Bool { get set }
 }
+
+// MARK: - ActivityService
 
 final class FakeActivityService {
     private let apiService: APIServiceProtocol
@@ -24,6 +28,8 @@ final class FakeActivityService {
         self.apiService = api
     }
 }
+
+// MARK: - ActivityServiceProtocol IMP
 
 extension FakeActivityService: ActivityServiceProtocol {
     func getOnboardingQuestions() -> [Question] {
@@ -37,8 +43,8 @@ extension FakeActivityService: ActivityServiceProtocol {
         set { banner = newValue }
     }
     
-    func getActivity(for personID: PersonID) -> Activity {
-        let response = apiService.getActivity(for: personID)
+    func getActivity() -> Activity {
+        let response = apiService.getActivity(for: 0)
         let decoder = JSONDecoder()
         let decoded = try! decoder.decode(GetActivityResponse.self, from: response)
         let activity = Activity(id: decoded.activity.id,
@@ -51,11 +57,11 @@ extension FakeActivityService: ActivityServiceProtocol {
         return activity
     }
 
-    func rateActivity(activity: Activity, for personID: PersonID, feedback: Feedback) {
+    func rateActivity(activity: Activity, feedback: Feedback) {
         let feedback = Dictionary(uniqueKeysWithValues: feedback.map { key, value in
             ( key, value.rawValue)
         })
-        apiService.rateActivity(activity.id, with: feedback, for: personID)
+        apiService.rateActivity(activity.id, with: feedback, for: 0)
         self.shouldShowBanner = true
     }
     

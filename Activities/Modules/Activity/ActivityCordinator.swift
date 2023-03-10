@@ -10,11 +10,15 @@ import Stinsen
 
 // swiftlint:disable type_name
 
+// MARK: - MainScreenFactory Protocol
+
 protocol MainScreenFactory: AnyObject {
     func makeMainScreen() -> AnyView
     func makeDeailedActivityScreen() -> AnyView
     func makeRateScreen() -> AnyView
 }
+
+// MARK: - MainCoordinator
 
 final class MainCordinator: NavigationCoordinatable {
     let stack = NavigationStack(initial: \MainCordinator.mainScreen)
@@ -24,6 +28,8 @@ final class MainCordinator: NavigationCoordinatable {
     @Route(.fullScreen) var detailsScreen = makeDeailedActivityScreen
     @Route(.fullScreen) var rateUsScreen = makeRateScreen
 }
+
+// MARK: - MainCoordinator Routes
 
 extension MainCordinator {
     @ViewBuilder func makeMainScreen() -> some View {

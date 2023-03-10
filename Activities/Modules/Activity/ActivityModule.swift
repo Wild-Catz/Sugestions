@@ -9,55 +9,62 @@ import SwiftUI
 import API
 // swiftlint:disable type_name
 
+// MARK: - Module Protocol
+
 protocol Module {
     @ViewBuilder var rootView: AnyView { get }
 }
+
+// MARK: - Activity Module
 
 final class ActivityModule: Module {
     @ViewBuilder var rootView: AnyView {
         cordinator.view()
     }
-    let cordinator: MainCordinator
+    private let cordinator: MainCordinator
     private let activityService: ActivityServiceProtocol
     private let personService: PersonServiceProtocol
     
-    init() {
-        let apiLayer: APIServiceProtocol = APIService()
-        self.activityService = FakeActivityService(api: apiLayer)
-        self.personService = PersonService(api: apiLayer)
+    init(activityService: ActivityServiceProtocol, personService: PersonServiceProtocol) {
+        self.activityService = activityService
+        self.personService = personService
         self.cordinator = MainCordinator()
         self.cordinator.factory = self
     }
 }
 
+// MARK: Routing
+
 extension ActivityModule: MainScreenFactory {
     func makeMainScreen() -> AnyView {
-        return AnyView(MainView(viewModel: MainViewModel(
-            person: personService.getPerson(with: 0),
-            activity: activityService.getActivity(for: 0),
+        let person = personService.getPerson()
+        let activity = activityService.getActivity()
+        let vm = MainViewModel(
+            person: person,
+            activity: activity,
             showCongratulationsBanner: activityService.shouldShowBanner,
             onCongratsClose: { self.activityService.shouldShowBanner = false },
-            onDetailsScreen: {
-                self.cordinator.route(to: \.detailsScreen)
-            })))
+            onDetailsScreen: { self.cordinator.route(to: \.detailsScreen) }
+        )
+        return AnyView(MainView(viewModel: vm))
     }
     
     func makeDeailedActivityScreen() -> AnyView {
-        return AnyView(ActivityView(
-            vm: ActivityViewModel(
-                activity: activityService.getActivity(for: 0),
-                onDone: { self.cordinator.route(to: \.rateUsScreen) },
-                onClose: { self.cordinator.popLast() }
-            )))
+        let vm = ActivityViewModel(
+            activity: activityService.getActivity(),
+            onDone: { self.cordinator.route(to: \.rateUsScreen) },
+            onClose: { self.cordinator.popLast() }
+        )
+        return AnyView(ActivityView(vm: vm))
     }
     
     func makeRateScreen() -> AnyView {
-        let activity: Activity = self.activityService.getActivity(for: 0)
+        let activity = self.activityService.getActivity()
         let onDone: (Feedback) -> Void = {
-            self.activityService.rateActivity(activity: activity, for: 0, feedback: $0)
+            self.activityService.rateActivity(activity: activity, feedback: $0)
             self.cordinator.route(to: \.mainScreen)
         }
-        let vm = RateViewModel(category: self.activityService.getActivity(for: 0).category , questions: self.activityService.getQuestions(activity: activity), onDone: onDone)
+        let vm = RateViewModel(category: self.activityService.getActivity().category , questions: self.activityService.getQuestions(activity: activity), onDone: onDone)
         let rateView = RateView(vm: vm)
         return AnyView(rateView)
     }

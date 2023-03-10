@@ -10,6 +10,8 @@ import Stinsen
 
 // swiftlint:disable type_name
 
+// MARK: - OnboardingScreenFactory Protocol
+
 protocol OnboardingScreenFactory: AnyObject {
     func makeStartScreen() -> AnyView
     func makeUserDataScreen() -> AnyView
@@ -17,6 +19,8 @@ protocol OnboardingScreenFactory: AnyObject {
     func makeCategoriesScreen() -> AnyView
     func makeEndScreen() -> AnyView
 }
+
+// MARK: - OnboardingCordinator
 
 final class OnboardingCordinator : NavigationCoordinatable {
     let stack = NavigationStack(initial: \OnboardingCordinator.startScreen)
@@ -28,6 +32,8 @@ final class OnboardingCordinator : NavigationCoordinatable {
     @Route(.push) var categoriesScreen = makeCategoriesScreen
     @Route(.push) var endScreen = makeEndScreen
 }
+
+// MARK: - OnboardingCordinator Routes
 
 extension OnboardingCordinator {
     @ViewBuilder func makeStartScreen() -> some View {

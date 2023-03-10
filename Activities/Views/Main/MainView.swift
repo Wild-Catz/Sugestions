@@ -12,6 +12,10 @@ import API
 private enum Const {
     static var bottomPadding: CGFloat = 33
     static var profileSize: CGFloat = 50
+    static var buttonHeight: CGFloat = 400
+    static var buttonHPadding: CGFloat = 10
+    static var movementToStop: CGFloat = 80
+    static var congratulationImageWidth: CGFloat = 200
 }
 
 protocol MainViewModelProtocol: ObservableObject {
@@ -23,7 +27,7 @@ protocol MainViewModelProtocol: ObservableObject {
     func closeShowBannerTap()
 }
 
-class MainViewModel: MainViewModelProtocol {
+final class MainViewModel: MainViewModelProtocol {
     var onDetailsScreen: () -> Void
     var onCongratsClose: () -> Void
     
@@ -60,36 +64,17 @@ struct MainView<VM: MainViewModelProtocol>: View {
     
     var body: some View {
         VStack {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                    Text("Welcome back,")
-                        .font(.largeTitle)
-                    Text(viewModel.person.name + "!")
-                        .font(.largeTitle)
-                        .bold()
+            welcomBackLabel
+                .padding(.top, 40)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 30)
+            MainButtonView(model: .init(activity: viewModel.activity))
+                .disabled(self.viewModel.showCongratulationsBanner)
+                .frame(height: Const.buttonHeight)
+                .padding(.horizontal, Const.buttonHPadding)
+                .onTapGesture {
+                    viewModel.onButtonTap()
                 }
-                Spacer()
-//                Image(systemName: "person.circle")
-//                    .resizable()
-//                    .frame(width: 48, height: 48)
-            }
-            .padding(.top, 40)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 30)
-                MainButtonView(model: .init(activity: viewModel.activity))
-                    .disabled(self.viewModel.showCongratulationsBanner)
-                    .frame(height: 400)
-                    .padding(.horizontal, 10)
-                    .onTapGesture {
-                        viewModel.onButtonTap()
-                    }
-//            Button(action: viewModel.onButtonTap) {
-//                MainButtonView(model: .init(activity: viewModel.activity))
-//                    .frame(height: 400)
-//                    .padding(.horizontal, 10)
-//            }
-//            .disabled(self.viewModel.showCongratulationsBanner)
-//            .buttonStyle(.plain)
             Spacer()
         }
         .background(Color("MainBackgroundScreen"))
@@ -97,41 +82,51 @@ struct MainView<VM: MainViewModelProtocol>: View {
         .blur(radius: viewModel.showCongratulationsBanner ? 30 : 0)
         .overlay {
             if viewModel.showCongratulationsBanner {
-                CongratulationScreen(image: Image("congrats"), imageWidth: 200, aspectRatio: 1.72, color: Color(viewModel.activity.category.rawValue)) {
-                    self.viewModel.closeShowBannerTap()
-                }
-                .offset(x: offset.width/2, y: offset.height/2)
-                .rotation3DEffect(.degrees(-offset.height / 50.0), axis: (x: 1, y: 1, z: 0))
-
-                .gesture(
-                    DragGesture()
-                        .onChanged { gesture in
-                            offset = gesture.translation
-                        }
-                        .onEnded { _ in
-                            if abs(offset.width) > 80 || abs(offset.height) > 80 {
-                                viewModel.closeShowBannerTap()
-                            } else {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 1)) {
-                                    offset = .zero
-                                }
-                            }
-                        }
-                )
+                congratsView
             }
         }
     }
     
-    var shape: some View {
-        Image("shape")
-            .resizable()
-            .aspectRatio(0.71, contentMode: .fit)
+    var congratsView: some View {
+        CongratulationScreen(image: Image("congrats"), imageWidth: Const.congratulationImageWidth, aspectRatio: 1.72, color: Color(viewModel.activity.category.rawValue)) {
+            self.viewModel.closeShowBannerTap()
+        }
+        .offset(x: offset.width/2, y: offset.height/2)
+        .rotation3DEffect(.degrees(-offset.height / 50.0), axis: (x: 1, y: 1, z: 0))
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    offset = gesture.translation
+                }
+                .onEnded { _ in
+                    if abs(offset.width) > Const.movementToStop || abs(offset.height) > Const.movementToStop {
+                        viewModel.closeShowBannerTap()
+                    } else {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 1)) {
+                            offset = .zero
+                        }
+                    }
+                }
+        )
+    }
+    
+    var welcomBackLabel: some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading) {
+                Text("Welcome back,")
+                    .font(.largeTitle)
+                Text(viewModel.person.name + "!")
+                    .font(.largeTitle)
+                    .bold()
+            }
+            Spacer()
+        }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel(person: self.personService.getPerson(with: 0), activity: self.activityService.getActivity(for: 0),
+        MainView(viewModel: MainViewModel(person: self.personService.getPerson(), activity: self.activityService.getActivity(),
                                           showCongratulationsBanner: false,
                                           onCongratsClose: { },
                                           onDetailsScreen: { }))

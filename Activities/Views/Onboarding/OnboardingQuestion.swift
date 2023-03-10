@@ -34,7 +34,7 @@ final class OnboardingQuestionViewModel: OnboardingQuestionViewModelProtocol {
     }
     
     func done() {
-        let feedback = questions.reduce(Dictionary<QuestionID,Mark>()) { partialResult, question in
+        let feedback = questions.reduce([QuestionID:Mark]()) { partialResult, question in
             var result = partialResult
             if case let .ready(mark) = question.ready {
                 result[question.id] = mark

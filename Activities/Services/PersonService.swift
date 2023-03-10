@@ -8,10 +8,14 @@
 import Foundation
 import API
 
+// MARK: - PersonServiceProtocol
+
 protocol PersonServiceProtocol {
-    func getPerson(with id: Int) -> Person
+    func getPerson() -> Person
     func createPerson(onboardingPerson: OnboardingPerson)
 }
+
+// MARK: - PersonService
 
 final class PersonService {
     let id: Int?
@@ -24,15 +28,16 @@ final class PersonService {
     }
 }
 
+// MARK: - PersonServiceProtocol IMP
+
 extension PersonService: PersonServiceProtocol {
     func createPerson(onboardingPerson: OnboardingPerson) {
         let jsonEncoder = JSONEncoder()
         let data = try! jsonEncoder.encode(onboardingPerson)
         apiLayer.saveUser(userData: data)
-        ud.save(true, forKey: "firstLaunch")
     }
     
-    func getPerson(with id: Int) -> Person {
+    func getPerson() -> Person {
         let jsonDecoder = JSONDecoder()
         return try! jsonDecoder.decode(Person.self, from: apiLayer.getPerson())
     }

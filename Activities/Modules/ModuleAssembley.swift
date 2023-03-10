@@ -9,39 +9,49 @@ import Foundation
 import API
 
 final class ModuleAssembly: ObservableObject {
+    @Published var currentModule: (any Module)?
+    let ud = UserDefaultsManager()
+    
+    init() {
+        self.onboardingModule = OnboardingModule(activityService: makeActivityService(), personService: makePersonService()) { [weak self] in
+            if let activityModule = self?.activityModule {
+                self?.currentModule = activityModule
+                self?.ud.save(false, forKey: "firstActivity")
+
+            }
+        }
+
+        self.activityModule = ActivityModule(activityService: makeActivityService(), personService: makePersonService())
+        
+        self.currentModule =  isFirstLaunch() ? onboardingModule : activityModule
+    }
+    
+    private func isFirstLaunch() -> Bool {
+        let firstLaunch = self.ud.load(Bool.self, forKey: "firstActivity")
+        return firstLaunch ?? true
+    }
+    
+    // MARK: - Modules
+
     private var onboardingModule: (any Module)!
     private var activityModule: (any Module)!
     
-    @Published var currentModule: (any Module)?
-    
-    private let personService: PersonServiceProtocol = PersonService(api: APIService())
-    private let activityService: ActivityServiceProtocol = FakeActivityService(api: APIService())
-    
-    init() {
-        self.onboardingModule = OnboardingModule(activityService: self.activityService, personService: self.personService) { [weak self] in
-            if let activityModule = self?.activityModule {
-                self?.currentModule = activityModule
-            }
-        }
-        self.activityModule = ActivityModule()
-        
-        if let firstLaunch = UserDefaultsManager().load(Bool.self, forKey: "firstLaunch"),
-           firstLaunch == true {
-            self.currentModule = activityModule
-        } else {
-            self.currentModule = onboardingModule
-        }
+}
+
+extension ModuleAssembly {
+    // MARK: - Dependencies
+
+    enum Dependencies {
+        static let api = APIService()
+        static let activityService = FakeActivityService(api: Self.api)
+        static let personService = PersonService(api: Self.api)
     }
     
-    func makeActivityModule() -> ActivityModule {
-        ActivityModule()
+    func makeActivityService() -> ActivityServiceProtocol {
+        Dependencies.activityService
     }
     
-    func makeOnboardingModule() -> OnboardingModule {
-        OnboardingModule(activityService: self.activityService, personService: self.personService) { [weak self] in
-            if let activityModule = self?.activityModule {
-                self?.currentModule = activityModule
-            }
-        }
+    func makePersonService() -> PersonServiceProtocol {
+        Dependencies.personService
     }
 }

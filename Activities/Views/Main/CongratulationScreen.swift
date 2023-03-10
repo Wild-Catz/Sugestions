@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+private enum Const {
+    static let closeButtonSize: CGFloat = 30
+}
+
 struct CongratulationScreen: View {
     let image: Image
     let imageWidth: CGFloat
@@ -32,7 +36,7 @@ struct CongratulationScreen: View {
                                     .resizable()
                                     .renderingMode(.template)
                                     .foregroundColor(.white.opacity(0.78))
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: Const.closeButtonSize, height: Const.closeButtonSize)
                                     .padding(.top, 17)
                                     .padding(.trailing, 20)
                             }

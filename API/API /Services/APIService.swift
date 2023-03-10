@@ -99,12 +99,10 @@ public final class APIService {
         let currentRatings = personService.getAllCategoriesRating()
         return activities
             .filter { $0.categories.contains(category) }
-        
             .filter {
                 $0.difficult.difficultDict().allSatisfy {
                     currentRatings[$0.key]! >= $0.value
                 }
-    
             }
             .sorted { act1, act2 -> Bool in
                 act1.difficult.getDifficult(category: category) < act2.difficult.getDifficult(category: category)
@@ -140,8 +138,6 @@ extension APIService: APIServiceProtocol {
     }
     
     public func getActivity(for profileID: Int) -> Data {
-        //if currentLanguage == "it-IT"
-        
         if let today = self.today {
             let response = GetActivityResponse(activity: today.activity, isDone: today.isDone, categoryOfTheDay: today.category)
             let encoder = JSONEncoder()

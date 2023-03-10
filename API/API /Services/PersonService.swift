@@ -19,12 +19,8 @@ final class FakePersonService {
     let ud = UserDefaultsManager()
     let ratingService: RatingServiceProtocol
     var person: Person {
-        get {
-            ud.load(Person.self, forKey: "person") ?? Self.defaultPerson
-        }
-        set {
-            ud.save(newValue, forKey: "person")
-        }
+        get { ud.load(Person.self, forKey: "person") ?? Self.defaultPerson }
+        set { ud.save(newValue, forKey: "person") }
     }
 
     init(ratingService: RatingServiceProtocol) {

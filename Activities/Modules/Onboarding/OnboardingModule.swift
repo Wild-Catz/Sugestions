@@ -25,6 +25,8 @@ private struct OnboardPersonFactory {
     }
 }
 
+// MARK: - Onboarding Module
+
 final class OnboardingModule: Module {
     @ViewBuilder var rootView: AnyView {
         cordinator.view()
@@ -44,6 +46,8 @@ final class OnboardingModule: Module {
         self.cordinator.factory = self
     }
 }
+
+// MARK: - Routing
 
 extension OnboardingModule: OnboardingScreenFactory {
     func makeStartScreen() -> AnyView {
